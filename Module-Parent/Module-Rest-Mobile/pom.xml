@@ -9,7 +9,6 @@
     <groupId>co.id</groupId>
     <artifactId>Module-Rest-Mobile</artifactId>
     <packaging>jar</packaging>
-    
     <dependencies>
 
         <!-- Spring MVC framework -->
