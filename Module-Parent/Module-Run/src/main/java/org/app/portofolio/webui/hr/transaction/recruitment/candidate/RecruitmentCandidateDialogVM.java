@@ -11,7 +11,7 @@ import org.app.portofolio.webui.hr.common.collections.ArgKey;
 import org.app.portofolio.webui.hr.common.collections.ModalAction;
 import org.app.portofolio.webui.hr.common.utilities.ComponentConditionUtil;
 import org.app.portofolio.webui.hr.transaction.recruitment.candidate.validator.TrsJobCandidateFormValidator;
-import org.module.api.common.ParameterKey;
+//import org.module.api.common.ParameterKey;
 import org.module.hr.model.TrsJobCandidate;
 import org.module.hr.model.TrsJobVacancy;
 import org.module.hr.service.EmployeeService;
@@ -127,7 +127,7 @@ public class RecruitmentCandidateDialogVM {
 		}
 		
 		FileInputStream fileInputStream = new FileInputStream(uploadFile);
-		uploadFileService.uploadResume(fileInputStream, settings.get(ParameterKey.KEY_SETTING_ROOT_PATH).toString(), trsJobCandidate);
+		//uploadFileService.uploadResume(fileInputStream, settings.get(ParameterKey.KEY_SETTING_ROOT_PATH).toString(), trsJobCandidate);
 		
 		BindUtils.postGlobalCommand(null, null, "refreshAfterSaveCandidate", null);
 		Messagebox.show("Success !");

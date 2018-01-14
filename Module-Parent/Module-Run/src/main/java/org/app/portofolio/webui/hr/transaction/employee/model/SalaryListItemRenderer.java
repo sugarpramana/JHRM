@@ -142,9 +142,9 @@ public class SalaryListItemRenderer implements ListitemRenderer<TrsEmployeeSalar
 			public void onEvent(Event event) throws Exception {
 				trsEmployeeSalary.setAmount(textboxAmount.getValue());
 				trsEmployeeSalary.setComment(textboxComment.getValue());
-				trsEmployeeSalary.setCurrency(String.valueOf(comboboxCurrency.getSelectedIndex()));
+				//trsEmployeeSalary.setCurrency(String.valueOf(comboboxCurrency.getSelectedIndex()));
 				trsEmployeeSalary.setPayFrequency(String.valueOf(comboboxPayFrequency.getSelectedIndex()));
-				trsEmployeeSalary.setPayGrade(String.valueOf(comboboxPayGrade.getSelectedIndex()));
+				//trsEmployeeSalary.setPayGrade(String.valueOf(comboboxPayGrade.getSelectedIndex()));
 				trsEmployeeSalary.setSalaryComponent(textboxSalaryComponent.getValue());
 				
 				if (trsEmployeeSalary.getIdSalary() == null) {

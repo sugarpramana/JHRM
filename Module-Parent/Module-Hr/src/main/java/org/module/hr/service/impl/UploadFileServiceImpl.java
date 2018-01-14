@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import org.module.api.common.ParameterKey;
+//import org.module.api.common.ParameterKey;
 import org.module.api.common.utilities.BusinessCaseUtilities;
 import org.module.hr.dao.MstUploadFileDAO;
 import org.module.hr.model.MstUploadFile;
@@ -113,7 +113,7 @@ public class UploadFileServiceImpl implements UploadFileService{
 	@Override
 	public MstUploadFile getByTrsEmployee(TrsEmployee trsEmployee) {
 		HashMap<String, Object> parameter = new HashMap<>();
-		parameter.put(ParameterKey.KEY_TRS_EMPLOYEE, trsEmployee);
+		//parameter.put(ParameterKey.KEY_TRS_EMPLOYEE, trsEmployee);
 		
 		List<MstUploadFile> listResult = mstUploadFileDAO.getByRequestMap(parameter);
 		
@@ -123,7 +123,7 @@ public class UploadFileServiceImpl implements UploadFileService{
 	@Override
 	public File getResumeFile(TrsJobCandidate trsJobCandidate) {
 		HashMap<String, Object> parameter = new HashMap<>();
-		parameter.put(ParameterKey.KEY_TRS_JOB_CANDIDATE, trsJobCandidate);
+		//parameter.put(ParameterKey.KEY_TRS_JOB_CANDIDATE, trsJobCandidate);
 		
 		List<MstUploadFile> listResult = mstUploadFileDAO.getByRequestMap(parameter);
 		
