@@ -26,6 +26,9 @@ public interface JobService {
     public void saveOrUpdate(MstPaygrade mstPaygrade);
     public void delete(MstPaygrade mstPaygrade);
     public List<MstPaygrade> getAllMstPaygrades();
+    public List<MstPaygrade> getByMstPaygradeRequestMap(HashMap<String, Object> hashMap);
+    public List<MstPaygrade> getMstPaygradePaging(HashMap<String, Object> hashMap);
+    public int getCountMstPaygrades();
     
     /*- Employment Status +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     public void save(MstEmployementStatus mstEmployementStatus);

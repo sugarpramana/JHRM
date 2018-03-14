@@ -95,6 +95,21 @@ public class JobServiceImpl implements JobService{
 	}
 	
 	@Override
+	public List<MstPaygrade> getByMstPaygradeRequestMap(HashMap<String, Object> hashMap) {
+		return mstPaygradeDAO.getByRequestMap(hashMap);
+	}
+
+	@Override
+	public List<MstPaygrade> getMstPaygradePaging(HashMap<String, Object> hashMap) {
+		return mstPaygradeDAO.getMstPaygradePaging(hashMap);
+	}
+
+	@Override
+	public int getCountMstPaygrades() {
+		return mstPaygradeDAO.getCountMstPaygrades();
+	}
+	
+	@Override
 	public void save(MstEmployementStatus mstEmployementStatus) {
 		mstEmployementStatusDAO.save(mstEmployementStatus);
 	}

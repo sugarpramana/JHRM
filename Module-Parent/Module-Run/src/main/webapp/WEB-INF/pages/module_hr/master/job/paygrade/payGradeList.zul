@@ -21,13 +21,23 @@
 			<center>
 				<borderlayout>
 					<north title="List Pay Grade" splittable="true" collapsible="true">
-						<listbox id="listboxPayGrade">
-							<listhead sizable="true">
-								<listheader width="50px" align="center"/>
-								<listheader label="Pay Grade"/>
-								<listheader label="Curency"/>	
-							</listhead>
-						</listbox>	
+						<vbox>
+							<listbox id="listboxPayGrade" model="@bind(vm.mstPaygrades)">
+								<listhead sizable="true">
+									<listheader width="50px" align="center"/>
+									<listheader label="ID"/>
+									<listheader label="Paygrade Name"/>	
+								</listhead>
+								<template name="model" var="mstPaygrade">
+								<listitem>
+									<listcell image="/images/icons/btn_edit.gif" tooltiptext="Click For Edit" onClick="@command('doDetail')"/>
+									<listcell label="@bind(mstPaygrade.idPaygrade)" />
+									<listcell label="@bind(mstPaygrade.paygradeName)" />
+								</listitem>
+								</template>
+							</listbox>
+							<paging id="pagingPayGrade" onPaging="@command('onPaging')"/>
+						</vbox>	
 					</north>
 					<south title="List Currency" splittable="true" collapsible="true">
 						<listbox id="listboxCurrency">
