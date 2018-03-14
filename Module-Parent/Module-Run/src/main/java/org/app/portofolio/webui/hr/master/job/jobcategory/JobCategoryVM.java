@@ -3,6 +3,8 @@ package org.app.portofolio.webui.hr.master.job.jobcategory;
 import java.util.HashMap;
 import java.util.List;
 
+import net.sf.jasperreports.engine.JRException;
+
 import org.app.portofolio.webui.hr.master.job.jobcategory.model.MstJobCategoryListItemRenderer;
 import org.module.hr.model.MstJobCategory;
 import org.module.hr.service.JobService;
@@ -25,6 +27,7 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.ListitemRenderer;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Paging;
+import org.zkoss.zul.Textbox;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class JobCategoryVM {
@@ -32,6 +35,9 @@ public class JobCategoryVM {
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Wire component
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	@Wire("#textboxFilter")
+	private Textbox textboxFilter;
+	
 	@Wire("#listboxJobCategory")
 	private Listbox listboxJobCategory;
 	
@@ -98,6 +104,24 @@ public class JobCategoryVM {
 	 * Function CRUD Event
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Command
+	@NotifyChange("mstJobCategories")
+	public void doFilter(){
+		mstJobCategories.clear();
+        
+		String getName = textboxFilter.getValue();
+		
+		if(getName == null || "".equals(getName)) {
+			doPrepareList();
+			refreshPageList(startPageNumber);
+		} else {
+			HashMap<String, Object> hashMap = new HashMap<String, Object>();
+			hashMap.put("jobCategoryName", getName);
+			mstJobCategories = jobService.getByMstJobCategoryRequestMap(hashMap);
+			listitemRenderer = new MstJobCategoryListItemRenderer();
+		}
+	}
+	
+	@Command
 	public void doNew(){
 		ListModelList listModelList = (ListModelList) listboxJobCategory.getModel();
 		listModelList.add(0, new MstJobCategory());
@@ -126,6 +150,18 @@ public class JobCategoryVM {
 			 	}
 			});
 		}
+	}
+	
+	@Command
+	@NotifyChange("mstJobCategories")
+	public void doRefresh(){
+		doPrepareList();
+		refreshPageList(startPageNumber);
+	}
+	
+	@Command
+	public void doPrint() throws JRException{
+
 	}
 	
 	@GlobalCommand

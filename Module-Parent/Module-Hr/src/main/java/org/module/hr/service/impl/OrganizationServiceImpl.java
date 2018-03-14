@@ -6,9 +6,13 @@ import java.util.List;
 import org.module.hr.dao.MstLocationDAO;
 import org.module.hr.model.MstLocation;
 import org.module.hr.service.OrganizationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class OrganizationServiceImpl implements OrganizationService{
 
+	@Autowired
 	private MstLocationDAO mstLocationDAO;
 
 	/*- Location +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/

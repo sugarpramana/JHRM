@@ -137,12 +137,6 @@ public class JobTitleVM {
 		final ListModelList<MstJobtitle> listModelListJobtitle = (ListModelList) listBoxJobTitle.getModel();
 		listModelListJobtitle.add(0, new MstJobtitle());
 	}
-
-	@GlobalCommand
-	@NotifyChange("mstJobtitles")
-	public void refreshAfterSaveOrUpdate(){
-		mstJobtitles = jobService.getAllMstJobtitles();
-	}
 	
 	@Command
 	public void doDelete(){
@@ -170,7 +164,7 @@ public class JobTitleVM {
 	}
 	
 	@Command
-	@NotifyChange({"mstJobtitles", "mstJobtitleListItemRenderer"})
+	@NotifyChange("mstJobtitles")
 	public void doRefresh(){
 		doPrepareList();
 		refreshPageList(startPageNumber);
@@ -179,6 +173,12 @@ public class JobTitleVM {
 	@Command
 	public void doPrint() throws JRException{
 
+	}
+	
+	@GlobalCommand
+	@NotifyChange("mstJobtitles")
+	public void refreshAfterSaveOrUpdate(){
+		mstJobtitles = jobService.getAllMstJobtitles();
 	}
 
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

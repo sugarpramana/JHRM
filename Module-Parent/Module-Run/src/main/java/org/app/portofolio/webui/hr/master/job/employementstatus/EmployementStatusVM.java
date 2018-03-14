@@ -3,6 +3,8 @@ package org.app.portofolio.webui.hr.master.job.employementstatus;
 import java.util.HashMap;
 import java.util.List;
 
+import net.sf.jasperreports.engine.JRException;
+
 import org.app.portofolio.webui.hr.master.job.employementstatus.model.MstEmployementStatusListItemRenderer;
 import org.module.hr.model.MstEmployementStatus;
 import org.module.hr.service.JobService;
@@ -25,6 +27,7 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.ListitemRenderer;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Paging;
+import org.zkoss.zul.Textbox;
 import org.zkoss.zul.event.PagingEvent;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -33,6 +36,9 @@ public class EmployementStatusVM {
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Wire component
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	@Wire("#textboxFilter")
+	private Textbox textboxFilter;
+	
 	@Wire("#listboxEmployementStatus")
 	private Listbox listboxEmployementStatus;
 	
@@ -100,6 +106,24 @@ public class EmployementStatusVM {
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Command
 	@NotifyChange("employementStatus")
+	public void doFilter(){
+		employementStatus.clear();
+        
+		String getName = textboxFilter.getValue();
+		
+		if(getName == null || "".equals(getName)) {
+			doPrepareList();
+			refreshPageList(startPageNumber);
+		} else {
+			HashMap<String, Object> hashMap = new HashMap<String, Object>();
+			hashMap.put("employementStatusName", getName);
+			employementStatus = jobService.getByMstEmployementStatusRequestMap(hashMap);
+			listitemRenderer = new MstEmployementStatusListItemRenderer();
+		}
+	}
+	
+	@Command
+	@NotifyChange("employementStatus")
 	public void onPaging(@ContextParam(ContextType.TRIGGER_EVENT) PagingEvent pagingEvent){
 		startPageNumber = pagingEvent.getActivePage() * pageSize;
 		refreshPageList(startPageNumber);
@@ -109,12 +133,6 @@ public class EmployementStatusVM {
 	public void doNew(){
 		ListModelList listModelList = (ListModelList) listboxEmployementStatus.getModel();
 		listModelList.add(0, new MstEmployementStatus());
-	}
-
-	@GlobalCommand
-	@NotifyChange("employementStatus")
-	public void refreshAfterSaveOrUpdate(){
-		employementStatus = jobService.getAllMstEmployementStatus();
 	}
 	
 	@Command
@@ -142,6 +160,24 @@ public class EmployementStatusVM {
 		}
 	}
 
+	@Command
+	@NotifyChange("employementStatus")
+	public void doRefresh(){
+		doPrepareList();
+		refreshPageList(startPageNumber);
+	}
+	
+	@Command
+	public void doPrint() throws JRException{
+
+	}
+	
+	@GlobalCommand
+	@NotifyChange("employementStatus")
+	public void refreshAfterSaveOrUpdate(){
+		employementStatus = jobService.getAllMstEmployementStatus();
+	}
+	
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Getter Setter
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/

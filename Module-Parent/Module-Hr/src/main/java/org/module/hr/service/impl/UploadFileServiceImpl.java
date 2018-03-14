@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+
 //import org.module.api.common.ParameterKey;
 import org.module.api.common.utilities.BusinessCaseUtilities;
 import org.module.hr.dao.MstUploadFileDAO;
@@ -19,7 +20,9 @@ import org.module.hr.model.MstUploadFile;
 import org.module.hr.model.TrsEmployee;
 import org.module.hr.model.TrsJobCandidate;
 import org.module.hr.service.UploadFileService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UploadFileServiceImpl implements UploadFileService{
 
 	private MstUploadFileDAO mstUploadFileDAO;

@@ -14,13 +14,25 @@ import org.module.hr.model.MstLicense;
 import org.module.hr.model.MstMembership;
 import org.module.hr.model.MstSkill;
 import org.module.hr.service.QualificationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class QualificationServiceImpl implements QualificationService {
 
+	@Autowired
 	private MstSkillDAO mstSkillDAO; 
+	
+	@Autowired
 	private MstLanguageDAO mstLanguageDAO;
+	
+	@Autowired
 	private MstEducationDAO mstEducationDAO;
+	
+	@Autowired
 	private MstLicenseDAO mstLicenseDAO;
+	
+	@Autowired
 	private MstMembershipDAO mstMembershipDAO;
 
 	/*- Skill +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/

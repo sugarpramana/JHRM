@@ -10,10 +10,16 @@ import org.module.hr.dao.TrsJobVacancyDAO;
 import org.module.hr.model.TrsJobCandidate;
 import org.module.hr.model.TrsJobVacancy;
 import org.module.hr.service.RecruitmentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RecruitmentServiceImpl implements RecruitmentService{
 
+	@Autowired
 	private TrsJobVacancyDAO trsJobVacancyDAO;
+	
+	@Autowired
 	private TrsJobCandidateDAO trsJobCandidateDAO;
 
 	/* ------- Vacancy ---------*/

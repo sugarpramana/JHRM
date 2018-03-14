@@ -18,7 +18,7 @@ import org.zkoss.zul.Textbox;
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class MstJobtitleListItemRenderer implements ListitemRenderer<MstJobtitle>{
 	
-	private JobService masterJobService = (JobService) SpringUtil.getBean("masterJobService");		
+	private JobService jobService = (JobService) SpringUtil.getBean("jobService");		
 	
 	@Override
 	public void render(Listitem item, final MstJobtitle mstJobtitle, int index) throws Exception {
@@ -91,7 +91,7 @@ public class MstJobtitleListItemRenderer implements ListitemRenderer<MstJobtitle
 					mstJobtitle.setJobDescription(textboxDescription.getValue());
 					mstJobtitle.setJobNote(textboxNote.getValue());
 
-					masterJobService.save(mstJobtitle);
+					jobService.save(mstJobtitle);
 					
 					BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdate", null);
 				}else{
@@ -99,7 +99,7 @@ public class MstJobtitleListItemRenderer implements ListitemRenderer<MstJobtitle
 					mstJobtitle.setJobDescription(textboxDescription.getValue());
 					mstJobtitle.setJobNote(textboxNote.getValue());
 					
-					masterJobService.update(mstJobtitle);
+					jobService.update(mstJobtitle);
 					
 					BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdate", null);
 				}
@@ -133,7 +133,7 @@ public class MstJobtitleListItemRenderer implements ListitemRenderer<MstJobtitle
 				    public void onEvent(Event event) throws Exception {    	
 				 		if (((Integer) event.getData()).intValue() == Messagebox.OK) {
 
-				 			masterJobService.delete(mstJobtitle);
+				 			jobService.delete(mstJobtitle);
 				 			
 				 			BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdate", null);
 				 		}else{

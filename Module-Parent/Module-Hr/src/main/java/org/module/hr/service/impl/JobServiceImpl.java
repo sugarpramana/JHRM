@@ -12,12 +12,22 @@ import org.module.hr.model.MstJobCategory;
 import org.module.hr.model.MstJobtitle;
 import org.module.hr.model.MstPaygrade;
 import org.module.hr.service.JobService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class JobServiceImpl implements JobService{
 
+	@Autowired
 	private MstJobtitleDAO mstJobtitleDAO;
+	
+	@Autowired
 	private MstPaygradeDAO mstPaygradeDAO;
+	
+	@Autowired
 	private MstEmployementStatusDAO mstEmployementStatusDAO;
+	
+	@Autowired
 	private MstJobCategoryDAO mstJobCategoryDAO;
 	
 	@Override

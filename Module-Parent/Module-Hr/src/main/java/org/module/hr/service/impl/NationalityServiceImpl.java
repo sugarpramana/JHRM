@@ -6,9 +6,13 @@ import java.util.List;
 import org.module.hr.dao.MstNationalityDAO;
 import org.module.hr.model.MstNationality;
 import org.module.hr.service.NationalityService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class NationalityServiceImpl implements NationalityService{
 
+	@Autowired
 	private MstNationalityDAO mstNationalityDAO;
 	
 	@Override
