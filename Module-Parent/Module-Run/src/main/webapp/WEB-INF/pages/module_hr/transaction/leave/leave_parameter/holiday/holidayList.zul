@@ -19,7 +19,7 @@
 				</div>
 			</north>
 			<center border="none">
-				<listbox id="listBoxJobTitle">
+				<listbox id="listboxHoliday"  model="@bind(vm.mstHolidays)" itemRenderer="@bind(vm.listitemRenderer)">
 					<listhead sizable="true">
 						<listheader width="10%" align="center"/>
 						<listheader label="Name"/>
@@ -30,7 +30,7 @@
 				</listbox>
 			</center>
 			<south>
-				<paging id="pagingJobTitle" onPaging="@command('onPaging')"/>
+				<paging id="pagingHoliday" onPaging="@command('onPaging')"/>
 			</south>
 		</borderlayout>
 	</window>
