@@ -45,7 +45,7 @@ public class LeavePeriodVM {
     @NotifyChange("*")
     private void doInit() throws Exception {
 
-        mstLeavePeriodList = leaveService.getAllLeavePeriod();
+        mstLeavePeriodList = null;// = leaveService.getAllLeavePeriod();
         if (mstLeavePeriodList != null
                 && mstLeavePeriodList.size() > 0) {
             //karena dia insertnya yg current dan juga tahun kedepannya 
@@ -131,7 +131,7 @@ public class LeavePeriodVM {
         } else {
             mstLeavePeriodList.add(makeNewPeriodForAfter());
         }
-        leaveService.saveAllLeavePeriod(mstLeavePeriodList);
+        //leaveService.saveAllLeavePeriod(mstLeavePeriodList);
         doInit();
     }
 

@@ -123,11 +123,7 @@
   	
   	<!-- Nationality -->
   	<bean id="mstNationalityDAO" class="org.module.hr.dao.impl.MstNationalityDAOImpl" parent="baseDao"/>
-  	
-  	<!-- Recruitment -->
-  	<bean id="trsJobVacancyDAO" class="org.module.hr.dao.impl.TrsJobVacancyDAOImpl" parent="baseDao"/>
-  	<bean id="trsJobCandidateDAO" class="org.module.hr.dao.impl.TrsJobCandidateDAOImpl" parent="baseDao"/>
-  	
+
   	<!-- Employee -->
   	<bean id="trsEmployeeDAO" class="org.module.hr.dao.impl.TrsEmployeeDAOImpl" parent="baseDao"/>
   	<bean id="trsEmployeeEmergencyContactDAO" class="org.module.hr.dao.impl.TrsEmployeeEmergencyContactDAOImpl" parent="baseDao"/>
@@ -140,6 +136,14 @@
 	<bean id="trsEmployeeLanguageDAO" class="org.module.hr.dao.impl.TrsEmployeeLanguageDAOImpl" parent="baseDao"/>
 	<bean id="trsEmployeeSkillDAO" class="org.module.hr.dao.impl.TrsEmployeeSkillDAOImpl" parent="baseDao"/>
 	<bean id="trsEmployeeSalaryDAO" class="org.module.hr.dao.impl.TrsEmployeeSalaryDAOImpl" parent="baseDao"/>
+	
+	<!-- Leave -->
+	<bean id="mstLeaveTypeDAO" class="org.module.hr.dao.impl.MstLeaveTypeDAOImpl" parent="baseDao"/>
+  	<bean id="mstHolidayDAO" class="org.module.hr.dao.impl.MstHolidayDAOImpl" parent="baseDao"/>
+	
+	<!-- Recruitment -->
+  	<bean id="trsJobVacancyDAO" class="org.module.hr.dao.impl.TrsJobVacancyDAOImpl" parent="baseDao"/>
+  	<bean id="trsJobCandidateDAO" class="org.module.hr.dao.impl.TrsJobCandidateDAOImpl" parent="baseDao"/>
 	
 	<!-- Setting -->
 	<bean id="mstSettingDAO" class="org.module.hr.dao.impl.MstSettingDAOImpl" parent="baseDao"/>
@@ -175,12 +179,6 @@
         <property name="mstNationalityDAO" ref="mstNationalityDAO" />
     </bean>
     
-    <!-- Recruitment Service -->
-	<bean id="recruitmentService" class="org.module.hr.service.impl.RecruitmentServiceImpl">
-        <property name="trsJobVacancyDAO" ref="trsJobVacancyDAO" />
-        <property name="trsJobCandidateDAO" ref="trsJobCandidateDAO" />
-    </bean>
-    
     <!-- Employee -->
     <bean id="employeeService" class="org.module.hr.service.impl.EmployeeServiceImpl">
     	<property name="trsEmployeeDAO" ref="trsEmployeeDAO"/>
@@ -194,6 +192,18 @@
     	<property name="trsEmployeeLanguageDAO" ref="trsEmployeeLanguageDAO"/>
     	<property name="trsEmployeeSkillDAO" ref="trsEmployeeSkillDAO"/>
     	<property name="trsEmployeeSalaryDAO" ref="trsEmployeeSalaryDAO"/>
+    </bean>
+    
+    <!-- Leave Service -->
+	<bean id="leaveService" class="org.module.hr.service.impl.LeaveServiceImpl">
+        <property name="mstLeaveTypeDAO" ref="mstLeaveTypeDAO" />
+        <property name="mstHolidayDAO" ref="mstHolidayDAO" />
+    </bean>
+    
+    <!-- Recruitment Service -->
+	<bean id="recruitmentService" class="org.module.hr.service.impl.RecruitmentServiceImpl">
+        <property name="trsJobVacancyDAO" ref="trsJobVacancyDAO" />
+        <property name="trsJobCandidateDAO" ref="trsJobCandidateDAO" />
     </bean>
     
     <!-- System Setting -->

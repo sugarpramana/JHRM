@@ -1,14 +1,11 @@
 package org.app.portofolio.webui.hr.transaction.leave.parameter.type;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
+
 import net.sf.jasperreports.engine.JRException;
-import org.app.portofolio.webui.hr.transaction.leave.model.LeaveTypeListitemRenderer;
+
+import org.app.portofolio.webui.hr.transaction.leave.parameter.type.model.MstLeaveTypeListitemRenderer;
 import org.module.hr.model.MstLeaveType;
 import org.module.hr.service.LeaveService;
 import org.zkoss.bind.BindUtils;
@@ -16,217 +13,207 @@ import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
+import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.select.Selectors;
+import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
+import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Listbox;
 import org.zkoss.zul.ListitemRenderer;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Paging;
+import org.zkoss.zul.Textbox;
 import org.zkoss.zul.event.PagingEvent;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class LeaveTypeVM {
 
-    private List<MstLeaveType> leaveTypeList, selectedTypeList;
-    private Set<MstLeaveType> tempSelectedTypeList;
-    private ListitemRenderer<MstLeaveType> leaveTypeItemRenderer;
-    private MstLeaveType mstLeaveTypeForFilter;
-    private Integer pagingCount, pageSize;
-    private String itemNameFilter;
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Wire component
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	@Wire("#textboxFilter")
+	private Textbox textboxFilter;
+	
+	@Wire("#listboxLeaveType")
+	private Listbox listboxLeaveType;
+	
+	@Wire("#pagingLeaveType")
+	private Paging pagingLeaveType;
 
-    @WireVariable
-    private LeaveService leaveService;
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Service yang dibutuhkan sesuai bisnis proses
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	private MstLeaveType mstLeaveType;
+	private List<MstLeaveType> leaveTypes;
+	@WireVariable
+	private LeaveService leaveService;
+	private ListitemRenderer<MstLeaveType> listitemRenderer;
+	
+	private HashMap<String, Object> hashMapLeaveType;
+	
+	private int startPageNumber = 0;
+	private int pageSize = 10;
 
-    @AfterCompose
-    public void setupComponents(@ContextParam(ContextType.VIEW) Component component) throws Exception {
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Function Custom sesuai kebutuhan
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	public void doPrepareList(){
+		listboxLeaveType.setCheckmark(true);
+		listboxLeaveType.setMultiple(true);
+		listboxLeaveType.setStyle("border-style: none;");
+		listboxLeaveType.setMold("paging");
+		
+		int count = leaveService.getCountMstLeaveTypes();
 
-        Selectors.wireComponents(component, this, false);
+		pagingLeaveType.setTotalSize(count);
+		pagingLeaveType.setDetailed(true);
+		pagingLeaveType.setPageSize(pageSize);
+	}
+	
+	private void refreshPageList(int refreshActivePage) {
+		if (refreshActivePage == 0) {
+			pagingLeaveType.setActivePage(0);
+		}
+		
+		refreshActivePage += 1;
+		
+		hashMapLeaveType = new HashMap<String, Object>();
+		hashMapLeaveType.put("firstResult", refreshActivePage);
+		hashMapLeaveType.put("maxResults", pagingLeaveType.getPageSize());
+		
+		leaveTypes = leaveService.getMstLeaveTypePaging(hashMapLeaveType);
+		listitemRenderer = new MstLeaveTypeListitemRenderer();
+	}
 
-        mstLeaveTypeForFilter = new MstLeaveType();
-        selectedTypeList = new ArrayList<>();
-        tempSelectedTypeList = new HashSet<>();
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Inisialize Methode MVVM yang pertama kali dijalankan
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	@AfterCompose
+	public void setupComponents(@ContextParam(ContextType.VIEW) Component component, 
+		@ExecutionArgParam("object") Object object,
+		@ExecutionArgParam("mstLeaveType") MstLeaveType mstLeaveType) {
+		
+		Selectors.wireComponents(component, this, false);
+
+		doPrepareList();
+		refreshPageList(startPageNumber);
+	}
+	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Function CRUD Event
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	@Command
+	@NotifyChange("leaveTypes")
+	public void doFilter(){
+		leaveTypes.clear();
         
-        pageSize = 10;
-        refreshPageList(0);
+		String getName = textboxFilter.getValue();
+		
+		if(getName == null || "".equals(getName)) {
+			doPrepareList();
+			refreshPageList(startPageNumber);
+		} else {
+			HashMap<String, Object> hashMap = new HashMap<String, Object>();
+			hashMap.put("leaveTypeName", getName);
+			leaveTypes = leaveService.getByMstLeaveTypeRequestMap(hashMap);
+			listitemRenderer = new MstLeaveTypeListitemRenderer();
+		}
+	}
+	
+	@Command
+	@NotifyChange("leaveTypes")
+	public void onPaging(@ContextParam(ContextType.TRIGGER_EVENT) PagingEvent pagingEvent){
+		startPageNumber = pagingEvent.getActivePage() * pageSize;
+		refreshPageList(startPageNumber);
+	}
 
-    }
+	@Command
+	public void doNew(){
+		final ListModelList<MstLeaveType> listModelListLeaveType = (ListModelList) listboxLeaveType.getModel();
+		listModelListLeaveType.add(0, new MstLeaveType());
+	}
+	
+	@Command
+	public void doDelete(){
+		final ListModelList<MstLeaveType> listModelListMstLeaveType = (ListModelList) listboxLeaveType.getModel();
+		
+		if(listboxLeaveType.getSelectedIndex() == -1){
+			Messagebox.show("There is no selected record?", "Confirm", Messagebox.OK, Messagebox.ERROR);
+		}else{
+			Messagebox.show("Do you really want to remove item?", "Confirm", Messagebox.OK | Messagebox.CANCEL, Messagebox.EXCLAMATION, new EventListener() {
+			    public void onEvent(Event event) throws Exception {    	
+			 		if (((Integer) event.getData()).intValue() == Messagebox.OK) {
+			 			for(MstLeaveType mstLeaveType: listModelListMstLeaveType){
+			 				if(listModelListMstLeaveType.isSelected(mstLeaveType)){
+			 					leaveService.delete(mstLeaveType);
+			 				}
+			 			}
+			 			
+			 			BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdate", null);
+			 		}else{
+			 			return;
+			 		}
+			 	}
+			});
+		}
+	}
+	
+	@Command
+	@NotifyChange("leaveTypes")
+	public void doRefresh(){
+		doPrepareList();
+		refreshPageList(startPageNumber);
+	}
+	
+	@Command
+	public void doPrint() throws JRException{
 
-    @NotifyChange("*")
-    private void refreshPageList(int refreshActivePage) throws Exception {
-        HashMap<String, Object> hashMap = new HashMap<String, Object>();
-        if (mstLeaveTypeForFilter.getLeaveTypeName() != null
-                && mstLeaveTypeForFilter.getLeaveTypeName().equals("")) {
-            hashMap.put("leaveTypeName", mstLeaveTypeForFilter.getLeaveTypeName());
-        }
-        pagingCount = leaveService.getCountMstLeaveTypeWithFilter(hashMap);
+	}
+	
+	@GlobalCommand
+	@NotifyChange("leaveTypes")
+	public void refreshAfterSaveOrUpdate(){
+		doPrepareList();
+		refreshPageList(startPageNumber);
+	}
 
-        //postgres offset start from 0
-        //refreshActivePage += 1;
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Getter Setter
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	public MstLeaveType getMstLeaveType() {
+		return mstLeaveType;
+	}
 
-        Map<String, Object> sortBy = new LinkedHashMap<>();
-        sortBy.put("leaveTypeName","ASC");
-        
-        HashMap<String, Object> hashMapMstLeaveType = new HashMap<String, Object>();
-        hashMapMstLeaveType.put("map", hashMap);
-        hashMapMstLeaveType.put("sortBy", sortBy);
-        hashMapMstLeaveType.put("offset", refreshActivePage);
-        hashMapMstLeaveType.put("limit", pageSize);
+	public void setMstLeaveType(MstLeaveType mstLeaveType) {
+		this.mstLeaveType = mstLeaveType;
+	}
 
-        leaveTypeList = leaveService.getMstLeaveTypePagingWithFilter(hashMapMstLeaveType);
-        leaveTypeItemRenderer = new LeaveTypeListitemRenderer();
-        
-        setSelectedFromTemp();
-    }
+	public List<MstLeaveType> getLeaveTypes() {
+		return leaveTypes;
+	}
 
-    @Command
-    @NotifyChange("leaveTypeList")
-    public void onPaging(@ContextParam(ContextType.TRIGGER_EVENT) PagingEvent pagingEvent) throws Exception {
-        selectedToTemp();
-        refreshPageList(pagingEvent.getActivePage() * pageSize);
-    }
+	public void setLeaveTypes(List<MstLeaveType> leaveTypes) {
+		this.leaveTypes = leaveTypes;
+	}
 
-    @Command
-    @NotifyChange({"leaveTypeList", "leaveTypeItemRenderer", "pagingCount"})
-    public void doFilter() throws Exception {
-        leaveTypeList.clear();
-        refreshPageList(0);
-    }
+	public LeaveService getLeaveService() {
+		return leaveService;
+	}
 
-    @Command
-    @NotifyChange("leaveTypeList")
-    public void doNew() {
-        leaveTypeList.add(0, new MstLeaveType());
-    }
+	public void setLeaveService(LeaveService leaveService) {
+		this.leaveService = leaveService;
+	}
 
-    @GlobalCommand
-    @NotifyChange("*")
-    public void refreshMstLeaveTypeAfterSaveOrUpdate() throws Exception {
-        refreshPageList(0);
-    }
+	public ListitemRenderer<MstLeaveType> getListitemRenderer() {
+		return listitemRenderer;
+	}
 
-    public void selectedToTemp(){
-        for(MstLeaveType obj : leaveTypeList){
-            if(tempSelectedTypeList.contains(obj)
-                    && !selectedTypeList.contains(obj)){
-                tempSelectedTypeList.remove(obj);
-            }
-        }
-        tempSelectedTypeList.addAll(selectedTypeList);
-    }
-    
-    public void setSelectedFromTemp(){
-        selectedTypeList = new ArrayList<>();
-        for(MstLeaveType obj : leaveTypeList){
-            if(tempSelectedTypeList.contains(obj)){
-                selectedTypeList.add(obj);
-            }
-        }
-    }
-    
-    @Command
-    @NotifyChange("*")
-    public void doDelete() {
-        selectedToTemp();
-        if (tempSelectedTypeList.isEmpty()) {
-            Messagebox.show("There is no selected record?", "Confirm", Messagebox.OK, Messagebox.ERROR);
-        } else {
-            Messagebox.show("Do you really want to remove item?", "Confirm", Messagebox.OK | Messagebox.CANCEL, Messagebox.EXCLAMATION, new EventListener<Event>() {
-                public void onEvent(Event event) throws Exception {
-                    if (((Integer) event.getData()).intValue() == Messagebox.OK) {
-                        leaveService.deleteListMstLeaveType(new ArrayList<MstLeaveType>(tempSelectedTypeList));
-                        tempSelectedTypeList.clear();
-                        BindUtils.postGlobalCommand(null, null, "refreshMstLeaveTypeAfterSaveOrUpdate", null);
-                    } else {
-                        return;
-                    }
-                }
-            });
-        }
-    }
-
-    @Command
-    @NotifyChange("*")
-    public void doRefresh() throws Exception {
-        tempSelectedTypeList.clear();
-        refreshPageList(0);
-    }
-
-    @Command
-    public void doPrint() throws JRException {
-
-    }
-
-    
-    
-    
-    
-    /////////// setter getter ////////////////
-    
-   
-    public List<MstLeaveType> getLeaveTypeList() {
-        return leaveTypeList;
-    }
-
-    public void setLeaveTypeList(List<MstLeaveType> leaveTypeList) {
-        this.leaveTypeList = leaveTypeList;
-    }
-
-    public ListitemRenderer<MstLeaveType> getLeaveTypeItemRenderer() {
-        return leaveTypeItemRenderer;
-    }
-
-    public void setLeaveTypeItemRenderer(ListitemRenderer<MstLeaveType> leaveTypeItemRenderer) {
-        this.leaveTypeItemRenderer = leaveTypeItemRenderer;
-    }
-
-    public Integer getPagingCount() {
-        return pagingCount;
-    }
-
-    public void setPagingCount(Integer pagingCount) {
-        this.pagingCount = pagingCount;
-    }
-
-    public Integer getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public String getItemNameFilter() {
-        return itemNameFilter;
-    }
-
-    public void setItemNameFilter(String itemNameFilter) {
-        this.itemNameFilter = itemNameFilter;
-    }
-
-    public MstLeaveType getMstLeaveTypeForFilter() {
-        return mstLeaveTypeForFilter;
-    }
-
-    public void setMstLeaveTypeForFilter(MstLeaveType mstLeaveTypeForFilter) {
-        this.mstLeaveTypeForFilter = mstLeaveTypeForFilter;
-    }
-
-    public List<MstLeaveType> getSelectedTypeList() {
-        return selectedTypeList;
-    }
-
-    public void setSelectedTypeList(List<MstLeaveType> selectedTypeList) {
-        this.selectedTypeList = selectedTypeList;
-    }
-
-    public Set<MstLeaveType> getTempSelectedTypeList() {
-        return tempSelectedTypeList;
-    }
-
-    public void setTempSelectedTypeList(Set<MstLeaveType> tempSelectedTypeList) {
-        this.tempSelectedTypeList = tempSelectedTypeList;
-    }
-
+	public void setListitemRenderer(ListitemRenderer<MstLeaveType> listitemRenderer) {
+		this.listitemRenderer = listitemRenderer;
+	}
 }

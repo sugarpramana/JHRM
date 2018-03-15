@@ -30,15 +30,15 @@ public class WorkWeekVM {
         
         workWeekList = new LinkedHashMap<>();
         isEdit = false;
-        dayType = DayType.values();
+        //dayType = DayType.values();
         
         initLoadWorkWeekData();
     }
 
     public void initLoadWorkWeekData() throws Exception{
-        for(MstWorkWeek obj : leaveService.getAllWorkWeek()){
+       /* for(MstWorkWeek obj : leaveService.getAllWorkWeek()){
             workWeekList.put(obj.getWorkdayName(), obj.getDayType());
-        }
+        }*/
     }
     
     @Command
@@ -50,7 +50,7 @@ public class WorkWeekVM {
     @Command
     @NotifyChange("isEdit")
     public void doSave() throws Exception{
-        leaveService.updateAllWorkWeek(workWeekList);
+        //leaveService.updateAllWorkWeek(workWeekList);
         isEdit = false;
         initLoadWorkWeekData();
     }

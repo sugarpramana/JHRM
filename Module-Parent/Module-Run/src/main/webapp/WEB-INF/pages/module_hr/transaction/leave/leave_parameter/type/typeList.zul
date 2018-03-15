@@ -1,12 +1,12 @@
 <zk>
     <window apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.leave.parameter.type.LeaveTypeVM')" border="none" width="100%" vflex="true">
-        <borderlayout vflex="min">
+        <borderlayout vflex="true">
             <north border="none">
                 <div sclass="z-toolbar" style="padding:0">
                     <hbox pack="stretch" width="100%">
                         <toolbar align="start" style="border-style: none;">
                             <label value="${labels.menu.leave.leaveparameter.leavetype.leave}"/>
-                            <textbox id="textboxFilter" mold="rounded" value="@save(vm.mstLeaveTypeForFilter.leaveTypeName)"/>
+                            <textbox id="textboxFilter" mold="rounded"/>
                             <button mold="trendy" image="/images/icons/btn_search.gif" label="${labels.button.filter}" onClick="@command('doFilter')"/>
                         </toolbar>
                         <toolbar align="end" style="border-style: none;">
@@ -19,18 +19,16 @@
                 </div>
             </north>
             <center border="none">
-                <listbox id="listBoxLeaveType" model="@load(vm.leaveTypeList)" 
-                         selectedItems="@bind(vm.selectedTypeList)"
-                         itemRenderer="@load(vm.leaveTypeItemRenderer)" checkmark="true" multiple="true" style="border-style: none;">
-                    <listhead sizable="true">
+                <listbox id="listboxLeaveType" model="@bind(vm.leaveTypes)" itemRenderer="@bind(vm.listitemRenderer)" selectedItem="@bind(vm.mstLeaveType)">
+					<listhead sizable="true">
                         <listheader width="10%" align="center"/>
-                        <listheader label="${labels.menu.leave.leaveparameter.leavetype.leave}"/>
-                        <listheader label="${labels.menu.leave.leaveparameter.leavetype.situational}"/>
+                        <listheader label="Leave Type"/>
+                        <listheader label="Is Situational"/>
                     </listhead>
                 </listbox>
             </center>
             <south>
-                <paging id="pagingLeaveType" onPaging="@command('onPaging')" totalSize="@load(vm.pagingCount)" detailed="true" pageSize="@load(vm.pageSize)"/>
+            	<paging id="pagingLeaveType" onPaging="@command('onPaging')"/>
             </south>
         </borderlayout>
     </window>

@@ -1,39 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.module.hr.service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import org.module.hr.model.MstLeavePeriod;
+
+import org.module.hr.model.MstHoliday;
 import org.module.hr.model.MstLeaveType;
-import org.module.hr.model.MstWorkWeek;
 
-/**
- *
- * @author achmadsy
- */
 public interface LeaveService {
-
-    //leave Period
-    public List<MstLeavePeriod> getAllLeavePeriod() throws Exception;
-    public void saveAllLeavePeriod(List<MstLeavePeriod> listLeavePeriod) throws Exception;
-    public void deleteLeavePeriodList(List<MstLeavePeriod> listLeavePeriod) throws Exception;
+	public void save(MstLeaveType mstLeaveType);
+    public void update(MstLeaveType mstLeaveType);
+    public void saveOrUpdate(MstLeaveType mstLeaveType);
+    public void delete(MstLeaveType mstLeaveType);
+    public List<MstLeaveType> getAllMstLeaveTypes();
+    public List<MstLeaveType> getByMstLeaveTypeRequestMap(HashMap<String, Object> hashMap);
+    public List<MstLeaveType> getMstLeaveTypePaging(HashMap<String, Object> hashMap);
+    public int getCountMstLeaveTypes();
     
-    //leave Type
-    public int getCountMstLeaveTypeWithFilter(HashMap<String, Object> hashMap) throws Exception;
-    public List<MstLeaveType> getMstLeaveTypePagingWithFilter(HashMap<String,Object> map) throws Exception;
-    public void saveOrUpdateMstLeaveType(MstLeaveType mstLeaveType) throws Exception;
-    public void deleteMstLeaveType(MstLeaveType mstLeaveType) throws Exception;
-    public void deleteListMstLeaveType(List<MstLeaveType> mstLeaveTypes) throws Exception;
-    
-    //work week
-    public List<MstWorkWeek> getAllWorkWeek() throws Exception;
-    public MstWorkWeek getWorkWeekByDayName(String dayName) throws Exception;
-    public void updateWorkWeek(MstWorkWeek mstWorkWeek) throws Exception;
-    public void updateAllWorkWeek(Map<String, Integer> mstWorkWeek) throws Exception;
-    
+    public void save(MstHoliday mstHoliday);
+    public void update(MstHoliday mstHoliday);
+    public void saveOrUpdate(MstHoliday mstHoliday);
+    public void delete(MstHoliday mstHoliday);
+    public List<MstHoliday> getAllMstHolidays();
+    public List<MstHoliday> getByMstHolidayRequestMap(HashMap<String, Object> hashMap);
+    public List<MstHoliday> getMstHolidayPaging(HashMap<String, Object> hashMap);
+    public int getCountMstHolidays();
 }

@@ -1,23 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.module.hr.dao;
 
 import java.util.HashMap;
 import java.util.List;
+
 import org.module.hr.model.MstLeaveType;
 
-/**
- *
- * @author achmadsy
- */
 public interface MstLeaveTypeDAO {
-
-    public int getCountWithFilter(HashMap<String, Object> hashMap) throws Exception;
-    public List<MstLeaveType> getPagingWithFilter(HashMap<String,Object> map) throws Exception;
-    public void saveOrUpdate(MstLeaveType mstLeaveType) throws Exception;
-    public void delete(MstLeaveType mstLeaveType) throws Exception;
-    public void deleteList(List<MstLeaveType> mstLeaveTypes) throws Exception;
+	public void save(MstLeaveType mstLeaveType);
+    public void update(MstLeaveType mstLeaveType);
+    public void saveOrUpdate(MstLeaveType mstLeaveType);
+    public void delete(MstLeaveType mstLeaveType);
+    public List<MstLeaveType> getAllMstLeaveTypes();
+    public List<MstLeaveType> getByRequestMap(HashMap<String, Object> hashMap);
+    public List<MstLeaveType> getMstLeaveTypePaging(HashMap<String, Object> hashMap);
+    public int getCountMstLeaveTypes();
 }

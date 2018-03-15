@@ -28,7 +28,7 @@ import org.zkoss.zul.Textbox;
  *
  * @author achmadsy
  */
-public class LeaveTypeListitemRenderer implements ListitemRenderer<MstLeaveType> {
+public class LeaveListitemRenderer implements ListitemRenderer<MstLeaveType> {
 
     LeaveService leaveService = (LeaveService) SpringUtil.getBean("leaveService");
 
@@ -107,7 +107,7 @@ public class LeaveTypeListitemRenderer implements ListitemRenderer<MstLeaveType>
                     mstLeaveType.setLeaveTypeName(textboxName.getValue());
                     mstLeaveType.setIsSituational(checkbox.isChecked());
 
-                    leaveService.saveOrUpdateMstLeaveType(mstLeaveType);
+                    //leaveService.saveOrUpdateMstLeaveType(mstLeaveType);
 
                     BindUtils.postGlobalCommand(null, null, "refreshMstLeaveTypeAfterSaveOrUpdate", null);
                 } else {
@@ -144,7 +144,7 @@ public class LeaveTypeListitemRenderer implements ListitemRenderer<MstLeaveType>
                     public void onEvent(Event event) throws Exception {
                         if (((Integer) event.getData()).intValue() == Messagebox.OK) {
 
-                            leaveService.deleteMstLeaveType(mstLeaveType);
+                            //leaveService.deleteMstLeaveType(mstLeaveType);
 
                             BindUtils.postGlobalCommand(null, null, "refreshMstLeaveTypeAfterSaveOrUpdate", null);
                         } else {
