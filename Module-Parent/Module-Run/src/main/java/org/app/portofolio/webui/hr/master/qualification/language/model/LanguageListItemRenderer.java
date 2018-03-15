@@ -17,7 +17,7 @@ import org.zkoss.zul.Textbox;
 
 public class LanguageListItemRenderer implements ListitemRenderer<MstLanguage>{
 	
-	private QualificationService masterQualificationService = (QualificationService) SpringUtil.getBean("masterQualificationService");		
+	private QualificationService qualificationService = (QualificationService) SpringUtil.getBean("qualificationService");		
 	
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -71,13 +71,13 @@ public class LanguageListItemRenderer implements ListitemRenderer<MstLanguage>{
 				if(mstLanguage.getIdLanguage() == null){
 					mstLanguage.setNameLanguage(textboxName.getValue());
 
-					masterQualificationService.save(mstLanguage);
+					qualificationService.save(mstLanguage);
 					
 					BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdate", null);
 				}else{
 					mstLanguage.setNameLanguage(textboxName.getValue());
 
-					masterQualificationService.update(mstLanguage);
+					qualificationService.update(mstLanguage);
 					
 					BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdate", null);
 				}
@@ -105,7 +105,7 @@ public class LanguageListItemRenderer implements ListitemRenderer<MstLanguage>{
 				    public void onEvent(Event event) throws Exception {    	
 				 		if (((Integer) event.getData()).intValue() == Messagebox.OK) {
 
-				 			masterQualificationService.delete(mstLanguage);
+				 			qualificationService.delete(mstLanguage);
 				 			
 				 			BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdate", null);
 				 		}else{

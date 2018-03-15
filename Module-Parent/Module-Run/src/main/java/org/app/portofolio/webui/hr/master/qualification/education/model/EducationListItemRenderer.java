@@ -17,7 +17,7 @@ import org.zkoss.zul.Textbox;
 
 public class EducationListItemRenderer implements ListitemRenderer<MstEducation>{
 	
-	private QualificationService masterQualificationService = (QualificationService) SpringUtil.getBean("masterQualificationService");		
+	private QualificationService qualificationService = (QualificationService) SpringUtil.getBean("qualificationService");		
 	
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -71,13 +71,13 @@ public class EducationListItemRenderer implements ListitemRenderer<MstEducation>
 				if(mstEducation.getIdEducation() == null){
 					mstEducation.setEducationName(textboxName.getValue());
 
-					masterQualificationService.save(mstEducation);
+					qualificationService.save(mstEducation);
 					
 					BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdate", null);
 				}else{
 					mstEducation.setEducationName(textboxName.getValue());
 
-					masterQualificationService.update(mstEducation);
+					qualificationService.update(mstEducation);
 					
 					BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdate", null);
 				}
@@ -105,7 +105,7 @@ public class EducationListItemRenderer implements ListitemRenderer<MstEducation>
 				    public void onEvent(Event event) throws Exception {    	
 				 		if (((Integer) event.getData()).intValue() == Messagebox.OK) {
 
-				 			masterQualificationService.delete(mstEducation);
+				 			qualificationService.delete(mstEducation);
 				 			
 				 			BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdate", null);
 				 		}else{

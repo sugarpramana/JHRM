@@ -18,8 +18,8 @@
 					</hbox>	
 				</div>
 			</north>
-			<center>
-				<listbox id="listboxnNationality" model="@bind(vm.mstNationalities)" itemRenderer="@bind(vm.listitemRenderer)" selectedItem="@bind(vm.mstNationality)">
+			<center border="none">
+				<listbox id="listboxnNationality" model="@bind(vm.mstNationalities)" itemRenderer="@bind(vm.listitemRenderer)" selectedItem="@bind(vm.mstNationality)" style="overflow: scroll;">
 					<listhead sizable="true">
 						<listheader width="10%" align="center"/>
 						<listheader label="Nationality"/>

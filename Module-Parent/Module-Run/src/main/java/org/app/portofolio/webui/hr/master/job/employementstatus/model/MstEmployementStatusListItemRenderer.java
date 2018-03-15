@@ -17,7 +17,7 @@ import org.zkoss.zul.Textbox;
 
 public class MstEmployementStatusListItemRenderer implements ListitemRenderer<MstEmployementStatus>{
 	
-	private JobService masterJobService = (JobService) SpringUtil.getBean("masterJobService");		
+	private JobService jobService = (JobService) SpringUtil.getBean("jobService");		
 	
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -71,13 +71,13 @@ public class MstEmployementStatusListItemRenderer implements ListitemRenderer<Ms
 				if(mstEmployementStatus.getIdEmployementStatus() == null){
 					mstEmployementStatus.setEmployementStatusName(textboxName.getValue());
 
-					masterJobService.save(mstEmployementStatus);
+					jobService.save(mstEmployementStatus);
 					
 					BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdate", null);
 				}else{
 					mstEmployementStatus.setEmployementStatusName(textboxName.getValue());
 
-					masterJobService.update(mstEmployementStatus);
+					jobService.update(mstEmployementStatus);
 					
 					BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdate", null);
 				}
@@ -105,7 +105,7 @@ public class MstEmployementStatusListItemRenderer implements ListitemRenderer<Ms
 				    public void onEvent(Event event) throws Exception {    	
 				 		if (((Integer) event.getData()).intValue() == Messagebox.OK) {
 
-				 			masterJobService.delete(mstEmployementStatus);
+				 			jobService.delete(mstEmployementStatus);
 				 			
 				 			BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdate", null);
 				 		}else{

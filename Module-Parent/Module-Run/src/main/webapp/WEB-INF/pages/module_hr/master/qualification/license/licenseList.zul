@@ -6,7 +6,7 @@
 				<div sclass="z-toolbar" style="padding:0">
 					<hbox pack="stretch" width="100%">
 						<toolbar align="start" style="border-style: none;">
-							<label value="Job Title"/>
+							<label value="Name"/>
 							<textbox id="textboxFilter" mold="rounded"/>
 							<button mold="trendy" image="/images/icons/btn_search.gif" label="Filter" onClick="@command('doFilter')"/>
 						</toolbar>

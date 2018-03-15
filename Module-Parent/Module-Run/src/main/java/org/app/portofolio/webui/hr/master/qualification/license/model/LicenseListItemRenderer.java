@@ -17,7 +17,7 @@ import org.zkoss.zul.Textbox;
 
 public class LicenseListItemRenderer implements ListitemRenderer<MstLicense>{
 
-	private QualificationService masterQualificationService = (QualificationService) SpringUtil.getBean("masterQualificationService");		
+	private QualificationService qualificationService = (QualificationService) SpringUtil.getBean("qualificationService");		
 	
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -71,13 +71,13 @@ public class LicenseListItemRenderer implements ListitemRenderer<MstLicense>{
 				if(mstLicense.getIdLicense() == null){
 					mstLicense.setNameLicense(textboxName.getValue());
 
-					masterQualificationService.save(mstLicense);
+					qualificationService.save(mstLicense);
 					
 					BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdate", null);
 				}else{
 					mstLicense.setNameLicense(textboxName.getValue());
 
-					masterQualificationService.update(mstLicense);
+					qualificationService.update(mstLicense);
 					
 					BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdate", null);
 				}
@@ -105,7 +105,7 @@ public class LicenseListItemRenderer implements ListitemRenderer<MstLicense>{
 				    public void onEvent(Event event) throws Exception {    	
 				 		if (((Integer) event.getData()).intValue() == Messagebox.OK) {
 
-				 			masterQualificationService.delete(mstLicense);
+				 			qualificationService.delete(mstLicense);
 				 			
 				 			BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdate", null);
 				 		}else{

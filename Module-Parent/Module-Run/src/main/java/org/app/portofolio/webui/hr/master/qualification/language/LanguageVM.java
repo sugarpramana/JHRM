@@ -3,6 +3,8 @@ package org.app.portofolio.webui.hr.master.qualification.language;
 import java.util.HashMap;
 import java.util.List;
 
+import net.sf.jasperreports.engine.JRException;
+
 import org.app.portofolio.webui.hr.master.qualification.language.model.LanguageListItemRenderer;
 import org.module.hr.model.MstLanguage;
 import org.module.hr.service.QualificationService;
@@ -25,6 +27,7 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.ListitemRenderer;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Paging;
+import org.zkoss.zul.Textbox;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class LanguageVM {
@@ -32,6 +35,9 @@ public class LanguageVM {
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Wire component
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	@Wire("#textboxFilter")
+	private Textbox textboxFilter;
+	
 	@Wire("#listboxLanguage")
 	private Listbox listboxLanguage;
 	
@@ -98,15 +104,27 @@ public class LanguageVM {
 	 * Function CRUD Event
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Command
+	@NotifyChange("languages")
+	public void doFilter(){
+		languages.clear();
+        
+		String getName = textboxFilter.getValue();
+		
+		if(getName == null || "".equals(getName)) {
+			doPrepareList();
+			refreshPageList(startPageNumber);
+		} else {
+			HashMap<String, Object> hashMap = new HashMap<String, Object>();
+			hashMap.put("nameLanguage", getName);
+			languages = qualificationService.getByMstLanguageRequestMap(hashMap);
+			listitemRenderer = new LanguageListItemRenderer();
+		}
+	}
+	
+	@Command
 	public void doNew() {
 		ListModelList listModelList = (ListModelList) listboxLanguage.getModel();
 		listModelList.add(0, new MstLanguage());
-	}
-
-	@GlobalCommand
-	@NotifyChange("languages")
-	public void refreshAfterSaveOrUpdate(){
-		languages = qualificationService.getAllMstLanguage();
 	}
 
 	@Command
@@ -132,6 +150,24 @@ public class LanguageVM {
 			 	}
 			});
 		}
+	}
+	
+	@Command
+	@NotifyChange("languages")
+	public void doRefresh(){
+		doPrepareList();
+		refreshPageList(startPageNumber);
+	}
+	
+	@Command
+	public void doPrint() throws JRException{
+
+	}
+	
+	@GlobalCommand
+	@NotifyChange("languages")
+	public void refreshAfterSaveOrUpdate(){
+		languages = qualificationService.getAllMstLanguage();
 	}
 
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -120,7 +120,7 @@ public class NationalityVM {
 			refreshPageList(startPageNumber);
 		} else {
 			HashMap<String, Object> hashMap = new HashMap<String, Object>();
-			hashMap.put("jobName", getName);
+			hashMap.put("nameNationality", getName);
 			mstNationalities = nationalityService.getByRequestMap(hashMap);
 			listitemRenderer = new NationalityListItemRenderer();
 		}
@@ -139,12 +139,6 @@ public class NationalityVM {
 		listModelListJobtitle.add(0, new MstJobtitle());
 	}
 
-	@GlobalCommand
-	@NotifyChange("mstNationalities")
-	public void refreshAfterSaveOrUpdate(){
-		mstNationalities = nationalityService.getAllMstNationality();
-	}
-	
 	@Command
 	public void doDelete(){
 		final ListModelList<MstNationality> listModelListJobtitle = (ListModelList) listboxNationality.getModel();
@@ -181,6 +175,13 @@ public class NationalityVM {
 	public void doPrint() throws JRException{
 
 	}
+	
+	@GlobalCommand
+	@NotifyChange("mstNationalities")
+	public void refreshAfterSaveOrUpdate(){
+		mstNationalities = nationalityService.getAllMstNationality();
+	}
+	
 
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Getter Setter

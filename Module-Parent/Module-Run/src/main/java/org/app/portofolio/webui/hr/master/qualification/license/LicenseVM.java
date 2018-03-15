@@ -3,6 +3,8 @@ package org.app.portofolio.webui.hr.master.qualification.license;
 import java.util.HashMap;
 import java.util.List;
 
+import net.sf.jasperreports.engine.JRException;
+
 import org.app.portofolio.webui.hr.master.qualification.license.model.LicenseListItemRenderer;
 import org.module.hr.model.MstLicense;
 import org.module.hr.service.QualificationService;
@@ -25,6 +27,7 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.ListitemRenderer;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Paging;
+import org.zkoss.zul.Textbox;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class LicenseVM {
@@ -32,6 +35,9 @@ public class LicenseVM {
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Wire component
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	@Wire("#textboxFilter")
+	private Textbox textboxFilter;
+	
 	@Wire("#listboxLicense")
 	private Listbox listboxLicense;
 	
@@ -98,6 +104,24 @@ public class LicenseVM {
 	 * Function CRUD Event
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Command
+	@NotifyChange("licenses")
+	public void doFilter(){
+		licenses.clear();
+        
+		String getName = textboxFilter.getValue();
+		
+		if(getName == null || "".equals(getName)) {
+			doPrepareList();
+			refreshPageList(startPageNumber);
+		} else {
+			HashMap<String, Object> hashMap = new HashMap<String, Object>();
+			hashMap.put("nameLicense", getName);
+			licenses = qualificationService.getByMstLicenseRequestMap(hashMap);
+			listitemRenderer = new LicenseListItemRenderer();
+		}
+	}
+	
+	@Command
 	public void doNew(){
 		ListModelList listModelList = (ListModelList) listboxLicense.getModel();
 		listModelList.add(0, new MstLicense());
@@ -126,6 +150,18 @@ public class LicenseVM {
 			 	}
 			});
 		}
+	}
+	
+	@Command
+	@NotifyChange("licenses")
+	public void doRefresh(){
+		doPrepareList();
+		refreshPageList(startPageNumber);
+	}
+	
+	@Command
+	public void doPrint() throws JRException{
+
 	}
 	
 	@GlobalCommand

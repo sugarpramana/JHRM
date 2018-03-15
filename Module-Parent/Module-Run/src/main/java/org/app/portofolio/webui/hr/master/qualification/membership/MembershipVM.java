@@ -3,6 +3,8 @@ package org.app.portofolio.webui.hr.master.qualification.membership;
 import java.util.HashMap;
 import java.util.List;
 
+import net.sf.jasperreports.engine.JRException;
+
 import org.app.portofolio.webui.hr.master.qualification.membership.model.MembershipListItemRenderer;
 import org.module.hr.model.MstMembership;
 import org.module.hr.service.QualificationService;
@@ -25,6 +27,7 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.ListitemRenderer;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Paging;
+import org.zkoss.zul.Textbox;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class MembershipVM {
@@ -32,6 +35,9 @@ public class MembershipVM {
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Wire component
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	@Wire("#textboxFilter")
+	private Textbox textboxFilter;
+	
 	@Wire("#listboxMembership")
 	private Listbox listboxMembership;
 	
@@ -98,15 +104,27 @@ public class MembershipVM {
 	 * Function CRUD Event
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Command
+	@NotifyChange("memberships")
+	public void doFilter(){
+		memberships.clear();
+        
+		String getName = textboxFilter.getValue();
+		
+		if(getName == null || "".equals(getName)) {
+			doPrepareList();
+			refreshPageList(startPageNumber);
+		} else {
+			HashMap<String, Object> hashMap = new HashMap<String, Object>();
+			hashMap.put("nameMembership", getName);
+			memberships = qualificationService.getByMstMembershipRequestMap(hashMap);
+			listitemRenderer = new MembershipListItemRenderer();
+		}
+	}
+	
+	@Command
 	public void doNew(){
 		ListModelList listModelList = (ListModelList) listboxMembership.getModel();
 		listModelList.add(0, new MstMembership());
-	}
-	
-	@GlobalCommand
-	@NotifyChange("memberships")
-	public void refreshAfterSaveOrUpdate(){
-		memberships = qualificationService.getAllMstMembership();
 	}
 
 	@Command
@@ -132,6 +150,24 @@ public class MembershipVM {
 			 	}
 			});
 		}
+	}
+	
+	@Command
+	@NotifyChange("memberships")
+	public void doRefresh(){
+		doPrepareList();
+		refreshPageList(startPageNumber);
+	}
+	
+	@Command
+	public void doPrint() throws JRException{
+
+	}
+	
+	@GlobalCommand
+	@NotifyChange("memberships")
+	public void refreshAfterSaveOrUpdate(){
+		memberships = qualificationService.getAllMstMembership();
 	}
 	
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

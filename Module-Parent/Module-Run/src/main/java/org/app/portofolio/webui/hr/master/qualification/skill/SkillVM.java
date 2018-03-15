@@ -3,6 +3,8 @@ package org.app.portofolio.webui.hr.master.qualification.skill;
 import java.util.HashMap;
 import java.util.List;
 
+import net.sf.jasperreports.engine.JRException;
+
 import org.app.portofolio.webui.hr.master.qualification.skill.model.SkillListItemRenderer;
 import org.module.hr.model.MstSkill;
 import org.module.hr.service.QualificationService;
@@ -25,6 +27,7 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.ListitemRenderer;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Paging;
+import org.zkoss.zul.Textbox;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class SkillVM {
@@ -32,6 +35,9 @@ public class SkillVM {
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Wire component
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	@Wire("#textboxFilter")
+	private Textbox textboxFilter;
+	
 	@Wire("#listboxSkill")
 	private Listbox listboxSkill;
 	
@@ -98,6 +104,24 @@ public class SkillVM {
 	 * Function CRUD Event
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Command
+	@NotifyChange("skills")
+	public void doFilter(){
+		skills.clear();
+        
+		String getName = textboxFilter.getValue();
+		
+		if(getName == null || "".equals(getName)) {
+			doPrepareList();
+			refreshPageList(startPageNumber);
+		} else {
+			HashMap<String, Object> hashMap = new HashMap<String, Object>();
+			hashMap.put("nameSkill", getName);
+			skills = qualificationService.getByMstSkillRequestMap(hashMap);
+			listitemRenderer = new SkillListItemRenderer();
+		}
+	}
+	
+	@Command
 	public void doNew(){
 		ListModelList listModelList = (ListModelList) listboxSkill.getModel();
 		listModelList.add(0,  new MstSkill());
@@ -126,6 +150,18 @@ public class SkillVM {
 			 	}
 			});
 		}
+	}
+	
+	@Command
+	@NotifyChange("skills")
+	public void doRefresh(){
+		doPrepareList();
+		refreshPageList(startPageNumber);
+	}
+	
+	@Command
+	public void doPrint() throws JRException{
+
 	}
 	
 	@GlobalCommand

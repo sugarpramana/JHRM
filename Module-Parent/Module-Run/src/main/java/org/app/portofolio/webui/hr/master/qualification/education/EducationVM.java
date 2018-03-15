@@ -3,6 +3,8 @@ package org.app.portofolio.webui.hr.master.qualification.education;
 import java.util.HashMap;
 import java.util.List;
 
+import net.sf.jasperreports.engine.JRException;
+
 import org.app.portofolio.webui.hr.master.qualification.education.model.EducationListItemRenderer;
 import org.module.hr.model.MstEducation;
 import org.module.hr.service.QualificationService;
@@ -25,6 +27,7 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.ListitemRenderer;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Paging;
+import org.zkoss.zul.Textbox;
 import org.zkoss.zul.event.PagingEvent;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -33,6 +36,9 @@ public class EducationVM {
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Wire component
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	@Wire("#textboxFilter")
+	private Textbox textboxFilter;
+	
 	@Wire("#listboxEducation")
 	private Listbox listboxEducation;
 	
@@ -100,6 +106,24 @@ public class EducationVM {
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Command
 	@NotifyChange("educations")
+	public void doFilter(){
+		educations.clear();
+        
+		String getName = textboxFilter.getValue();
+		
+		if(getName == null || "".equals(getName)) {
+			doPrepareList();
+			refreshPageList(startPageNumber);
+		} else {
+			HashMap<String, Object> hashMap = new HashMap<String, Object>();
+			hashMap.put("educationName", getName);
+			educations = qualificationService.getByMstEducationRequestMap(hashMap);
+			listitemRenderer = new EducationListItemRenderer();
+		}
+	}
+	
+	@Command
+	@NotifyChange("educations")
 	public void onPaging(@ContextParam(ContextType.TRIGGER_EVENT) PagingEvent pagingEvent){
 		startPageNumber = pagingEvent.getActivePage() * pageSize;
 		refreshPageList(startPageNumber);
@@ -109,12 +133,6 @@ public class EducationVM {
 	public void doNew() {
 		ListModelList listModelList = (ListModelList) listboxEducation.getModel();
 		listModelList.add(0, new MstEducation());
-	}
-
-	@GlobalCommand
-	@NotifyChange("educations")
-	public void refreshAfterSaveOrUpdate(){
-		educations = qualificationService.getAllMstEducation();
 	}
 
 	@Command
@@ -140,6 +158,24 @@ public class EducationVM {
 			 	}
 			});
 		}
+	}
+	
+	@Command
+	@NotifyChange("educations")
+	public void doRefresh(){
+		doPrepareList();
+		refreshPageList(startPageNumber);
+	}
+	
+	@Command
+	public void doPrint() throws JRException{
+
+	}
+	
+	@GlobalCommand
+	@NotifyChange("educations")
+	public void refreshAfterSaveOrUpdate(){
+		educations = qualificationService.getAllMstEducation();
 	}
 
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
