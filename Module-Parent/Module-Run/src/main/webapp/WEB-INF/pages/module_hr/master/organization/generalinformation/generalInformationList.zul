@@ -1,9 +1,10 @@
 <zk>
-	<window border="none" width="100%" vflex="true">
+	<window border="none" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.master.organization.generalinformation.GeneralInformationVM')" vflex="true">
 		<borderlayout vflex="true">
 			<north>
 				<toolbar>
-					<button image="/images/icons/btn_edit.gif" label="Edit" onClick="@command('doSave')"/> 
+					<button image="/images/icons/btn_edit.gif" label="Edit" onClick="@command('doEdit')"/> 
+					<button image="/images/icons/btn_save.gif" label="Save" onClick="@command('doSave')"/> 
 				</toolbar>
 			</north>
 			<center>
@@ -17,49 +18,49 @@
 					<rows>
 						<row>
 							<label value="Organization Name" />
-							<textbox width="200px" />
+							<textbox width="200px" value="@bind(vm.mstGeneralInformation.name)"/>
 							<label value="Tax Id" />
-							<textbox width="200px"/>
+							<textbox width="200px" value="@bind(vm.mstGeneralInformation.taxId)"/>
 						</row>
 						<row>
 							<label value="Number of Employees"/>
 							<label value="0" />
 							<label value="Registration Number" />
-							<textbox width="200px"/>
+							<textbox width="200px" value="@bind(vm.mstGeneralInformation.registrationNumber)"/>
 						</row>
 						<row>
 							<label value="Phone" />
-							<textbox width="200px" />
+							<textbox width="200px" value="@bind(vm.mstGeneralInformation.phone)"/>
 							<label value="Fax" />
-							<textbox width="200px"/>
+							<textbox width="200px" value="@bind(vm.mstGeneralInformation.fax)"/>
 						</row>
 						<row>
 							<label value="Email" />
-							<textbox width="200px" />	
+							<textbox width="200px" value="@bind(vm.mstGeneralInformation.email)"/>	
 							<space/>
 							<space/>						
 						</row>
 						<row>
 							<label value="Address Street 1" />
-							<textbox width="200px" />
+							<textbox width="200px" value="@bind(vm.mstGeneralInformation.street1)"/>
 							<label value="Address Street 2" />
-							<textbox width="200px"/>
+							<textbox width="200px" value="@bind(vm.mstGeneralInformation.street2)"/>
 						</row>
 						<row>
 							<label value="City" />
-							<textbox width="200px" />
+							<textbox width="200px" value="@bind(vm.mstGeneralInformation.city)"/>
 							<label value="State/Province" />
-							<textbox width="200px"/>
+							<textbox width="200px" value="@bind(vm.mstGeneralInformation.province)"/>
 						</row>
 						<row>
 							<label value="Zip/Postal Code" />
-							<textbox width="200px" />
+							<textbox width="200px" value="@bind(vm.mstGeneralInformation.zipCode)"/>
 							<label value="Country" />
-							<combobox width="200px"/>
+							<combobox width="200px" value="@bind(vm.mstGeneralInformation.country)"/>
 						</row>	
 						<row>
 							<label value="Note" />
-							<textbox width="200px" rows="5"/>
+							<textbox width="200px" rows="5" value="@bind(vm.mstGeneralInformation.note)"/>
 							<space/>
 							<space/>
 						</row>	

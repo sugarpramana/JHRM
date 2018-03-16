@@ -1,40 +1,35 @@
 package org.app.portofolio.webui.hr.master.organization.generalinformation;
 
-import net.sf.jasperreports.engine.JRException;
+import java.util.List;
 
 import org.module.hr.model.MstGeneralInformation;
+import org.module.hr.service.OrganizationService;
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
 import org.zkoss.bind.annotation.ExecutionArgParam;
-import org.zkoss.bind.annotation.GlobalCommand;
-import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.Selectors;
-import org.zkoss.zul.event.PagingEvent;
+import org.zkoss.zk.ui.select.annotation.WireVariable;
+import org.zkoss.zul.Messagebox;
 
 public class GeneralInformationVM {
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Wire component
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	
-
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Service yang dibutuhkan sesuai bisnis proses
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
+	private MstGeneralInformation mstGeneralInformation;
+	private List<MstGeneralInformation> generalInformations;
+	@WireVariable
+	private OrganizationService organizationService;
 
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Function Custom sesuai kebutuhan
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-	public void doPrepareList(){
-		
-	}
-	
-	private void refreshPageList(int refreshActivePage) {
-		
-	}
 
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Inisialize Methode MVVM yang pertama kali dijalankan
@@ -46,51 +41,61 @@ public class GeneralInformationVM {
 		
 		Selectors.wireComponents(component, this, false);
 
-		doPrepareList();
-		refreshPageList(0);
+		generalInformations = organizationService.getAllMstGeneralInformations();
+		
+		for(MstGeneralInformation generalInformation : generalInformations){
+			this.mstGeneralInformation = generalInformation;
+		}
 	}
 	
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Function CRUD Event
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Command
-	public void doFilter(){
+	public void doEdit(){
 		
 	}
 	
 	@Command
-	@NotifyChange("mstNationalities")
-	public void onPaging(@ContextParam(ContextType.TRIGGER_EVENT) PagingEvent pagingEvent){
-
-	}
-
-	@Command
-	public void doNew(){
-		
-	}
-
-	@GlobalCommand
-	public void refreshAfterSaveOrUpdate(){
-		
-	}
-	
-	@Command
-	public void doDelete(){
-
-	}
-	
-	@Command
-	public void doRefresh(){
-		
-	}
-	
-	@Command
-	public void doPrint() throws JRException{
-
+	public void doSave(){
+		if(mstGeneralInformation.getIdGeneralInformation()== null){
+			System.out.println("doSave");
+			
+			organizationService.save(mstGeneralInformation);
+			Messagebox.show("doSave");
+		}else{
+			System.out.println("doUpdate");
+			
+			organizationService.saveOrUpdate(mstGeneralInformation);
+			Messagebox.show("doUpdate");
+		}
 	}
 
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Getter Setter
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	public MstGeneralInformation getMstGeneralInformation() {
+		return mstGeneralInformation;
+	}
 
+	public void setMstGeneralInformation(MstGeneralInformation mstGeneralInformation) {
+		this.mstGeneralInformation = mstGeneralInformation;
+	}
+
+	public List<MstGeneralInformation> getGeneralInformations() {
+		return generalInformations;
+	}
+
+	public void setGeneralInformations(
+			List<MstGeneralInformation> generalInformations) {
+		this.generalInformations = generalInformations;
+	}
+
+	public OrganizationService getOrganizationService() {
+		return organizationService;
+	}
+
+	public void setOrganizationService(OrganizationService organizationService) {
+		this.organizationService = organizationService;
+	}
 }
