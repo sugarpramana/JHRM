@@ -1,6 +1,60 @@
-<?page title="Add Location" contentType="text/html;charset=UTF-8"?>
-<zk>
-<window title="Add Location" border="normal">
-
-</window>
+<zk> 
+	<window id="windowUser" title="Form Location" border="normal" width="550px" position="center,center" closable="true" action="show: slideDown; hide: slideUp" mode="modal" 
+		apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.master.organization.location.LocationDialogVM')" onClose="@command('doClose')">
+		<borderlayout height="475px">
+			<north>
+				<toolbar>
+					<button image="/images/icons/btn_save.gif" label="Save" onClick="@command('doSave')"/> 
+				</toolbar>
+			</north>
+			<center>
+				<grid>
+					<columns>
+						<column align="right" width="150px" label=""/>
+						<column label=""/>
+					</columns>
+					<rows>
+						<row><space/></row>
+						<row>	
+							<label value="Name"/>
+							<textbox value="@bind(vm.mstLocation.name)"/>
+						</row>
+						<row>	
+							<label value="Country"/>
+							<bandbox value="@bind(vm.mstLocation.countryCode)"></bandbox>
+						</row>
+						<row>	
+							<label value="State/Province"/>
+							<textbox mold="rounded" value="@bind(vm.mstLocation.province)"/>
+						</row>
+						<row>	
+							<label value="City"/>
+							<textbox mold="rounded" width="350px" value="@bind(vm.mstLocation.city)"/>
+						</row>
+						<row>	
+							<label value="Address"/>
+							<textbox mold="rounded" width="350px" rows="5" multiline="true" value="@bind(vm.mstLocation.address)"/>
+						</row>
+						<row>	
+							<label value="Zip/Postal Code"/>
+							<textbox mold="rounded" value="@bind(vm.mstLocation.zipCode)"/>
+						</row>
+						<row>
+							<label value="Phone"/>
+							<textbox mold="rounded" value="@bind(vm.mstLocation.phone)"/>
+						</row>
+						<row>
+							<label value="Fax"/>
+							<textbox mold="rounded" value="@bind(vm.mstLocation.fax)"/>
+						</row>
+						<row>	
+							<label value="Note"/>
+							<textbox mold="rounded" value="@bind(vm.mstLocation.notes)"/>
+						</row>
+						<row><space/></row>
+					</rows>
+				</grid>
+			</center>
+		</borderlayout>
+	</window>
 </zk>

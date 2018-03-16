@@ -5,7 +5,10 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -19,6 +22,8 @@ public class MstLocation implements Serializable {
     
     @Id
     @Basic(optional = false)
+    @SequenceGenerator(name="MstLocation_idLocation_GENERATOR", sequenceName="SCHEMA_HR.MstLocation_idLocation_SEQ")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="MstLocation_idLocation_GENERATOR")
     @Column(name = "id_location")
     private Integer idLocation;
     

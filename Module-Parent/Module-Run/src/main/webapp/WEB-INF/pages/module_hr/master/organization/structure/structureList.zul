@@ -1,8 +1,8 @@
 <zk>
-	<window vflex="true">
-		<groupbox mold="3d">
+	<window apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.master.organization.structure.StructureVM')" border="none" width="100%" vflex="true">
+		<!-- <groupbox mold="3d">
 			<caption label="Organization Structure" />	  
-			
+			 -->
 			<borderlayout vflex="true">
 				<north>
 					<toolbar>
@@ -10,21 +10,27 @@
 					</toolbar>
 				</north>
 				<center border="none">
-					<tree>
+					<!-- <tree model="@bind(vm.subUnits)" itemRenderer="@bind(vm.listitemRenderer)">
 						<treecols>
-							<treecol label="" />
+							<treecol label="Menu" />
+						</treecols>
+					</tree> -->
+					<tree model="@bind(vm.treeModel)">
+						<treecols>
+							<treecol label="Menu" />
 						</treecols>
 						<treechildren>
 							<treeitem>
 								<treerow>
-									<treecell label="" />
+									<treecell label="@load(vm.mstSubUnit.idSubUnit)" />
 								</treerow>
 							</treeitem>
 						</treechildren>
-					</tree>
+					</tree> 
+					
 				</center>
 				<south/>
 			</borderlayout>          	
-		</groupbox>
+		<!-- </groupbox> -->
 	</window>
 </zk>

@@ -15,6 +15,7 @@ import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
@@ -106,27 +107,39 @@ public class LocationVM {
 
 	@Command
 	public void doNew(){
-		
+		Executions.createComponents("/WEB-INF/pages/module_hr/master/organization/location/locationDialog.zul", null, null);
 	}
 
-	@GlobalCommand
-	public void refreshAfterSaveOrUpdate(){
-		
-	}
-	
 	@Command
 	public void doDelete(){
 
 	}
 	
 	@Command
+	@NotifyChange("mstLocations")
 	public void doRefresh(){
-		
+		doPrepareList();
+		refreshPageList(startPageNumber);
 	}
 	
 	@Command
 	public void doPrint() throws JRException{
 
+	}
+	
+	@Command
+	public void doDetail(){
+		/*HashMap<K, V> K = Key, V = Value*/
+		HashMap<String, Object> arg = new HashMap<String, Object>();
+		arg.put("mstLocation", mstLocation);
+		Executions.createComponents("/WEB-INF/pages/module_hr/master/organization/location/locationDialog.zul", null, arg);
+	}
+	
+	@GlobalCommand
+	@NotifyChange("mstLocations")
+	public void refreshAfterSaveOrUpdate(){
+		doPrepareList();
+		refreshPageList(startPageNumber);
 	}
 
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
