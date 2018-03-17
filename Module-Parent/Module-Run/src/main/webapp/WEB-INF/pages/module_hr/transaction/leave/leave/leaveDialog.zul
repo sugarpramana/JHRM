@@ -1,7 +1,7 @@
 <zk> 
-	<window id="windowUser" title="Form User" border="normal" width="550px" position="center,center" closable="true" action="show: slideDown; hide: slideUp" mode="modal" 
+	<window id="windowUser" title="Form Leave" border="normal" width="450px" position="center,center" closable="true" action="show: slideDown; hide: slideUp" mode="modal" 
 		apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.leave.LeaveDialogVM')" onClose="@command('doClose')">
-		<borderlayout height="425px">
+		<borderlayout height="375px">
 			<north>
 				<toolbar>
 					<button image="/images/icons/btn_save.gif" label="Save" onClick="@command('doSave')"/> 
@@ -15,6 +15,30 @@
 					</columns>
 					<rows>
 						<row><space/></row>
+						<row>
+							<label value="Employee Name"/>
+							<bandbox/>
+						</row>
+						<row>
+							<label value="Leave Type"/>
+							<bandbox/>
+						</row>
+						<row>
+							<label value="Leave Balance"/>
+							<intbox/>
+						</row>
+						<row>
+							<label value="Start Date"/>
+							<datebox/>
+						</row>
+						<row>
+							<label value="End Date"/>
+							<datebox/>
+						</row>
+						<row>
+							<label value="Comment"/>
+							<textbox multiline="true" rows="5" width="175px"/>
+						</row>
 						<row><space/></row>
 					</rows>
 				</grid>
