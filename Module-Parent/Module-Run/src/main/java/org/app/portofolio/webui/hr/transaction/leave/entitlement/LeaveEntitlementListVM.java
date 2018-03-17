@@ -1,5 +1,6 @@
 package org.app.portofolio.webui.hr.transaction.leave.entitlement;
 
+import org.module.hr.model.TrsEntitlement;
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
@@ -15,7 +16,8 @@ public class LeaveEntitlementListVM {
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@AfterCompose
 	public void setupComponents(@ContextParam(ContextType.VIEW) Component component,
-		@ExecutionArgParam("object") Object object) {
+		@ExecutionArgParam("object") Object object,
+		@ExecutionArgParam("trsEntitlement") TrsEntitlement trsEntitlement) {
 		
 		Selectors.wireComponents(component, this, false);
 	}

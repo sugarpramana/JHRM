@@ -140,6 +140,8 @@
 	<bean id="trsEmployeeSalaryDAO" class="org.module.hr.dao.impl.TrsEmployeeSalaryDAOImpl" parent="baseDao"/>
 	
 	<!-- Leave -->
+	<bean id="trsLeaveDAO" class="org.module.hr.dao.impl.TrsLeaveDAOImpl" parent="baseDao"/>
+	<bean id="trsEntitlementDAO" class="org.module.hr.dao.impl.TrsEntitlementDAOImpl" parent="baseDao"/>
 	<bean id="mstLeavePeriodDAO" class="org.module.hr.dao.impl.MstLeavePeriodDAOImpl" parent="baseDao"/>
 	<bean id="mstLeaveTypeDAO" class="org.module.hr.dao.impl.MstLeaveTypeDAOImpl" parent="baseDao"/>
   	<bean id="mstHolidayDAO" class="org.module.hr.dao.impl.MstHolidayDAOImpl" parent="baseDao"/>
@@ -201,6 +203,8 @@
     
     <!-- Leave Service -->
 	<bean id="leaveService" class="org.module.hr.service.impl.LeaveServiceImpl">
+		<property name="trsLeaveDAO" ref="trsLeaveDAO" />
+        <property name="trsEntitlementDAO" ref="trsEntitlementDAO" />
 		<property name="mstLeavePeriodDAO" ref="mstLeavePeriodDAO" />
         <property name="mstLeaveTypeDAO" ref="mstLeaveTypeDAO" />
         <property name="mstHolidayDAO" ref="mstHolidayDAO" />
