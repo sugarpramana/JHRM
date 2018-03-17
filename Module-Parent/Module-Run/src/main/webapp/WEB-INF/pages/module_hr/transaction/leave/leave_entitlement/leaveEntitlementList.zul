@@ -19,7 +19,7 @@
 				</div>
 			</north>
 			<center border="none">
-				<listbox id="listBoxJobTitle">
+				<listbox id="listboxLeaveEntitlement" model="@bind(vm.trsEntitlements)">
 					<listhead sizable="true">
 						<listheader width="10%" align="center"/>
 						<listheader label="Employee Name"/>
@@ -29,10 +29,21 @@
 						<listheader label="Valid To"/>
 						<listheader label="Days"/>
 					</listhead>
+					<template name="model" var="trsEntitlement">
+						<listitem>
+							<listcell image="/images/icons/btn_edit.gif" tooltiptext="Click For Edit" onClick="@command('doDetail')"/>
+							<listcell label="@bind(trsEntitlement.idEmployee.firstName)" />
+							<listcell label="" />
+							<listcell label="" />
+							<listcell label="" />
+							<listcell label="" />
+							<listcell label="" />
+						</listitem>
+					</template>
 				</listbox>
 			</center>
 			<south>
-				<paging id="pagingJobTitle" onPaging="@command('onPaging')"/>
+				<paging id="pagingLeaveEntitlement" onPaging="@command('onPaging')"/>
 			</south>
 		</borderlayout>
 	</window>
