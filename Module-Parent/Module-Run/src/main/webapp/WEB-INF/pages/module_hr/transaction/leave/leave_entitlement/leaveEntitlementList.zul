@@ -1,5 +1,5 @@
 <zk>
-	<window apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.leave.entitlement.LeaveEntitlement')" border="none" width="100%" vflex="true">
+	<window apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.leave.entitlement.LeaveEntitlementListVM')" border="none" width="100%" vflex="true">
 		<borderlayout vflex="true">
 			<north border="none">
 				<div sclass="z-toolbar" style="padding:0">

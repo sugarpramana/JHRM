@@ -1,6 +1,6 @@
 <zk> 
 	<window id="windowUser" title="Form User" border="normal" width="550px" position="center,center" closable="true" action="show: slideDown; hide: slideUp" mode="modal" 
-		apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.leave.LeaveDialogVM')" onClose="@command('doClose')">
+		apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.leave.entitlement.LeaveEntitlementDialogVM')" onClose="@command('doClose')">
 		<borderlayout height="425px">
 			<north>
 				<toolbar>

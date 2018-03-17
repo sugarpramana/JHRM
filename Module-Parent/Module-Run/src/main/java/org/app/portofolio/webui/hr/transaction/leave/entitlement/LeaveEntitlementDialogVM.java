@@ -1,4 +1,4 @@
-package org.app.portofolio.webui.hr.transaction.leave;
+package org.app.portofolio.webui.hr.transaction.leave.entitlement;
 
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.AfterCompose;
@@ -9,7 +9,7 @@ import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.Selectors;
 
-public class LeaveDialogVM {
+public class LeaveEntitlementDialogVM {
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Inisialize Methode MVVM yang pertama kali dijalankan
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
