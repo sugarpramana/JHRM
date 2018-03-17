@@ -1,31 +1,65 @@
 <zk>
-    <window apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.leave.parameter.workweek.WorkWeekVM')" border="none" width="100%" vflex="true">
+    <window border="none" width="100%" vflex="true">
         <borderlayout vflex="min">
             <north>
                 <toolbar>
-                    <button image="/images/icons/btn_edit.gif" label="Edit" onClick="@command('doEdit')" visible="@load(!vm.isEdit)"/> 
-                    <button image="/images/icons/btn_save.gif" label="Save" onClick="@command('doSave')" visible="@load(vm.isEdit)"/> 
+                    <button image="/images/icons/btn_edit.gif" label="Edit" onClick="@command('doEdit')" /> 
+                    <button image="/images/icons/btn_save.gif" label="Save" onClick="@command('doSave')" /> 
                 </toolbar>
             </north>
             <center>
-                <listbox id="listBoxWorkWeek" model="@load(vm.workWeekList.entrySet())" style="border-style: none;">
-                    <listhead>
-                        <listheader hflex="min"/>
-                        <listheader />
-                    </listhead>
-                    <template name="model" var="entry">
-                        <listitem>
-                            <listcell style="text-align: right;" label="@load(entry.key) @converter('org.app.portofolio.common.zul.util.DayNameEnumConverter')" />
-                            <listcell>
-                                <combobox readonly="true" disabled="@load(!vm.isEdit)" model="@load(vm.dayType)" value="@bind(entry.value) @converter('org.app.portofolio.common.zul.util.DayTypeEnumConverter')">
-                                    <template name="model" var="model">
-                                        <comboitem label="@load(model.dayTypeDesc)" value="@load(model.dayType)"/>
-                                    </template>
-                                </combobox>
-                            </listcell>
-                        </listitem>
-                    </template>
-                </listbox>
+                <grid>
+					<columns>
+						<column align="right" width="150px" label=""/>
+						<column label=""/>
+					</columns>
+					<rows>
+						<row><space/></row>
+						<row>	
+							<label value="Monday"/>
+							<combobox>
+							
+							</combobox>
+						</row>
+						<row>	
+							<label value="Tuesday"/>
+							<combobox>
+							
+							</combobox>
+						</row>
+						<row>	
+							<label value="Wednesday"/>
+							<combobox>
+							
+							</combobox>
+						</row>
+						<row>	
+							<label value="Thursday"/>
+							<combobox>
+							
+							</combobox>
+						</row>
+						<row>	
+							<label value="Friday"/>
+							<combobox>
+							
+							</combobox>
+						</row>
+						<row>	
+							<label value="Saturday"/>
+							<combobox>
+							
+							</combobox>
+						</row>
+						<row>
+							<label value="Sunday"/>
+							<combobox>
+							
+							</combobox>
+						</row>
+						<row><space/></row>
+					</rows>
+				</grid>
             </center>
             <south/>
         </borderlayout>

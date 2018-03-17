@@ -1,20 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.module.hr.dao;
 
+import java.util.HashMap;
 import java.util.List;
+
 import org.module.hr.model.MstLeavePeriod;
 
-/**
- *
- * @author achmadsy
- */
 public interface MstLeavePeriodDAO {
-
-    public List<MstLeavePeriod> getAll() throws Exception;
-    public void saveOrUpdateList(List<MstLeavePeriod> listLeavePeriod) throws Exception;
-    public void deleteList(List<MstLeavePeriod> listLeavePeriod) throws Exception;
+	public void save(MstLeavePeriod mstLeavePeriod);
+    public void update(MstLeavePeriod mstLeavePeriod);
+    public void saveOrUpdate(MstLeavePeriod mstLeavePeriod);
+    public void delete(MstLeavePeriod mstLeavePeriod);
+    public List<MstLeavePeriod> getAllMstLeavePeriods();
+    public List<MstLeavePeriod> getByRequestMap(HashMap<String, Object> hashMap);
+    public List<MstLeavePeriod> getMstLeavePeriodPaging(HashMap<String, Object> hashMap);
+    public int getCountMstLeavePeriods();
 }

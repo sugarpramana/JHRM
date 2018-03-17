@@ -28,46 +28,42 @@ public class OrganizationServiceImpl implements OrganizationService{
 	/*- General Information +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Override
 	public void save(MstGeneralInformation mstGeneralInformation) {
-		// TODO Auto-generated method stub	
+		mstGeneralInformationDAO.save(mstGeneralInformation);	
 	}
 
 	@Override
 	public void update(MstGeneralInformation mstGeneralInformation) {
-		// TODO Auto-generated method stub
+		mstGeneralInformationDAO.update(mstGeneralInformation);
 	}
 
 	@Override
 	public void saveOrUpdate(MstGeneralInformation mstGeneralInformation) {
-		// TODO Auto-generated method stub
+		mstGeneralInformationDAO.saveOrUpdate(mstGeneralInformation);
 	}
 
 	@Override
 	public void delete(MstGeneralInformation mstGeneralInformation) {
-		// TODO Auto-generated method stub
+		mstGeneralInformationDAO.delete(mstGeneralInformation);
 	}
 
 	@Override
 	public List<MstGeneralInformation> getAllMstGeneralInformations() {
-		// TODO Auto-generated method stub
-		return null;
+		return mstGeneralInformationDAO.getAllMstGeneralInformations();
 	}
 
 	@Override
 	public List<MstGeneralInformation> getByMstGeneralInformation(HashMap<String, Object> hashMap) {
-		// TODO Auto-generated method stub
-		return null;
+		return mstGeneralInformationDAO.getByRequestMap(hashMap);
 	}
 
 	@Override
 	public List<MstGeneralInformation> getMstGeneralInformationPaging(HashMap<String, Object> hashMap) {
-		// TODO Auto-generated method stub
-		return null;
+		return mstGeneralInformationDAO.getMstGeneralInformationPaging(hashMap);
 	}
 
 	@Override
 	public int getCountMstGeneralInformations() {
-		// TODO Auto-generated method stub
-		return 0;
+		return mstGeneralInformationDAO.getCountMstGeneralInformations();
 	}
 	
 	/*- Location +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -114,22 +110,22 @@ public class OrganizationServiceImpl implements OrganizationService{
 	/*- Structure +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Override
 	public void save(MstSubUnit mstSubUnit) {
-		// TODO Auto-generated method stub
+		mstSubUnitDAO.save(mstSubUnit);
 	}
 
 	@Override
 	public void update(MstSubUnit mstSubUnit) {
-		// TODO Auto-generated method stub
+		mstSubUnitDAO.update(mstSubUnit);
 	}
 
 	@Override
 	public void saveOrUpdate(MstSubUnit mstSubUnit) {
-		// TODO Auto-generated method stub
+		mstSubUnitDAO.saveOrUpdate(mstSubUnit);
 	}
 
 	@Override
 	public void delete(MstSubUnit mstSubUnit) {
-		// TODO Auto-generated method stub
+		mstSubUnitDAO.delete(mstSubUnit);
 	}
 
 	@Override
@@ -139,20 +135,17 @@ public class OrganizationServiceImpl implements OrganizationService{
 
 	@Override
 	public List<MstSubUnit> getByMstSubUnitRequestMap(HashMap<String, Object> hashMap) {
-		// TODO Auto-generated method stub
-		return null;
+		return mstSubUnitDAO.getByRequestMap(hashMap);
 	}
 
 	@Override
 	public List<MstSubUnit> getMstSubUnitPaging(HashMap<String, Object> hashMap) {
-		// TODO Auto-generated method stub
-		return null;
+		return mstSubUnitDAO.getMstSubUnitPaging(hashMap);
 	}
 
 	@Override
 	public int getCountMstSubUnits() {
-		// TODO Auto-generated method stub
-		return 0;
+		return mstSubUnitDAO.getCountMstSubUnits();
 	}
 
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

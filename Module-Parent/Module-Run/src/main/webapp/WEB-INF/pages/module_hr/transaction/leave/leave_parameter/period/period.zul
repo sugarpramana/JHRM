@@ -1,16 +1,10 @@
 <zk>
-    <style>
-        .z-comboitem {
-            line-height: normal;
-        }
-    </style>
     <window apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.leave.parameter.period.LeavePeriodVM')" border="none" width="100%" vflex="true">
         <borderlayout vflex="true">
             <north>
                 <toolbar>
-                    <button image="/images/icons/btn_edit.gif" label="${labels.button.dialog.edit}" onClick="@command('doEdit')" visible="@load(vm.readOnly)"/> 
-                    <button image="/images/icons/btn_save.gif" label="${labels.button.dialog.save}" onClick="@command('doSave')" visible="@load(!vm.readOnly)"/> 
-                    <button image="/images/icons/btn_cancel.gif" label="${labels.button.reset}" onClick="@command('doReset')" visible="@load(!vm.readOnly)"/> 
+                    <button image="/images/icons/btn_edit.gif" label="${labels.button.dialog.edit}" onClick="@command('doEdit')" /> 
+                    <button image="/images/icons/btn_save.gif" label="${labels.button.dialog.save}" onClick="@command('doSave')" /> 
                 </toolbar>
             </north>
             <center>
@@ -21,30 +15,16 @@
                     </columns>
                     <rows>
                         <row>
-                            <label value="${labels.menu.leave.leaveparameter.leaveperiod.startMonth}"/>
-                            <combobox model="@load(vm.monthList)" readonly="true" disabled="@load(vm.readOnly)"
-                                      value="@bind(vm.mstLeavePeriod.selectedFromDateMonth) @converter('org.app.portofolio.common.zul.util.MapToBeanConverter')" onChange="@command('changedFromDate')">
-                                <template name="model" var="model">
-                                    <comboitem label="@load(model.key)" value="@load(model.value)"/>
-                                </template>
-                            </combobox>
-                        </row>
-                        <row>
-                            <label value="${labels.menu.leave.leaveparameter.leaveperiod.startDate}"/>
-                            <combobox model="@load(vm.dateList)" readonly="true" disabled="@load(vm.readOnly)"
-                                      value="@bind(vm.mstLeavePeriod.selectedFromDateDate) @converter('org.app.portofolio.common.zul.util.MapToBeanConverter')" onChange="@command('changedFromDate')">
-                                <template name="model" var="model1">
-                                    <comboitem label="@load(model1.key)" value="@load(model1.value)"/>
-                                </template>
-                            </combobox>
+                            <label value="Start Period"/>
+                            <datebox id="dateboxStart" format="dd-MM-yyyy" onChange="@command('doOK')" value="@bind(vm.mstLeavePeriod.fromDate)"/>
                         </row>
                         <row>
                             <label value="${labels.menu.leave.leaveparameter.leaveperiod.endDate}"/>
-                            <label value="@load(vm.mstLeavePeriod.selectedToDate)"/>
+                             <datebox id="dateboxEnd" format="dd-MM-yyyy" value="@bind(vm.mstLeavePeriod.toDate)"/>
                         </row>
                         <row>
                             <label value="${labels.menu.leave.leaveparameter.leaveperiod.currentLeavePeriod}"/>
-                            <label value="@load(vm.currentLeavePeriod)"/>
+                            <label id="labelCurrent"/>
                         </row>
                     </rows>
                 </grid>

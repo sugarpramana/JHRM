@@ -4,9 +4,19 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.module.hr.model.MstHoliday;
+import org.module.hr.model.MstLeavePeriod;
 import org.module.hr.model.MstLeaveType;
 
 public interface LeaveService {
+	public void save(MstLeavePeriod mstLeavePeriod);
+    public void update(MstLeavePeriod mstLeavePeriod);
+    public void saveOrUpdate(MstLeavePeriod mstLeavePeriod);
+    public void delete(MstLeavePeriod mstLeavePeriod);
+    public List<MstLeavePeriod> getAllMstLeavePeriods();
+    public List<MstLeavePeriod> getByMstLeavePeriodRequestMap(HashMap<String, Object> hashMap);
+    public List<MstLeavePeriod> getMstLeavePeriodPaging(HashMap<String, Object> hashMap);
+    public int getCountMstLeavePeriods();
+	
 	public void save(MstLeaveType mstLeaveType);
     public void update(MstLeaveType mstLeaveType);
     public void saveOrUpdate(MstLeaveType mstLeaveType);
