@@ -7,6 +7,10 @@ import org.module.hr.model.MstGeneralInformation;
 import org.module.hr.model.MstLocation;
 import org.module.hr.model.MstSubUnit;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public interface OrganizationService {
 	/*- General Information +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void save(MstGeneralInformation mstGeneralInformation);

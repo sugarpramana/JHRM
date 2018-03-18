@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 /**
 *
-* @author tekosulaiman@yahoo.com
+* @author formulateko@admin.com
 */
 @Entity
 @Table(name = "trs_employee_salary", catalog = "dbhr", schema = "schema_hr")

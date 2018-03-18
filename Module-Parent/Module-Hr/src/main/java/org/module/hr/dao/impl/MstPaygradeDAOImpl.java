@@ -8,6 +8,10 @@ import org.module.hr.dao.MstPaygradeDAO;
 import org.module.hr.model.MstPaygrade;
 import org.springframework.dao.support.DataAccessUtils;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings("unchecked")
 public class MstPaygradeDAOImpl extends BasisDAO<MstPaygrade> implements MstPaygradeDAO{
 

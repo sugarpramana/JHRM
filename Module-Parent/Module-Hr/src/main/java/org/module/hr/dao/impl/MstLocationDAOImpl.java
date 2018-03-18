@@ -8,6 +8,10 @@ import org.module.hr.dao.MstLocationDAO;
 import org.module.hr.model.MstLocation;
 import org.springframework.dao.support.DataAccessUtils;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings("unchecked")
 public class MstLocationDAOImpl extends BasisDAO<MstLocation> implements MstLocationDAO{
 

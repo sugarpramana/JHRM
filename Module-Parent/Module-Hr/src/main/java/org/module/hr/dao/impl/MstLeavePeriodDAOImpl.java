@@ -7,6 +7,10 @@ import org.module.api.common.dao.base.BasisDAO;
 import org.module.hr.model.MstLeavePeriod;
 import org.module.hr.dao.MstLeavePeriodDAO;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings("unchecked")
 public class MstLeavePeriodDAOImpl extends BasisDAO<MstLeavePeriod> implements MstLeavePeriodDAO {
 

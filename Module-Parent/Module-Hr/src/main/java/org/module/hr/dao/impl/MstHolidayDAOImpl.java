@@ -8,6 +8,10 @@ import org.module.hr.dao.MstHolidayDAO;
 import org.module.hr.model.MstHoliday;
 import org.springframework.dao.support.DataAccessUtils;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings("unchecked")
 public class MstHolidayDAOImpl extends BasisDAO<MstHoliday> implements MstHolidayDAO{
 

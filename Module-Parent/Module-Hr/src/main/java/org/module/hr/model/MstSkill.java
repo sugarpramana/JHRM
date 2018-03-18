@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
 *
-* @author tekosulaiman@yahoo.com
+* @author formulateko@admin.com
 */
 @Entity
 @Table(name = "mst_skill", catalog = "dbhr", schema = "schema_hr")
@@ -41,6 +41,7 @@ public class MstSkill implements Serializable {
     private List<TrsEmployeeSkill> trsEmployeeSkillList;
 
     public MstSkill() {
+    	
     }
 
     public MstSkill(Integer idSkill) {

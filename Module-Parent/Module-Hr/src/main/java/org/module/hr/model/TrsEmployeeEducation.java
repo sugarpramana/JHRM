@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 
 /**
 *
-* @author tekosulaiman@yahoo.com
+* @author formulateko@admin.com
 */
 @Entity
 @Table(name = "trs_employee_education", catalog = "dbhr", schema = "schema_hr")

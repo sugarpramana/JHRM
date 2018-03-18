@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.module.hr.model.MstNationality;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public interface NationalityService {
 	public void save(MstNationality mstNationality);
     public void update(MstNationality mstNationality);

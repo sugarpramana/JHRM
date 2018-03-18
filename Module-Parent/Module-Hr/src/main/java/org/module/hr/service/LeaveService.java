@@ -9,6 +9,10 @@ import org.module.hr.model.MstLeaveType;
 import org.module.hr.model.TrsEntitlement;
 import org.module.hr.model.TrsLeave;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public interface LeaveService {
 	/*- Leave +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void save(TrsLeave trsLeave);

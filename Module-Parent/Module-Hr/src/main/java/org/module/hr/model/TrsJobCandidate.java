@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package org.module.hr.model;
 
 import java.io.Serializable;
@@ -31,7 +25,7 @@ import org.module.api.common.utilities.BusinessCaseUtilities;
 
 /**
 *
-* @author tekosulaiman@yahoo.com
+* @author formulateko@admin.com
 */
 @Entity
 @Table(name = "trs_job_candidate", catalog = "dbhr", schema = "schema_hr")
@@ -64,11 +58,13 @@ public class TrsJobCandidate implements Identifiable<Serializable> {
     @Basic(optional = false)
     @Column(name = "first_name")
     private String firstName;
+    
     @Column(name = "last_name")
     private String lastName;
     
     @Column(name = "middle_name")
     private String middleName;
+    
     @Column(name = "resume")
     private String resume;
     
@@ -84,6 +80,7 @@ public class TrsJobCandidate implements Identifiable<Serializable> {
     private TrsJobVacancy idTrsJobVacancy;
 
     public TrsJobCandidate() {
+    	
     }
 
     public TrsJobCandidate(String id) {

@@ -7,7 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+*
+* @author formulateko@admin.com
+*/
 final public class RelationshipType implements Serializable{
 
 	private static final long serialVersionUID = -1060144618443900336L;
@@ -76,5 +79,4 @@ final public class RelationshipType implements Serializable{
 
 		return false;
 	}
-
 }

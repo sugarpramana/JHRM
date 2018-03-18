@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 /**
 *
-* @author tekosulaiman@yahoo.com
+* @author formulateko@admin.com
 */
 @Entity
 @Table(name = "mst_upload_file", catalog = "dbhr", schema = "schema_hr")
@@ -45,6 +45,7 @@ public class MstUploadFile implements Serializable {
     private TrsJobCandidate idTrsJobCandidate;
 
     public MstUploadFile() {
+    	
     }
 
     public MstUploadFile(Integer idUploadFile) {

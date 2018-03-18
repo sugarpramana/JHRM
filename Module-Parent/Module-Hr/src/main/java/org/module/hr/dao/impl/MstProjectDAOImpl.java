@@ -8,6 +8,10 @@ import org.module.hr.dao.MstProjectDAO;
 import org.module.hr.model.MstProject;
 import org.springframework.dao.support.DataAccessUtils;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings("unchecked")
 public class MstProjectDAOImpl extends BasisDAO<MstProject> implements MstProjectDAO{
 

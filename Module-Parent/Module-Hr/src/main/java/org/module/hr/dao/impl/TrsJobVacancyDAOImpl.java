@@ -7,9 +7,13 @@ import org.module.api.common.dao.base.BasisDAO;
 import org.module.hr.dao.TrsJobVacancyDAO;
 import org.module.hr.model.TrsJobVacancy;
 
+/**
+*
+* @author formulateko@admin.com
+*/
+@SuppressWarnings("unchecked")
 public class TrsJobVacancyDAOImpl extends BasisDAO<TrsJobVacancy> implements TrsJobVacancyDAO{
-
-	@SuppressWarnings("unchecked")
+	
 	@Override
 	public List<TrsJobVacancy> getAllTrsJobVacancy() {
 		List<TrsJobVacancy> list = (List<TrsJobVacancy>) getHibernateTemplate().find("FROM TrsJobVacancy t");
@@ -26,4 +30,15 @@ public class TrsJobVacancyDAOImpl extends BasisDAO<TrsJobVacancy> implements Trs
 		return getByRequestMap(params);
 	}
 
+	@Override
+	public List<TrsJobVacancy> getTrsJobVacancyPaging(HashMap<String, Object> hashMap) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getCountTrsJobVacancys() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

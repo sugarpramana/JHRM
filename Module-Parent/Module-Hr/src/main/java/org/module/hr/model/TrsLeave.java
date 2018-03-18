@@ -15,7 +15,7 @@ import javax.persistence.TemporalType;
 
 /**
 *
-* @author tekosulaiman@yahoo.com
+* @author formulateko@admin.com
 */
 @Entity
 @Table(name = "trs_leave", catalog = "dbhr", schema = "schema_hr")
@@ -53,6 +53,7 @@ public class TrsLeave implements Serializable {
     private Integer status;
 
     public TrsLeave() {
+    	
     }
 
     public TrsLeave(Integer idLeave) {

@@ -8,6 +8,10 @@ import org.module.hr.dao.MstMembershipDAO;
 import org.module.hr.model.MstMembership;
 import org.springframework.dao.support.DataAccessUtils;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings("unchecked")
 public class MstMembershipDAOImpl extends BasisDAO<MstMembership> implements MstMembershipDAO{
 

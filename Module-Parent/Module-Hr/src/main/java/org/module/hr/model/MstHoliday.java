@@ -15,7 +15,7 @@ import javax.persistence.Temporal;
 
 /**
 *
-* @author tekosulaiman@yahoo.com
+* @author formulateko@admin.com
 */
 @Entity
 @Table(name = "mst_holiday", catalog = "dbhr", schema = "schema_hr")
@@ -89,5 +89,4 @@ public class MstHoliday implements Serializable {
     public void setDayType(Integer dayType) {
         this.dayType = dayType;
     }
-    
 }

@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.module.hr.model.MstGeneralInformation;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public interface MstGeneralInformationDAO {
 	public void save(MstGeneralInformation mstGeneralInformation);
     public void update(MstGeneralInformation mstGeneralInformation);

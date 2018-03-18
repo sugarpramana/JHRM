@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 
 /**
 *
-* @author tekosulaiman@yahoo.com
+* @author formulateko@admin.com
 */
 @Entity
 @Table(name = "trs_attendance", catalog = "dbhr", schema = "schema_hr")
@@ -54,6 +54,7 @@ public class TrsAttendance implements Serializable {
     private TrsEmployee idEmployee;
 
     public TrsAttendance() {
+    	
     }
 
     public TrsAttendance(Integer idAttendance) {

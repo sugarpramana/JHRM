@@ -8,6 +8,10 @@ import org.module.hr.dao.MstJobtitleDAO;
 import org.module.hr.model.MstJobtitle;
 import org.springframework.dao.support.DataAccessUtils;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings("unchecked")
 public class MstJobtitleDAOImpl extends BasisDAO<MstJobtitle> implements MstJobtitleDAO{
 

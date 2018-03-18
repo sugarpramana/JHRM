@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 /**
 *
-* @author tekosulaiman@yahoo.com
+* @author formulateko@admin.com
 */
 @Entity
 @Table(name = "mst_work_week", catalog = "dbhr", schema = "schema_hr")
@@ -60,5 +60,4 @@ public class MstWorkWeek implements Serializable {
     public void setDayType(Integer dayType) {
         this.dayType = dayType;
     }
-    
 }

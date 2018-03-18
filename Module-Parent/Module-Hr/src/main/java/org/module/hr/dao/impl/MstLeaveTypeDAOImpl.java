@@ -8,6 +8,10 @@ import org.module.hr.dao.MstLeaveTypeDAO;
 import org.module.hr.model.MstLeaveType;
 import org.springframework.dao.support.DataAccessUtils;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings("unchecked")
 public class MstLeaveTypeDAOImpl extends BasisDAO<MstLeaveType> implements MstLeaveTypeDAO {
 

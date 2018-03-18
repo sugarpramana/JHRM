@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.module.hr.model.MstLeaveType;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public interface MstLeaveTypeDAO {
 	public void save(MstLeaveType mstLeaveType);
     public void update(MstLeaveType mstLeaveType);

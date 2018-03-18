@@ -8,6 +8,10 @@ import org.module.hr.dao.MstLicenseDAO;
 import org.module.hr.model.MstLicense;
 import org.springframework.dao.support.DataAccessUtils;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings("unchecked")
 public class MstLicenseDAOImpl extends BasisDAO<MstLicense> implements MstLicenseDAO{
 

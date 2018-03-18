@@ -8,6 +8,10 @@ import org.module.hr.dao.MstJobCategoryDAO;
 import org.module.hr.model.MstJobCategory;
 import org.springframework.dao.support.DataAccessUtils;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings("unchecked")
 public class MstJobCategoryDAOImpl extends BasisDAO<MstJobCategory> implements MstJobCategoryDAO{
 

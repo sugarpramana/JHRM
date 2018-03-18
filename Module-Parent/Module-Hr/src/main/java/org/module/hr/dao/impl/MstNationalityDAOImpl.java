@@ -8,6 +8,10 @@ import org.module.hr.dao.MstNationalityDAO;
 import org.module.hr.model.MstNationality;
 import org.springframework.dao.support.DataAccessUtils;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings("unchecked")
 public class MstNationalityDAOImpl extends BasisDAO<MstNationality> implements MstNationalityDAO{
 

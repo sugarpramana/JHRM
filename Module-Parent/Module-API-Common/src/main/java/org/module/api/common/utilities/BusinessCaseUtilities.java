@@ -1,7 +1,10 @@
 package org.module.api.common.utilities;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public final class BusinessCaseUtilities {
-	
 	/**
 	 * Fungsi untuk menggabungkan FIRST NAME, MIDDLE NAME, LAST NAME.
 	 *  

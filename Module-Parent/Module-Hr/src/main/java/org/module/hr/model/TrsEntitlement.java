@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 /**
 *
-* @author tekosulaiman@yahoo.com
+* @author formulateko@admin.com
 */
 @Entity
 @Table(name = "trs_entitlement", catalog = "dbhr", schema = "schema_hr")
@@ -43,6 +43,7 @@ public class TrsEntitlement implements Serializable {
     private Integer status;
 
     public TrsEntitlement() {
+    	
     }
 
     public TrsEntitlement(Integer idEntitlement) {

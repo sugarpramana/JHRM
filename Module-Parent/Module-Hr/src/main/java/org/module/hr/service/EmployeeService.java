@@ -3,7 +3,6 @@ package org.module.hr.service;
 import java.util.List;
 import java.util.Map;
 
-import org.module.hr.dao.TrsEmployeeLicenseDAO;
 import org.module.hr.model.TrsEmployee;
 import org.module.hr.model.TrsEmployeeDependent;
 import org.module.hr.model.TrsEmployeeEducation;
@@ -18,9 +17,12 @@ import org.module.hr.model.TrsEmployeeSkill;
 import org.module.hr.model.dto.MaritalStatusType;
 import org.module.hr.model.dto.RelationshipType;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public interface EmployeeService {
-	
-	/*Employee Detail*/
+	/*- Employee Detail +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void save(TrsEmployee trsEmployee);
 	public void update(TrsEmployee trsEmployee);
 	public void saveOrUpdate(TrsEmployee trsEmployee);
@@ -28,7 +30,7 @@ public interface EmployeeService {
 	public List<TrsEmployee> getAllTrsEmployee();
 	public List<TrsEmployee> getByTrsEmployeeRequestMap(Map<String, Object> requestMap);
 	
-	/*Employee Emergency Contact*/
+	/*- Employee Emergency Contant +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void save(TrsEmployeeEmergencyContact trsEmployeeEmergencyContact);
 	public void update(TrsEmployeeEmergencyContact trsEmployeeEmergencyContact);
 	public void saveOrUpdate(TrsEmployeeEmergencyContact trsEmployeeEmergencyContact);
@@ -36,7 +38,7 @@ public interface EmployeeService {
 	public List<TrsEmployeeEmergencyContact> getAllTrsEmployeeEmergencyContact();
 	public List<TrsEmployeeEmergencyContact> getTrsEmployeeEmergencyContactByTrsEmployeeEmergencyContactRequestMap(Map<String, Object> requestMap);
 	
-	/*Employee Dependent*/
+	/*- Employee Dependent +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void save(TrsEmployeeDependent trsEmployeeDependent);
 	public void update(TrsEmployeeDependent trsEmployeeDependent);
 	public void saveOrUpdate(TrsEmployeeDependent trsEmployeeDependent);
@@ -44,7 +46,7 @@ public interface EmployeeService {
 	public List<TrsEmployeeDependent> getAllTrsEmployeeDependent();
 	public List<TrsEmployeeDependent> getTrsEmployeeDependentByTrsEmployeeDependentRequestMap(Map<String, Object> requestMap);
 	
-	/*Employee Immigration*/
+	/*- Employee Immigration +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void save(TrsEmployeeImmigration trsEmployeeImmigration);
 	public void update(TrsEmployeeImmigration trsEmployeeImmigration);
 	public void saveOrUpdate(TrsEmployeeImmigration trsEmployeeImmigration);
@@ -52,7 +54,7 @@ public interface EmployeeService {
 	public List<TrsEmployeeImmigration> getAllTrsEmployeeImmigration();
 	public List<TrsEmployeeImmigration> getTrsEmployeeImmigrationByTrsEmployeeImmigrationRequestMap(Map<String, Object> requestMap);
 	
-	/*Employee Membership*/
+	/*- Employee Membership +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void save(TrsEmployeeMembership trsEmployeeMembership);
 	public void update(TrsEmployeeMembership trsEmployeeMembership);
 	public void saveOrUpdate(TrsEmployeeMembership trsEmployeeMembership);
@@ -60,7 +62,7 @@ public interface EmployeeService {
 	public List<TrsEmployeeMembership> getAllTrsEmployeeMembership();
 	public List<TrsEmployeeMembership> getTrsEmployeeMembershipByTrsEmployeeMembershipRequestMap(Map<String, Object> requestMap);
 	
-	/*Employee Experience*/
+	/*- Employee Exprience +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void save(TrsEmployeeExprience trsEmployeeExprience);
 	public void update(TrsEmployeeExprience trsEmployeeExprience);
 	public void saveOrUpdate(TrsEmployeeExprience trsEmployeeExprience);
@@ -68,7 +70,7 @@ public interface EmployeeService {
 	public List<TrsEmployeeExprience> getAllTrsEmployeeExprience();
 	public List<TrsEmployeeExprience> getTrsEmployeeExprienceByTrsEmployeeExprienceRequestMap(Map<String, Object> requestMap);
 	
-	/*Employee Education*/
+	/*- Employee Education +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void save(TrsEmployeeEducation trsEmployeeEducation);
 	public void update(TrsEmployeeEducation trsEmployeeEducation);
 	public void saveOrUpdate(TrsEmployeeEducation trsEmployeeEducation);
@@ -76,7 +78,7 @@ public interface EmployeeService {
 	public List<TrsEmployeeEducation> getAllTrsEmployeeEducation();
 	public List<TrsEmployeeEducation> getTrsEmployeeEducationByTrsEmployeeEducationRequestMap(Map<String, Object> requestMap);
 	
-	/*Employee Language*/
+	/*- Employee Language +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void save(TrsEmployeeLanguage trsEmployeeLanguage);
 	public void update(TrsEmployeeLanguage trsEmployeeLanguage);
 	public void saveOrUpdate(TrsEmployeeLanguage trsEmployeeLanguage);
@@ -84,7 +86,7 @@ public interface EmployeeService {
 	public List<TrsEmployeeLanguage> getAllTrsEmployeeLanguage();
 	public List<TrsEmployeeLanguage> getTrsEmployeeLanguageByTrsEmployeeLanguageRequestMap(Map<String, Object> requestMap);
 	
-	/*Employee skill*/
+	/*- Employee Skill +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void save(TrsEmployeeSkill trsEmployeeSkill);
 	public void update(TrsEmployeeSkill trsEmployeeSkill);
 	public void saveOrUpdate(TrsEmployeeSkill trsEmployeeSkill);
@@ -92,7 +94,7 @@ public interface EmployeeService {
 	public List<TrsEmployeeSkill> getAllTrsEmployeeSkill();
 	public List<TrsEmployeeSkill> getTrsEmployeeSkillByTrsEmployeeSkillRequestMap(Map<String, Object> requestMap);
 	
-	/*Employee salary*/
+	/*- Employee Salary +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void save(TrsEmployeeSalary trsEmployeeSkill);
 	public void update(TrsEmployeeSalary trsEmployeeSkill);
 	public void saveOrUpdate(TrsEmployeeSalary trsEmployeeSkill);
@@ -100,7 +102,7 @@ public interface EmployeeService {
 	public List<TrsEmployeeSalary> getAllTrsEmployeeSalary();
 	public List<TrsEmployeeSalary> getTrsEmployeeSalaryByTrsEmployeeSalaryRequestMap(Map<String, Object> requestMap);
 	
-	/*Employee License*/
+	/*- Employee License +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void save(TrsEmployeeLicense trsEmployeeLicense);
 	public void update(TrsEmployeeLicense trsEmployeeLicense);
 	public void saveOrUpdate(TrsEmployeeLicense trsEmployeeLicense);
@@ -108,11 +110,11 @@ public interface EmployeeService {
 	public List<TrsEmployeeLicense> getAllTrsEmployeeLicense();
 	public List<TrsEmployeeLicense> getTrsEmployeeLicenseByTrsEmployeeLicenseRequestMap(Map<String, Object> requestMap);
 	
-	/*Relationship Type*/
+	/*- Relation Type +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public List<RelationshipType> getAllRelationshipType();
 	public RelationshipType getRelationshipTypeById(Character id);
 
-	/*MaritalStatus Type*/
+	/*- Marital Status Type +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public List<MaritalStatusType> getAllMaritalStatusType();
 	public MaritalStatusType getMaritalStatusTypeTypeById(Character id);
 	

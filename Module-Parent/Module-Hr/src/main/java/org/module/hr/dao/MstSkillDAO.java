@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.module.hr.model.MstSkill;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public interface MstSkillDAO {
 	public void save(MstSkill mstSkill);
     public void update(MstSkill mstSkill);

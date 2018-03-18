@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 /**
 *
-* @author tekosulaiman@yahoo.com
+* @author formulateko@admin.com
 */
 @Entity
 @Table(name = "mst_setting", catalog = "dbhr", schema = "schema_hr")
@@ -32,6 +32,7 @@ public class MstSetting implements Serializable {
     private String description;
 
     public MstSetting() {
+    	
     }
 
     public MstSetting(Integer idSetting) {

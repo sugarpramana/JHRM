@@ -8,6 +8,10 @@ import org.module.hr.dao.TrsEntitlementDAO;
 import org.module.hr.model.TrsEntitlement;
 import org.springframework.dao.support.DataAccessUtils;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings("unchecked")
 public class TrsEntitlementDAOImpl extends BasisDAO<TrsEntitlement> implements TrsEntitlementDAO{
 

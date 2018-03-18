@@ -8,6 +8,10 @@ import org.module.hr.dao.MstCustomerDAO;
 import org.module.hr.model.MstCustomer;
 import org.springframework.dao.support.DataAccessUtils;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings("unchecked")
 public class MstCustomerDAOImpl extends BasisDAO<MstCustomer> implements MstCustomerDAO{
 

@@ -9,8 +9,11 @@ import org.module.hr.model.MstLicense;
 import org.module.hr.model.MstMembership;
 import org.module.hr.model.MstSkill;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public interface QualificationService {
-
 	/*- Skill +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void save(MstSkill mstSkill);
     public void update(MstSkill mstSkill);

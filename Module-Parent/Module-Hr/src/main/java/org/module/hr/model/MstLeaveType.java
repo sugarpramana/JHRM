@@ -2,7 +2,6 @@ package org.module.hr.model;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -17,7 +16,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
 *
-* @author tekosulaiman@yahoo.com
+* @author formulateko@admin.com
 */
 @Entity
 @Table(name = "mst_leave_type", catalog = "dbhr", schema = "schema_hr")
@@ -91,31 +90,4 @@ public class MstLeaveType implements Serializable {
     public void setTrsEntitlementList(List<TrsEntitlement> trsEntitlementList) {
         this.trsEntitlementList = trsEntitlementList;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final MstLeaveType other = (MstLeaveType) obj;
-        if (!Objects.equals(this.idLeaveType, other.idLeaveType)) {
-            return false;
-        }
-        return true;
-    }
-    
-    
-    
 }

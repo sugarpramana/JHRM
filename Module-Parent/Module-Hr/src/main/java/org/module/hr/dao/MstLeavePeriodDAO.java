@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.module.hr.model.MstLeavePeriod;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public interface MstLeavePeriodDAO {
 	public void save(MstLeavePeriod mstLeavePeriod);
     public void update(MstLeavePeriod mstLeavePeriod);

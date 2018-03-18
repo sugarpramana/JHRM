@@ -7,6 +7,10 @@ import org.module.api.common.dao.base.BasisDAO;
 import org.module.hr.dao.MstSubUnitDAO;
 import org.module.hr.model.MstSubUnit;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings("unchecked")
 public class MstSubUnitDAOImpl extends BasisDAO<MstSubUnit> implements MstSubUnitDAO{
 

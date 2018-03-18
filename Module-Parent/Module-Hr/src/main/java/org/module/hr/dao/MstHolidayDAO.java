@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.module.hr.model.MstHoliday;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public interface MstHolidayDAO {
 	public void save(MstHoliday mstHoliday);
     public void update(MstHoliday mstHoliday);

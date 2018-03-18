@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.module.hr.model.MstLocation;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public interface MstLocationDAO {
 	public void save(MstLocation mstLocation);
     public void update(MstLocation mstLocation);

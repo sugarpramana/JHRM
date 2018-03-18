@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.module.hr.model.MstLanguage;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public interface MstLanguageDAO {
 	public void save(MstLanguage mstLanguage);
     public void update(MstLanguage mstLanguage);

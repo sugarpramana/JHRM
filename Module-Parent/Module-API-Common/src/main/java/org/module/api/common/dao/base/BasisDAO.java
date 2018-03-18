@@ -8,9 +8,9 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import org.hibernate.Query;
-import org.hibernate.Session;
+import java.util.logging.Logger;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.GenericTypeResolver;
@@ -19,12 +19,15 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 /**
- *
- * @author tekosulaiman@yahoo.com
- */
+*
+* @author formulateko@admin.com
+*/
 @Repository
+@SuppressWarnings("unchecked")
 public abstract class BasisDAO<T> {
     
+	final static Logger logger = Logger.getLogger("Logger : " + BasisDAO.class);
+	
     @Autowired
     private SessionFactory sessionFactory;
     
@@ -33,7 +36,6 @@ public abstract class BasisDAO<T> {
     
     private Class<T> genericType;
     
-    @SuppressWarnings("unchecked")
 	protected BasisDAO() {
     	this.setGenericType((Class<T>) GenericTypeResolver.resolveTypeArgument(getClass(), BasisDAO.class));
     }
@@ -67,7 +69,6 @@ public abstract class BasisDAO<T> {
         hibernateTemplate.deleteAll(entities);
     }
     
-    @SuppressWarnings("unchecked")
 	public List<T> getByRequestMap(HashMap<String, Object> hashMap) {
 		
     	final StringBuffer queryString = new StringBuffer();
@@ -101,15 +102,11 @@ public abstract class BasisDAO<T> {
             }
         }
         
-    	System.out.println("Query : "+queryString);
-		/*return (List<T>) hibernateTemplate.find(queryString.toString(), params);*/
+    	logger.info("Query Map : "+queryString);
 		return (List<T>) hibernateTemplate.find(queryString.toString());
     }
     
-        
-    @SuppressWarnings("unchecked")
     public List<T> getByRequestMapWithSortingForPaging(HashMap<String, Object> hashMap, LinkedHashMap<String, Object> orderByList, int offset, int limit) {
-
         final StringBuffer queryString = new StringBuffer();
 
         queryString.append(" FROM " + genericType.getSimpleName());
@@ -120,7 +117,6 @@ public abstract class BasisDAO<T> {
 
         if ((hashMap != null) && !hashMap.isEmpty()) {
             queryString.append(" WHERE ");
-            // temp untuk date
             Date dateFrom = new Date();
             Date dateTo = new Date();
 
@@ -136,9 +132,7 @@ public abstract class BasisDAO<T> {
                     queryString.append(entry.getKey()).append(" like ").append("'%" + entry.getValue() + "%'");
                 } else if (entry.getValue() instanceof Boolean) {
                     queryString.append(entry.getKey()).append(" = ").append(entry.getValue());
-                //between dates
-                } else if (entry.getValue() instanceof Map 
-                        && entry.getKey().toLowerCase().contains("date")) {
+                } else if (entry.getValue() instanceof Map && entry.getKey().toLowerCase().contains("date")) {
                     for(String obj : ((Map<String, Date>) entry.getValue()).keySet()){
                         if(obj.toLowerCase().contains("from")){
                             dateFrom = ((Map<String, Date>) entry.getValue()).get(obj);
@@ -146,6 +140,7 @@ public abstract class BasisDAO<T> {
                             dateTo = ((Map<String, Date>) entry.getValue()).get(obj);
                         }
                     }
+                    
                     queryString.append(entry.getKey()).append(" between ").append(dateFrom).append(" and ").append(dateTo);
                 }
 
@@ -172,15 +167,11 @@ public abstract class BasisDAO<T> {
         query.setFirstResult(offset);
         query.setMaxResults(limit);
         
-        System.out.println("Query : " + queryString);
-        /*return (List<T>) hibernateTemplate.find(queryString.toString(), params);*/
+        logger.info("Query Paging : "+queryString);
         return (List<T>) query.list();
     }
 
-    //tambahan byrequestmap for count (filtering count)
-    @SuppressWarnings("unchecked")
     public List<T> getByRequestMapCount(HashMap<String, Object> hashMap) {
-
         final StringBuffer queryString = new StringBuffer();
 
         queryString.append("SELECT COUNT(*) FROM " + genericType.getSimpleName());
@@ -212,8 +203,7 @@ public abstract class BasisDAO<T> {
             }
         }
 
-        System.out.println("Query : " + queryString);
-        /*return (List<T>) hibernateTemplate.find(queryString.toString(), params);*/
+        logger.info("Query Count Paging : "+queryString);
         return (List<T>) hibernateTemplate.find(queryString.toString());
     }
 

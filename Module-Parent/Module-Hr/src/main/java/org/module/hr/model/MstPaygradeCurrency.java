@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 /**
 *
-* @author tekosulaiman@yahoo.com
+* @author formulateko@admin.com
 */
 @Entity
 @Table(name = "mst_paygrade_currency", catalog = "dbhr", schema = "schema_hr")

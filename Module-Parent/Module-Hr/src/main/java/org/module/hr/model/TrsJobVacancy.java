@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package org.module.hr.model;
 
 import java.io.Serializable;
@@ -27,7 +21,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
 *
-* @author tekosulaiman@yahoo.com
+* @author formulateko@admin.com
 */
 @Entity
 @Table(name = "trs_job_vacancy", catalog = "dbhr", schema = "schema_hr")
@@ -64,6 +58,7 @@ public class TrsJobVacancy implements Serializable {
     @Basic(optional = false)
     @Column(name = "active")
     private boolean active;
+    
     @OneToMany(mappedBy = "idTrsJobVacancy")
     private List<TrsJobCandidate> trsJobCandidateList;
     
@@ -76,6 +71,7 @@ public class TrsJobVacancy implements Serializable {
     private TrsEmployee idEmployee;
 
     public TrsJobVacancy() {
+    	
     }
 
     public TrsJobVacancy(Integer idTrsJobVacancy) {

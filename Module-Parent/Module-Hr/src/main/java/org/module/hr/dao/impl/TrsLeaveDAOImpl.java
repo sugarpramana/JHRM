@@ -8,6 +8,10 @@ import org.module.hr.dao.TrsLeaveDAO;
 import org.module.hr.model.TrsLeave;
 import org.springframework.dao.support.DataAccessUtils;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings("unchecked")
 public class TrsLeaveDAOImpl extends BasisDAO<TrsLeave> implements TrsLeaveDAO{
 

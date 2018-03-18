@@ -8,6 +8,10 @@ import org.module.hr.dao.MstSkillDAO;
 import org.module.hr.model.MstSkill;
 import org.springframework.dao.support.DataAccessUtils;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings("unchecked")
 public class MstSkillDAOImpl extends BasisDAO<MstSkill> implements MstSkillDAO{
 

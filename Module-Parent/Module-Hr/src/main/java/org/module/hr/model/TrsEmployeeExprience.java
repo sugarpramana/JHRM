@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 
 /**
 *
-* @author tekosulaiman@yahoo.com
+* @author formulateko@admin.com
 */
 @Entity
 @Table(name = "trs_employee_exprience", catalog = "dbhr", schema = "schema_hr")
@@ -108,5 +108,4 @@ public class TrsEmployeeExprience implements Serializable {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-
 }

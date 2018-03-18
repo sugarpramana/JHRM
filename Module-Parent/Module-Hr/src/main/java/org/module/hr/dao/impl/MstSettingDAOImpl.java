@@ -7,6 +7,10 @@ import org.module.hr.dao.MstSettingDAO;
 import org.module.hr.model.MstSetting;
 import org.springframework.dao.DataAccessException;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings("unchecked")
 public class MstSettingDAOImpl extends BasisDAO<MstSetting> implements MstSettingDAO{
 

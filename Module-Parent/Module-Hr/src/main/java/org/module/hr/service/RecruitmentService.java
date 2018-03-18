@@ -6,9 +6,12 @@ import java.util.List;
 import org.module.hr.model.TrsJobCandidate;
 import org.module.hr.model.TrsJobVacancy;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public interface RecruitmentService {
-	
-	/* ------- Vacancy ---------*/
+	/*- Vacancy +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void save(TrsJobVacancy trsJobVacancy);
     public void update(TrsJobVacancy trsJobVacancy);
     public void saveOrUpdate(TrsJobVacancy trsJobVacancy);
@@ -17,7 +20,7 @@ public interface RecruitmentService {
     public TrsJobVacancy getTrsJobVacancyById(Integer id);
     public List<TrsJobVacancy> getTrsJobVacancyByRequest(HashMap<String, Object> params);
     
-    /* ------- Candidate --------*/
+    /*- Candidate +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void save(TrsJobCandidate trsJobCandidate);
     public void update(TrsJobCandidate trsJobCandidate);
     public void saveOrUpdate(TrsJobCandidate trsJobCandidate);

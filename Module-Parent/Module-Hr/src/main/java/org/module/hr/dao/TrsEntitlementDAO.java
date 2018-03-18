@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.module.hr.model.TrsEntitlement;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public interface TrsEntitlementDAO {
 	public void save(TrsEntitlement trsEntitlement);
     public void update(TrsEntitlement trsEntitlement);

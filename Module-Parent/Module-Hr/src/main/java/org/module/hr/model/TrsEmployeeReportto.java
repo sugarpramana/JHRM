@@ -1,4 +1,3 @@
-
 package org.module.hr.model;
 
 import java.io.Serializable;
@@ -13,7 +12,7 @@ import javax.persistence.Table;
 
 /**
 *
-* @author tekosulaiman@yahoo.com
+* @author formulateko@admin.com
 */
 @Entity
 @Table(name = "trs_employee_reportto", catalog = "dbhr", schema = "schema_hr")

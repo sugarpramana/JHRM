@@ -7,6 +7,10 @@ import org.module.api.common.dao.base.BasisDAO;
 import org.module.hr.dao.MstGeneralInformationDAO;
 import org.module.hr.model.MstGeneralInformation;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings("unchecked")
 public class MstGeneralInformationDAOImpl extends BasisDAO<MstGeneralInformation> implements MstGeneralInformationDAO{
 

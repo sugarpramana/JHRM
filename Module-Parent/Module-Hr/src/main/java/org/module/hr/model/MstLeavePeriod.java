@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
 *
-* @author tekosulaiman@yahoo.com
+* @author formulateko@admin.com
 */
 @Entity
 @Table(name = "mst_leave_period", catalog = "dbhr", schema = "schema_hr")

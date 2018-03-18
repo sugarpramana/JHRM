@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.module.hr.model.MstSubUnit;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public interface MstSubUnitDAO {
 	public void save(MstSubUnit mstSubUnit);
     public void update(MstSubUnit mstSubUnit);

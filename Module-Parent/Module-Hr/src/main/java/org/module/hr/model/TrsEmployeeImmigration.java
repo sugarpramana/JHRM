@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 
 /**
 *
-* @author tekosulaiman@yahoo.com
+* @author formulateko@admin.com
 */
 @Entity
 @Table(name = "trs_employee_immigration", catalog = "dbhr", schema = "schema_hr")
@@ -65,6 +65,7 @@ public class TrsEmployeeImmigration implements Serializable {
     private TrsEmployee idEmployee;
 
     public TrsEmployeeImmigration() {
+    	
     }
 
     public TrsEmployeeImmigration(Integer idImmigration) {

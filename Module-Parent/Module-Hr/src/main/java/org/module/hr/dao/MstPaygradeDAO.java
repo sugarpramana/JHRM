@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.module.hr.model.MstPaygrade;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public interface MstPaygradeDAO {
 	public void save(MstPaygrade mstPaygrade);
     public void update(MstPaygrade mstPaygrade);

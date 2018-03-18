@@ -8,6 +8,10 @@ import org.module.hr.dao.MstLanguageDAO;
 import org.module.hr.model.MstLanguage;
 import org.springframework.dao.support.DataAccessUtils;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings("unchecked")
 public class MstLanguageDAOImpl extends BasisDAO<MstLanguage> implements MstLanguageDAO{
 

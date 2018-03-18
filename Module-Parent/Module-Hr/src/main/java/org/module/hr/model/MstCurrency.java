@@ -12,9 +12,9 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author tekosulaiman@yahoo.com
- */
+*
+* @author formulateko@admin.com
+*/
 @Entity
 @Table(name = "mst_currency", catalog = "dbhr", schema = "schema_hr")
 public class MstCurrency implements Serializable {

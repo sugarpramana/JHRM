@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.module.hr.model.TrsLeave;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public interface TrsLeaveDAO {
 	public void save(TrsLeave trsLeave);
     public void update(TrsLeave trsLeave);

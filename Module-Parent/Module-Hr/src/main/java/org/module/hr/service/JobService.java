@@ -8,8 +8,11 @@ import org.module.hr.model.MstJobCategory;
 import org.module.hr.model.MstJobtitle;
 import org.module.hr.model.MstPaygrade;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public interface JobService {
-
 	/*- Job Title +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void save(MstJobtitle mstJobtitle);
     public void update(MstJobtitle mstJobtitle);

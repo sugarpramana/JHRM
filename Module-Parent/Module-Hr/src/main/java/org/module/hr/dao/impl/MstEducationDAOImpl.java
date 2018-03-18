@@ -8,6 +8,10 @@ import org.module.hr.dao.MstEducationDAO;
 import org.module.hr.model.MstEducation;
 import org.springframework.dao.support.DataAccessUtils;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings("unchecked")
 public class MstEducationDAOImpl extends BasisDAO<MstEducation> implements MstEducationDAO{
 

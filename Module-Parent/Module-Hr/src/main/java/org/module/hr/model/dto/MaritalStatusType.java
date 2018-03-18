@@ -7,6 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public class MaritalStatusType implements Serializable{
 	
 	private static final long serialVersionUID = -4808788227180776721L;

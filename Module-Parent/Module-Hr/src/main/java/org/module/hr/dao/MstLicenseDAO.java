@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.module.hr.model.MstLicense;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public interface MstLicenseDAO {
 	public void save(MstLicense mstLicense);
     public void update(MstLicense mstLicense);

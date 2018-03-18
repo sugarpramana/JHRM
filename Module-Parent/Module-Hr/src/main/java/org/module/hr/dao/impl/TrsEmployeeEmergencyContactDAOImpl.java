@@ -1,5 +1,6 @@
 package org.module.hr.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,8 +8,11 @@ import org.module.api.common.dao.base.BasisDAO;
 import org.module.hr.dao.TrsEmployeeEmergencyContactDAO;
 import org.module.hr.model.TrsEmployeeEmergencyContact;
 
-public class TrsEmployeeEmergencyContactDAOImpl extends BasisDAO<TrsEmployeeEmergencyContact>
-		implements TrsEmployeeEmergencyContactDAO {
+/**
+*
+* @author formulateko@admin.com
+*/
+public class TrsEmployeeEmergencyContactDAOImpl extends BasisDAO<TrsEmployeeEmergencyContact>implements TrsEmployeeEmergencyContactDAO {
 
 	@Override
 	public List<TrsEmployeeEmergencyContact> getAllTrsEmployeeEmergencyContact() {
@@ -21,4 +25,15 @@ public class TrsEmployeeEmergencyContactDAOImpl extends BasisDAO<TrsEmployeeEmer
 		return (List<TrsEmployeeEmergencyContact>) getHibernateTemplate().findByNamedParam("FROM TrsEmployeeEmergencyContact where idEmployee=:trsEmployee" , "trsEmployee", requestMap.get("trsEmployee"));
 	}
 
+	@Override
+	public List<TrsEmployeeEmergencyContact> getTrsEmployeeEmergencyContactPaging(HashMap<String, Object> hashMap) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getCountTrsEmployeeEmergencyContacts() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

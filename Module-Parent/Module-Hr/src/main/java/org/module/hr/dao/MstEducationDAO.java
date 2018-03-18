@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.module.hr.model.MstEducation;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public interface MstEducationDAO {
 	public void save(MstEducation mstEducation);
     public void update(MstEducation mstEducation);

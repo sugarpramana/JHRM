@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.module.hr.model.MstJobCategory;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public interface MstJobCategoryDAO {
 	public void save(MstJobCategory mstJobCategory);
     public void update(MstJobCategory mstJobCategory);

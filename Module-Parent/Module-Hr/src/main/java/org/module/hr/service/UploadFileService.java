@@ -7,10 +7,13 @@ import org.module.hr.model.MstUploadFile;
 import org.module.hr.model.TrsEmployee;
 import org.module.hr.model.TrsJobCandidate;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public interface UploadFileService {
-	
-	public static final String RESUME_FILE		= "resume";
-	public static final String PHOTO_FILE		= "photo";
+	public static final String RESUME_FILE ="resume";
+	public static final String PHOTO_FILE ="photo";
 	
 	public void save(MstUploadFile mstUploadFile);
 	public MstUploadFile getByTrsEmployee(TrsEmployee trsEmployee);

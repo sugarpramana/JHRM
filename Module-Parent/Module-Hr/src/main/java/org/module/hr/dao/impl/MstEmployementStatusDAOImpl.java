@@ -8,6 +8,10 @@ import org.module.hr.dao.MstEmployementStatusDAO;
 import org.module.hr.model.MstEmployementStatus;
 import org.springframework.dao.support.DataAccessUtils;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings("unchecked")
 public class MstEmployementStatusDAOImpl extends BasisDAO<MstEmployementStatus> implements MstEmployementStatusDAO{
 
