@@ -12,6 +12,7 @@ import org.module.hr.model.TrsEmployeeEmergencyContact;
 *
 * @author formulateko@admin.com
 */
+@SuppressWarnings("unchecked")
 public class TrsEmployeeEmergencyContactDAOImpl extends BasisDAO<TrsEmployeeEmergencyContact>implements TrsEmployeeEmergencyContactDAO {
 
 	@Override

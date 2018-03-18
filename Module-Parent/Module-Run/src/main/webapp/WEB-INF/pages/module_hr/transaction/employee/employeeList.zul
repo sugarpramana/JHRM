@@ -23,7 +23,7 @@
 			</north>
 			<!-- Table Database -->
 			<center>
-				<listbox id="listBoxEmployee" model="@bind(vm.trsEmployees)" selectedItem="@bind(vm.trsEmployee)" >
+				<listbox id="listboxEmployee" model="@bind(vm.trsEmployees)" selectedItem="@bind(vm.trsEmployee)" >
 					<listhead>
 						<listheader width="5%" align="center"/>
 						<listheader label="${labels.menu.employee.listheader.id}" sort="auto" /> 	
@@ -43,12 +43,13 @@
 							<listcell label="" />
 							<listcell label="" />
 							<listcell label="" />
+							<listcell label="" />
 						</listitem>
 					</template>
 				</listbox>
 			</center>
 			<south>
-				<paging/>
+				<paging id="pagingEmployee" onPaging="@command('onPaging')"/>
 			</south>
 		</borderlayout>
 	</window>

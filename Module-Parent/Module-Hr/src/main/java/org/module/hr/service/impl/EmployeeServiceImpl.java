@@ -1,5 +1,6 @@
 package org.module.hr.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -67,7 +68,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Autowired
 	private TrsEmployeeSalaryDAO trsEmployeeSalaryDAO;
 	
-	/*---------- Employee Detail ----------*/
+	/*- Employee Detail +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Override
 	public void save(TrsEmployee trsEmployee) {
 		trsEmployeeDAO.save(trsEmployee);
@@ -98,8 +99,17 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return trsEmployeeDAO.getByMstTestRequestMap(requestMap);
 	}
 	
-	/*---------- Employee Emergency Contact ----------*/
+	@Override
+	public List<TrsEmployee> getMstTrsEmployeePaging(HashMap<String, Object> hashMap) {
+		return trsEmployeeDAO.getMstTrsEmployeePaging(hashMap);
+	}
 
+	@Override
+	public int getCountTrsEmployees() {
+		return trsEmployeeDAO.getCountTrsEmployees();
+	}
+	
+	/*- Employee Emergency Contant +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Override
 	public void save(TrsEmployeeEmergencyContact trsEmployeeEmergencyContact) {
 		trsEmployeeEmergencyContactDAO.save(trsEmployeeEmergencyContact);
@@ -130,8 +140,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return trsEmployeeEmergencyContactDAO.getTrsEmployeeEmergencyContactByTrsEmployeeEmergencyContactRequestMap(requestMap);
 	}
 	
-	/*---------- Employee Dependent ----------*/
-	
+	/*- Employee Dependent +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Override
 	public void save(TrsEmployeeDependent trsEmployeeDependent) {
 		trsEmployeeDependentDAO.save(trsEmployeeDependent);
@@ -162,8 +171,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return trsEmployeeDependentDAO.getTrsEmployeeDependentByTrsEmployeeDependentRequestMap(requestMap);
 	}
 	
-	/*---------- Employee Immigration ----------*/
-	
+	/*- Employee Immigration +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Override
 	public void save(TrsEmployeeImmigration trsEmployeeImmigration) {
 		trsEmployeeImmigrationDAO.save(trsEmployeeImmigration);
@@ -194,8 +202,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return trsEmployeeImmigrationDAO.getTrsEmployeeImmigrationByTrsEmployeeImmigrationRequestMap(requestMap);
 	}
 	
-	/*---------- Employee Membership ----------*/
-	
+	/*- Employee Membership +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Override
 	public void save(TrsEmployeeMembership trsEmployeeMembership) {
 		trsEmployeeMembershipDAO.save(trsEmployeeMembership);
@@ -226,8 +233,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return trsEmployeeMembershipDAO.getTrsEmployeeMembershipByTrsEmployeeMembershipRequestMap(requestMap);
 	}
 	
-	/*---------- Employee Experience ----------*/
-	
+	/*- Employee Exprience +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Override
 	public void save(TrsEmployeeExprience trsEmployeeExprience) {
 		trsEmployeeExprienceDAO.save(trsEmployeeExprience);
@@ -258,8 +264,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return trsEmployeeExprienceDAO.getTrsEmployeeExprienceByTrsEmployeeExprienceRequestMap(requestMap);
 	}
 	
-	/*---------- Employee Education ----------*/
-	
+	/*- Employee Education +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Override
 	public void save(TrsEmployeeEducation trsEmployeeEducation) {
 		trsEmployeeEducationDAO.save(trsEmployeeEducation);
@@ -290,8 +295,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return trsEmployeeEducationDAO.getTrsEmployeeEducationByTrsEmployeeEducationRequestMap(requestMap);
 	}
 	
-	/*---------- Employee Language ----------*/
-	
+	/*- Employee Language +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Override
 	public void save(TrsEmployeeLanguage trsEmployeeLanguage) {
 		trsEmployeeLanguageDAO.save(trsEmployeeLanguage);
@@ -322,8 +326,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return trsEmployeeLanguageDAO.getTrsEmployeeLanguageByTrsEmployeeLanguageRequestMap(requestMap);
 	}
 	
-	/*---------- Employee Skill ----------*/
-	
+	/*- Employee Skill +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Override
 	public void save(TrsEmployeeSkill trsEmployeeSkill){
 		trsEmployeeSkillDAO.save(trsEmployeeSkill);
@@ -354,8 +357,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return trsEmployeeSkillDAO.getTrsEmployeeSkillByTrsEmployeeSkillRequestMap(requestMap);
 	}
 	
-	/*---------- Employee Salary ----------*/
-	
+	/*- Employee Salary +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Override
 	public void save(TrsEmployeeSalary trsEmployeeSalary){
 		trsEmployeeSalaryDAO.save(trsEmployeeSalary);
@@ -386,8 +388,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return trsEmployeeSalaryDAO.getTrsEmployeeSalaryByTrsEmployeeSalaryRequestMap(requestMap);
 	}
 	
-	/*---------- Employee License ----------*/
-	
+	/*- Employee License +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Override
 	public void save(TrsEmployeeLicense trsEmployeeLicense){
 		trsEmployeeLicenseDAO.save(trsEmployeeLicense);
@@ -418,7 +419,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return trsEmployeeLicenseDAO.getTrsEmployeeLicenseByTrsEmployeeLicenseRequestMap(requestMap);
 	}
 	
-	/*---------- Relationship Type ----------*/
+	/*- Relation Type +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Override
 	public List<RelationshipType> getAllRelationshipType(){
 		return RelationshipType.getAllTypes();
@@ -429,7 +430,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return RelationshipType.getTypById(id);
 	}
 	
-	/*---------- MaritalStatus Type ----------*/
+	/*- Marital Status Type +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Override
 	public List<MaritalStatusType> getAllMaritalStatusType(){
 		return MaritalStatusType.getAllTypes();
@@ -440,8 +441,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return MaritalStatusType.getTypById(id);
 	}
 
-
-	// setter DAO 
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Getter Setter
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void setTrsEmployeeDAO(TrsEmployeeDAO trsEmployeeDAO) {
 		this.trsEmployeeDAO = trsEmployeeDAO;
 	}
@@ -485,5 +487,4 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public void setTrsEmployeeSalaryDAO(TrsEmployeeSalaryDAO trsEmployeeSalaryDAO) {
 		this.trsEmployeeSalaryDAO = trsEmployeeSalaryDAO;
 	}
-	
 }

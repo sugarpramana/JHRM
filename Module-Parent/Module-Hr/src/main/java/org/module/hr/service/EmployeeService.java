@@ -1,5 +1,6 @@
 package org.module.hr.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,8 +30,10 @@ public interface EmployeeService {
 	public void delete(TrsEmployee trsEmployee);
 	public List<TrsEmployee> getAllTrsEmployee();
 	public List<TrsEmployee> getByTrsEmployeeRequestMap(Map<String, Object> requestMap);
+	public List<TrsEmployee> getMstTrsEmployeePaging(HashMap<String, Object> hashMap);
+    public int getCountTrsEmployees();
 	
-	/*- Employee Emergency Contant +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	/*- Employee Emergency Contact +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void save(TrsEmployeeEmergencyContact trsEmployeeEmergencyContact);
 	public void update(TrsEmployeeEmergencyContact trsEmployeeEmergencyContact);
 	public void saveOrUpdate(TrsEmployeeEmergencyContact trsEmployeeEmergencyContact);
@@ -117,6 +120,4 @@ public interface EmployeeService {
 	/*- Marital Status Type +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public List<MaritalStatusType> getAllMaritalStatusType();
 	public MaritalStatusType getMaritalStatusTypeTypeById(Character id);
-	
-
 }
