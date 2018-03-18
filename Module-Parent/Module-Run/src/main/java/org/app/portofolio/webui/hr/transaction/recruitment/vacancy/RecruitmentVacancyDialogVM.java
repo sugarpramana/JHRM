@@ -1,6 +1,5 @@
 package org.app.portofolio.webui.hr.transaction.recruitment.vacancy;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.app.portofolio.webui.hr.common.collections.ArgKey;
@@ -96,7 +95,7 @@ public class RecruitmentVacancyDialogVM {
 		}
 		
 		listJobtitle = jobService.getAllMstJobtitles();
-		hiringManagerList = employeeService.getAllTrsEmployee();		
+		hiringManagerList = employeeService.getAllTrsEmployees();		
 	}
 
 	/**

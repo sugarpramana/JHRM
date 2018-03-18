@@ -90,13 +90,13 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public List<TrsEmployee> getAllTrsEmployee() {
-		return trsEmployeeDAO.getAllTrsEmployee();
+	public List<TrsEmployee> getAllTrsEmployees() {
+		return trsEmployeeDAO.getAllTrsEmployees();
 	}
 
 	@Override
-	public List<TrsEmployee> getByTrsEmployeeRequestMap(Map<String, Object> requestMap) {
-		return trsEmployeeDAO.getByMstTestRequestMap(requestMap);
+	public List<TrsEmployee> getByTrsEmployeeRequestMap(HashMap<String, Object> hashMap) {
+		return trsEmployeeDAO.getByRequestMap(hashMap);
 	}
 	
 	@Override

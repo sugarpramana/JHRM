@@ -28,8 +28,8 @@ public interface EmployeeService {
 	public void update(TrsEmployee trsEmployee);
 	public void saveOrUpdate(TrsEmployee trsEmployee);
 	public void delete(TrsEmployee trsEmployee);
-	public List<TrsEmployee> getAllTrsEmployee();
-	public List<TrsEmployee> getByTrsEmployeeRequestMap(Map<String, Object> requestMap);
+	public List<TrsEmployee> getAllTrsEmployees();
+	public List<TrsEmployee> getByTrsEmployeeRequestMap(HashMap<String, Object> hashMap);
 	public List<TrsEmployee> getMstTrsEmployeePaging(HashMap<String, Object> hashMap);
     public int getCountTrsEmployees();
 	

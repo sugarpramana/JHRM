@@ -1,6 +1,6 @@
 <zk>
-	<window id="windowUserList" border="none" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.EmployeeListVM')">
-		<borderlayout height="500px">
+	<window id="windowUserList" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.EmployeeListVM')" border="none" width="100%" vflex="true">
+		<borderlayout vflex="true">
 			<!-- Function CRUD -->
 			<north>
 				<div sclass="z-toolbar" style="padding:0">
