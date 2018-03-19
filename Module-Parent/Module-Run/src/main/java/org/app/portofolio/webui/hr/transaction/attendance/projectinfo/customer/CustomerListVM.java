@@ -5,9 +5,9 @@ import java.util.List;
 
 import net.sf.jasperreports.engine.JRException;
 
-import org.app.portofolio.webui.hr.master.job.jobtitle.model.MstJobtitleListItemRenderer;
-import org.module.hr.model.MstJobtitle;
-import org.module.hr.service.JobService;
+import org.app.portofolio.webui.hr.transaction.attendance.projectinfo.customer.model.MstCustomerListItemRenderer;
+import org.module.hr.model.MstCustomer;
+import org.module.hr.service.AttendanceService;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
@@ -39,8 +39,8 @@ public class CustomerListVM {
 	@Wire("#textboxFilter")
 	private Textbox textboxFilter;
 	
-	@Wire("#listboxCutomer")
-	private Listbox listboxCutomer;
+	@Wire("#listboxCustomer")
+	private Listbox listboxCustomer;
 	
 	@Wire("#pagingCustomer")
 	private Paging pagingCustomer;
@@ -48,13 +48,13 @@ public class CustomerListVM {
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Service yang dibutuhkan sesuai bisnis proses
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-	private MstJobtitle mstJobtitle;
-	private List<MstJobtitle> mstJobtitles;
+	private MstCustomer mstCustomer;
+	private List<MstCustomer> mstCustomers;
 	@WireVariable
-	private JobService jobService;
-	private ListitemRenderer<MstJobtitle> listitemRenderer;
+	private AttendanceService attendanceService;
+	private ListitemRenderer<MstCustomer> listitemRenderer;
 	
-	private HashMap<String, Object> hashMapJobTitle;
+	private HashMap<String, Object> hashMapCustomer;
 	
 	private int startPageNumber = 0;
 	private int pageSize = 10;
@@ -63,12 +63,12 @@ public class CustomerListVM {
 	 * Function Custom sesuai kebutuhan
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void doPrepareList(){
-		listboxCutomer.setCheckmark(true);
-		listboxCutomer.setMultiple(true);
-		listboxCutomer.setStyle("border-style: none;");
-		listboxCutomer.setMold("paging");
+		listboxCustomer.setCheckmark(true);
+		listboxCustomer.setMultiple(true);
+		listboxCustomer.setStyle("border-style: none;");
+		listboxCustomer.setMold("paging");
 		
-		int count = jobService.getCountMstJobtitles();
+		int count = attendanceService.getCountMstCustomers();
 
 		pagingCustomer.setTotalSize(count);
 		pagingCustomer.setDetailed(true);
@@ -82,12 +82,12 @@ public class CustomerListVM {
 		
 		refreshActivePage += 1;
 		
-		hashMapJobTitle = new HashMap<String, Object>();
-		hashMapJobTitle.put("firstResult", refreshActivePage);
-		hashMapJobTitle.put("maxResults", pagingCustomer.getPageSize());
+		hashMapCustomer = new HashMap<String, Object>();
+		hashMapCustomer.put("firstResult", refreshActivePage);
+		hashMapCustomer.put("maxResults", pagingCustomer.getPageSize());
 		
-		mstJobtitles = jobService.getMstJobtitlePaging(hashMapJobTitle);
-		listitemRenderer = new MstJobtitleListItemRenderer();
+		mstCustomers = attendanceService.getMstCustomerPaging(hashMapCustomer);
+		listitemRenderer = new MstCustomerListItemRenderer();
 	}
 
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -96,7 +96,7 @@ public class CustomerListVM {
 	@AfterCompose
 	public void setupComponents(@ContextParam(ContextType.VIEW) Component component, 
 		@ExecutionArgParam("object") Object object,
-		@ExecutionArgParam("mstJobtitle") MstJobtitle mstJobtitle) {
+		@ExecutionArgParam("mstCustomer") MstCustomer mstCustomer) {
 		
 		Selectors.wireComponents(component, this, false);
 
@@ -108,9 +108,9 @@ public class CustomerListVM {
 	 * Function CRUD Event
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Command
-	@NotifyChange("mstJobtitles")
+	@NotifyChange("mstCustomers")
 	public void doFilter(){
-		mstJobtitles.clear();
+		mstCustomers.clear();
         
 		String getName = textboxFilter.getValue();
 		
@@ -119,14 +119,14 @@ public class CustomerListVM {
 			refreshPageList(startPageNumber);
 		} else {
 			HashMap<String, Object> hashMap = new HashMap<String, Object>();
-			hashMap.put("jobName", getName);
-			mstJobtitles = jobService.getByMstJobtitleRequestMap(hashMap);
-			listitemRenderer = new MstJobtitleListItemRenderer();
+			hashMap.put("customerName", getName);
+			mstCustomers = attendanceService.getByMstCustomerRequestMap(hashMap);
+			listitemRenderer = new MstCustomerListItemRenderer();
 		}
 	}
 	
 	@Command
-	@NotifyChange("mstJobtitles")
+	@NotifyChange("mstCustomers")
 	public void onPaging(@ContextParam(ContextType.TRIGGER_EVENT) PagingEvent pagingEvent){
 		startPageNumber = pagingEvent.getActivePage() * pageSize;
 		refreshPageList(startPageNumber);
@@ -134,23 +134,23 @@ public class CustomerListVM {
 
 	@Command
 	public void doNew(){
-		final ListModelList<MstJobtitle> listModelListJobtitle = (ListModelList) listboxCutomer.getModel();
-		listModelListJobtitle.add(0, new MstJobtitle());
+		final ListModelList<MstCustomer> listModelListCustomer = (ListModelList) listboxCustomer.getModel();
+		listModelListCustomer.add(0, new MstCustomer());
 	}
 	
 	@Command
 	public void doDelete(){
-		final ListModelList<MstJobtitle> listModelListJobtitle = (ListModelList) listboxCutomer.getModel();
+		final ListModelList<MstCustomer> listModelListCustomer = (ListModelList) listboxCustomer.getModel();
 		
-		if(listboxCutomer.getSelectedIndex() == -1){
+		if(listboxCustomer.getSelectedIndex() == -1){
 			Messagebox.show("There is no selected record?", "Confirm", Messagebox.OK, Messagebox.ERROR);
 		}else{
 			Messagebox.show("Do you really want to remove item?", "Confirm", Messagebox.OK | Messagebox.CANCEL, Messagebox.EXCLAMATION, new EventListener() {
 			    public void onEvent(Event event) throws Exception {    	
 			 		if (((Integer) event.getData()).intValue() == Messagebox.OK) {
-			 			for(MstJobtitle jobtitle: listModelListJobtitle){
-			 				if(listModelListJobtitle.isSelected(jobtitle)){
-			 					jobService.delete(jobtitle);
+			 			for(MstCustomer mstCustomer: listModelListCustomer){
+			 				if(listModelListCustomer.isSelected(mstCustomer)){
+			 					attendanceService.delete(mstCustomer);
 			 				}
 			 			}
 			 			
@@ -164,7 +164,7 @@ public class CustomerListVM {
 	}
 	
 	@Command
-	@NotifyChange("mstJobtitles")
+	@NotifyChange("mstCustomers")
 	public void doRefresh(){
 		doPrepareList();
 		refreshPageList(startPageNumber);
@@ -176,43 +176,45 @@ public class CustomerListVM {
 	}
 	
 	@GlobalCommand
-	@NotifyChange("mstJobtitles")
+	@NotifyChange("mstCustomers")
 	public void refreshAfterSaveOrUpdate(){
-		mstJobtitles = jobService.getAllMstJobtitles();
+		doPrepareList();
+		refreshPageList(startPageNumber);
 	}
 
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Getter Setter
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-	public MstJobtitle getMstJobtitle() {
-		return mstJobtitle;
+	
+	public MstCustomer getMstCustomer() {
+		return mstCustomer;
 	}
 
-	public void setMstJobtitle(MstJobtitle mstJobtitle) {
-		this.mstJobtitle = mstJobtitle;
+	public void setMstCustomer(MstCustomer mstCustomer) {
+		this.mstCustomer = mstCustomer;
 	}
 
-	public List<MstJobtitle> getMstJobtitles() {
-		return mstJobtitles;
+	public List<MstCustomer> getMstCustomers() {
+		return mstCustomers;
 	}
 
-	public void setMstJobtitles(List<MstJobtitle> mstJobtitles) {
-		this.mstJobtitles = mstJobtitles;
+	public void setMstCustomers(List<MstCustomer> mstCustomers) {
+		this.mstCustomers = mstCustomers;
 	}
 
-	public JobService getJobService() {
-		return jobService;
+	public AttendanceService getAttendanceService() {
+		return attendanceService;
 	}
 
-	public void setJobService(JobService jobService) {
-		this.jobService = jobService;
+	public void setAttendanceService(AttendanceService attendanceService) {
+		this.attendanceService = attendanceService;
 	}
 
-	public ListitemRenderer<MstJobtitle> getListitemRenderer() {
+	public ListitemRenderer<MstCustomer> getListitemRenderer() {
 		return listitemRenderer;
 	}
 
-	public void setListitemRenderer(ListitemRenderer<MstJobtitle> listitemRenderer) {
+	public void setListitemRenderer(ListitemRenderer<MstCustomer> listitemRenderer) {
 		this.listitemRenderer = listitemRenderer;
 	}
 }
