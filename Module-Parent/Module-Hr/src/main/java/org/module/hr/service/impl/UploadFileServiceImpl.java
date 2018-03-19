@@ -22,6 +22,10 @@ import org.module.hr.model.TrsJobCandidate;
 import org.module.hr.service.UploadFileService;
 import org.springframework.stereotype.Service;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @Service
 public class UploadFileServiceImpl implements UploadFileService{
 

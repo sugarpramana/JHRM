@@ -15,6 +15,10 @@ import org.module.hr.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @Service
 public class JobServiceImpl implements JobService{
 

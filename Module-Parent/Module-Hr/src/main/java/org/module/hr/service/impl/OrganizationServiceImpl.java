@@ -13,6 +13,10 @@ import org.module.hr.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @Service
 public class OrganizationServiceImpl implements OrganizationService{
 

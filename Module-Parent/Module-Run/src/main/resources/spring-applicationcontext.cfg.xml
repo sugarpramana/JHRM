@@ -125,6 +125,10 @@
   	
   	<!-- Nationality -->
   	<bean id="mstNationalityDAO" class="org.module.hr.dao.impl.MstNationalityDAOImpl" parent="baseDao"/>
+  	
+  	<!-- Attendance -->
+  	<bean id="mstCustomerDAO" class="org.module.hr.dao.impl.MstCustomerDAOImpl" parent="baseDao"/>
+  	<bean id="mstProjectDAO" class="org.module.hr.dao.impl.MstProjectDAOImpl" parent="baseDao"/>
 
   	<!-- Employee -->
   	<bean id="trsEmployeeDAO" class="org.module.hr.dao.impl.TrsEmployeeDAOImpl" parent="baseDao"/>
@@ -184,6 +188,12 @@
     <!-- Nationality -->
     <bean id="nationalityService" class="org.module.hr.service.impl.NationalityServiceImpl">
         <property name="mstNationalityDAO" ref="mstNationalityDAO" />
+    </bean>
+    
+    <!-- Attendance -->
+    <bean id="attendanceService" class="org.module.hr.service.impl.AttendanceServiceImpl">
+        <property name="mstCustomerDAO" ref="mstCustomerDAO" />
+        <property name="mstProjectDAO" ref="mstProjectDAO" />
     </bean>
     
     <!-- Employee -->
