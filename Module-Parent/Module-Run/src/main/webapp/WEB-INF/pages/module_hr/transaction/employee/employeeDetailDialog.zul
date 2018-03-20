@@ -96,7 +96,7 @@
 						<row visible="@load(employee.isVisibleFormEmergencyContacts)">
 							<include type="@load(employee.trsEmployee)" src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_emergency_contact/emergencyContacts.zul')" />
 						</row>
-						<rowvvisible="@load(employee.isVisibleFormDependents)">
+						<row visible="@load(employee.isVisibleFormDependents)">
 							<include  type="@load(employee.trsEmployee)" src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_dependent/dependents.zul')" />
 						</row>
 						<row visible="@load(employee.isVisibleFormImmigration)">
