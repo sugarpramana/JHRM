@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.HashMap;
 
 import org.app.portofolio.webui.hr.common.utilities.ComponentConditionUtil;
 import org.module.hr.model.TrsEmployee;
@@ -32,7 +31,9 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
 public class EmployeeDialog {
-	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Wire component
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Wire("#buttonSave")
 	private Button buttonSave;
 	
@@ -56,44 +57,65 @@ public class EmployeeDialog {
 	
 	@Wire("#buttonUpload")
 	private Button buttonUpload;
-
+	
+	private Media media;
+	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Service yang dibutuhkan sesuai bisnis proses
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	private String labelUploadFoto;
+	
 	private TrsEmployee trsEmployee;
-
 	@WireVariable
 	private EmployeeService employeeService;
-
-	private Media media;
-
-	private String labelUploadFoto;
-
-	/*
-	 * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	 * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	 * ++++++ Inisialize Methode MVVM yang pertama kali dijalankan
-	 * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	 * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	 * ++++++
-	 */
+	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Function Custom sesuai kebutuhan
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	private void formEditCondition() {
+		ComponentConditionUtil.enableButton(buttonSave, buttonUpload);
+		ComponentConditionUtil.disableButton(buttonEdit, buttonNew);
+		ComponentConditionUtil.enableTextbox(textboxFirstName, textBoxIdEmployee, textBoxLastName, textBoxMiddleName);
+	}
+	
+	private void formSaveCondition() {
+		ComponentConditionUtil.disableButton(buttonSave, buttonUpload);
+		ComponentConditionUtil.enableButton(buttonEdit, buttonNew);
+		ComponentConditionUtil.disableTextbox(textboxFirstName, textBoxIdEmployee, textBoxLastName, textBoxMiddleName);
+	}
+	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Inisialize Methode MVVM yang pertama kali dijalankan
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@AfterCompose
 	public void setupComponents(@ContextParam(ContextType.VIEW) Component component,
 			@ExecutionArgParam("object") Object object) {
+		
 		Selectors.wireComponents(component, this, false);
+		
 		this.trsEmployee = new TrsEmployee();
 		labelUploadFoto = "Select Foto";
+		
 		formEditCondition();
 	}
 
-	@NotifyChange("labelUploadFoto")
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Function CRUD Event
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Command("upload")
+	@NotifyChange("labelUploadFoto")
 	public void upload(@ContextParam(ContextType.BIND_CONTEXT) BindContext ctx) {
 		UploadEvent upEvent = null;
 		Object objUploadEvent = ctx.getTriggerEvent();
+		
 		if (objUploadEvent != null && (objUploadEvent instanceof UploadEvent)) {
 			upEvent = (UploadEvent) objUploadEvent;
 		}
+		
 		if (upEvent != null) {
 			this.media = upEvent.getMedia();
 			int lengthofImage = media.getByteData().length;
+			
 			if (media instanceof AImage) {
 				if (lengthofImage > 500 * 1024) {
 					Messagebox.show("Please Select a Image of size less than 500Kb.");
@@ -114,8 +136,8 @@ public class EmployeeDialog {
 		formEditCondition();
 	}
 	
-	@NotifyChange("trsEmployee")
 	@Command
+	@NotifyChange("trsEmployee")
 	public void doNew() {
 		formEditCondition();
 		this.trsEmployee = new TrsEmployee();
@@ -131,29 +153,20 @@ public class EmployeeDialog {
 				saveFile(this.media);
 			}
 		}
+		
 		if (trsEmployee.getIdEmployee() == null){
 			employeeService.save(this.trsEmployee);
 		} else {
 			employeeService.saveOrUpdate(trsEmployee);
 		}
+		
 		formSaveCondition();
-	}
-	
-	private void formEditCondition() {
-		ComponentConditionUtil.enableButton(buttonSave, buttonUpload);
-		ComponentConditionUtil.disableButton(buttonEdit, buttonNew);
-		ComponentConditionUtil.enableTextbox(textboxFirstName, textBoxIdEmployee, textBoxLastName, textBoxMiddleName);
-	}
-	
-	private void formSaveCondition() {
-		ComponentConditionUtil.disableButton(buttonSave, buttonUpload);
-		ComponentConditionUtil.enableButton(buttonEdit, buttonNew);
-		ComponentConditionUtil.disableTextbox(textboxFirstName, textBoxIdEmployee, textBoxLastName, textBoxMiddleName);
 	}
 
 	private void saveFile(Media media) {
 		BufferedInputStream in = null;
 		BufferedOutputStream out = null;
+		
 		try {
 			InputStream fin = media.getStreamData();
 			in = new BufferedInputStream(fin);
@@ -163,8 +176,10 @@ public class EmployeeDialog {
 
 			OutputStream fout = new FileOutputStream(file);
 			out = new BufferedOutputStream(fout);
+			
 			byte buffer[] = new byte[1024];
 			int ch = in.read(buffer);
+			
 			while (ch != -1) {
 				out.write(buffer, 0, ch);
 				ch = in.read(buffer);
@@ -177,7 +192,6 @@ public class EmployeeDialog {
 			try {
 				if (out != null)
 					out.close();
-
 				if (in != null)
 					in.close();
 
@@ -185,9 +199,11 @@ public class EmployeeDialog {
 				throw new RuntimeException(e);
 			}
 		}
-
 	}
 
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Getter Setter
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public TrsEmployee getTrsEmployee() {
 		return trsEmployee;
 	}

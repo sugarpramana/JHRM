@@ -1,8 +1,6 @@
 <zk>
-	<window id="windowEmployeeDetailDialog" title="Form Employee"
-		border="normal" width="60%" height="80%" position="center,center" closable="true"
-		maximizable="true" action="show: slideDown; hide: slideUp"
-		mode="modal" apply="org.zkoss.bind.BindComposer" sizable="true"
+	<window id="windowEmployeeDetailDialog" title="Form Employee" border="normal" width="60%" height="80%" position="center,center" closable="true"
+		maximizable="true" action="show: slideDown; hide: slideUp" mode="modal" apply="org.zkoss.bind.BindComposer" sizable="true"
 		viewModel="@id('employee') @init('org.app.portofolio.webui.hr.transaction.employee.EmployeeDetailDialogVM')">
 		<borderlayout vflex="true">
 			<!-- Function CRUD -->
@@ -22,7 +20,6 @@
 							</rows>
 						</grid>
 					</groupbox>
-			  
 					<tree>
 						<treecols>
 							<treecol />
@@ -30,38 +27,32 @@
 						<treechildren>
 							<treeitem>
 								<treerow>
-									<treecell label="Personal Details"
-										onClick="@command('selectPersonalDetails')" />
+									<treecell label="Personal Details" onClick="@command('selectPersonalDetails')" />
 								</treerow>
 							</treeitem>
 							<treeitem>
 								<treerow>
-									<treecell label="Contact Details"
-										onClick="@command('selectFormContactDetails')" />
+									<treecell label="Contact Details" onClick="@command('selectFormContactDetails')" />
 								</treerow>
 							</treeitem>
 							<treeitem>
 								<treerow>
-									<treecell label="Emergency Contact"
-										onClick="@command('selectFormEmergencyContacts')" />
+									<treecell label="Emergency Contact" onClick="@command('selectFormEmergencyContacts')" />
 								</treerow>
 							</treeitem>
 							<treeitem>
 								<treerow>
-									<treecell label="Dependents"
-										onClick="@command('selectFormDependents')" />
+									<treecell label="Dependents" onClick="@command('selectFormDependents')" />
 								</treerow>
 							</treeitem>
 							<treeitem>
 								<treerow>
-									<treecell label="Immigration"
-										onClick="@command('selectFormImmigration')" />
+									<treecell label="Immigration" onClick="@command('selectFormImmigration')" />
 								</treerow>
 							</treeitem>
 							<treeitem>
 								<treerow>
-									<treecell label="Job"
-										onClick="@command('selectFormJob')" />
+									<treecell label="Job" onClick="@command('selectFormJob')" />
 								</treerow>
 							</treeitem>
 							<!-- <treeitem>
@@ -72,29 +63,23 @@
 							</treeitem> -->
 							<treeitem>
 								<treerow>
-									<treecell label="Qualifications"
-										onClick="@command('selectFormQualification')" />
+									<treecell label="Qualifications" onClick="@command('selectFormQualification')" />
 								</treerow>
 							</treeitem> 
 							<treeitem>
 								<treerow>
-									<treecell label="Memberships"
-										onClick="@command('selectFormMembership')" />
+									<treecell label="Memberships" onClick="@command('selectFormMembership')" />
 								</treerow>
 							</treeitem>
-							 
-							<!-- 
-							<treeitem>
+							<!-- <treeitem>
 								<treerow>
 									<treecell label="Report-to"
 										onClick="@command('selectFormReportTo')" />
 								</treerow>
-							</treeitem>
-							-->
-							
+							</treeitem>-->
 						</treechildren>
 					</tree>
-					</div>
+				</div>
 			</west>
 			<center border="none" >
 				<grid height="100%">
@@ -102,64 +87,42 @@
 						<column />
 					</columns>
 					<rows height="100%">
-						<row 
-							height="100%"
-							visible="@load(employee.isVisiblesFormPerssonalDetails)">
-							<include type="@load(employee.trsEmployee)"
-								height="100%"
-								src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_personal_detail/personalDetails.zul')" />
+						<row height="100%" visible="@load(employee.isVisiblesFormPerssonalDetails)">
+							<include type="@load(employee.trsEmployee)" height="100%" src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_personal_detail/personalDetails.zul')" />
 						</row>
-						<row
-							visible="@load(employee.isVisibleFormContactDetails)">
-							<include type="@load(employee.trsEmployee)"
-								src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_contact_detail/contactDetails.zul')" />
+						<row visible="@load(employee.isVisibleFormContactDetails)">
+							<include type="@load(employee.trsEmployee)" src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_contact_detail/contactDetails.zul')" />
 						</row>
-						<row
-							visible="@load(employee.isVisibleFormEmergencyContacts)">
-							<include type="@load(employee.trsEmployee)"
-								src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_emergency_contact/emergencyContacts.zul')" />
+						<row visible="@load(employee.isVisibleFormEmergencyContacts)">
+							<include type="@load(employee.trsEmployee)" src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_emergency_contact/emergencyContacts.zul')" />
 						</row>
-						<row
-							visible="@load(employee.isVisibleFormDependents)">
-							<include  type="@load(employee.trsEmployee)"
-								src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_dependent/dependents.zul')" />
+						<rowvvisible="@load(employee.isVisibleFormDependents)">
+							<include  type="@load(employee.trsEmployee)" src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_dependent/dependents.zul')" />
 						</row>
-						<row
-							visible="@load(employee.isVisibleFormImmigration)">
-							<include type="@load(employee.trsEmployee)"
-								src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_immigration/immigration.zul')" />
+						<row visible="@load(employee.isVisibleFormImmigration)">
+							<include type="@load(employee.trsEmployee)" src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_immigration/immigration.zul')" />
 						</row>
 						<row visible="@load(employee.isVisibleFormJob)">
-							<include type="@load(employee.trsEmployee)"
-								src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_job/job.zul')" />
+							<include type="@load(employee.trsEmployee)" src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_job/job.zul')" />
 						</row>
 						<!-- <row 
 							visible="@load(employee.isVisibleFormSalary)">
 							<include type="@load(employee.trsEmployee)"
 								src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_salary/salary.zul')" />
 						</row> -->
-						<row
-							visible="@load(employee.isVisibleFormQualification)">
+						<row visible="@load(employee.isVisibleFormQualification)">
 							<div>
-								<include type="@load(employee.trsEmployee)"
-									src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_qualification/qualifications.zul')" />
+								<include type="@load(employee.trsEmployee)" src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_qualification/qualifications.zul')" />
 							</div>
 						</row> 
-						<row
-							visible="@load(employee.isVisibleFormMemberships)">
-							<include  type="@load(employee.trsEmployee)"
-								src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_membership/memberships.zul')"/>
+						<row visible="@load(employee.isVisibleFormMemberships)">
+							<include  type="@load(employee.trsEmployee)" src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_membership/memberships.zul')"/>
 						</row> 
-						<!-- 
-						
-						
-						<row
+						<!-- <row
 							visible="@load(employee.isVisibleFormReportTo)">
 							<include
 								src="/WEB-INF/pages/module_hr/transaction/employee/tab_report_to/reportTo.zul" />
-						</row>
-						-->
-						
+						</row>-->
 					</rows>
 				</grid>
 			</center>

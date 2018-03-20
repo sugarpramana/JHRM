@@ -1,58 +1,41 @@
 <zk>
-	<window id="windowEmployeeDialog" title="Form Employee"
-		border="normal" width="550px" position="center,center" closable="true"
-		action="show: slideDown; hide: slideUp" mode="modal" apply="org.zkoss.bind.BindComposer" 
-		viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.EmployeeDialog')" maximizable="true">
+	<window id="windowEmployeeDialog" title="Form Employee" border="normal" width="550px" position="center,center" closable="true"
+		action="show: slideDown; hide: slideUp" mode="modal" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.EmployeeDialog')" maximizable="true">
 		<borderlayout height="500px">
 			<!-- Function CRUD -->
 			<north>
 				<toolbar>
-					<button id="buttonSave" image="/images/icons/btn_save.gif"
-						label="Save" onClick="@command('doSave')" />
-					<button id="buttonEdit" image="/images/icons/btn_edit.gif"
-						label="Edit" onClick="@command('doEdit')" />
-					<button id="buttonNew" image="/images/icons/btn_new.gif"
-						label="New" onClick="@command('doNew')" />		
+					<button id="buttonSave" image="/images/icons/btn_save.gif" label="Save" onClick="@command('doSave')" />
+					<button id="buttonEdit" image="/images/icons/btn_edit.gif" label="Edit" onClick="@command('doEdit')" />
+					<button id="buttonNew" image="/images/icons/btn_new.gif" label="New" onClick="@command('doNew')" />		
 				</toolbar>
 			</north>
 			<center>
 				<grid>
 					<rows>
 						<row>
-							<label
-								value="${labels.menu.employee.personal.details.form.full.name}" />
+							<label value="${labels.menu.employee.personal.details.form.full.name}" />
 							<div>
-								<label
-									value="${labels.menu.employee.personal.details.form.first.name}"
-									style="text-align: justify; display: block;" />
+								<label value="${labels.menu.employee.personal.details.form.first.name}" style="text-align: justify; display: block;" />
 								<textbox id="textBoxFirstName" value="@bind(vm.trsEmployee.firstName)"/>
 							</div>
 							<div>
-								<label
-									value="${labels.menu.employee.personal.details.form.middle.name}"
-									style="text-align: justify; display: block;" />
+								<label value="${labels.menu.employee.personal.details.form.middle.name}" style="text-align: justify; display: block;" />
 								<textbox id="textBoxMiddleName" value="@bind(vm.trsEmployee.middleName)"/>
 							</div>
 							<div>
-								<label
-									value="${labels.menu.employee.personal.details.form.last.name}"
-									style="text-align: justify; display: block;" />
+								<label value="${labels.menu.employee.personal.details.form.last.name}" style="text-align: justify; display: block;" />
 								<textbox id="textBoxLastName" value="@bind(vm.trsEmployee.lastName)"/>
 							</div>
 						</row>
 						<row>
-							<label
-								value="${labels.menu.employee.form.employee.id}" />
+							<label value="${labels.menu.employee.form.employee.id}" />
 							<textbox id="textBoxIdEmployee" value="@bind(vm.trsEmployee.idEmployee)"/>
 					    </row>
 					    <row>
-							<label
-								value="${labels.menu.employee.form.photograph}" />
-								<label
-									value="@load(vm.labelUploadFoto)" />
-								<button id="buttonUpload" mold="trendy"
-									upload="true" label="upload"
-									onUpload="@command('upload')" />
+							<label value="${labels.menu.employee.form.photograph}" />
+								<label value="@load(vm.labelUploadFoto)" />
+								<button id="buttonUpload" mold="trendy" upload="true" label="upload" onUpload="@command('upload')" />
 					    </row>
 					</rows>
 				</grid>

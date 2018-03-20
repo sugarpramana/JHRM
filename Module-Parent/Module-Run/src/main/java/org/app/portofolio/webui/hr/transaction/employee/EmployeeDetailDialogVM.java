@@ -13,7 +13,6 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.Selectors;
 
 public class EmployeeDetailDialogVM {
-
 	private Boolean isVisiblesFormPerssonalDetails;
 	private Boolean isVisibleFormContactDetails;
 	private Boolean isVisibleFormEmergencyContacts;
@@ -25,36 +24,16 @@ public class EmployeeDetailDialogVM {
 	private Boolean isVisibleFormQualification;
 	private Boolean isVisibleFormMemberships;
 
-	// used variable
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Service yang dibutuhkan sesuai bisnis proses
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	private Boolean test;
 	
 	private TrsEmployee trsEmployee;
 	
-	// temp for test
-	private Boolean test;
-
-	/*
-	 * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	 * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	 * ++++++ Inisialize Methode MVVM yang pertama kali dijalankan
-	 * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	 * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	 * ++++++
-	 */
-	@AfterCompose
-	public void setupComponents(@ContextParam(ContextType.VIEW) Component component,
-			@ExecutionArgParam("object") Object object,
-			@ExecutionArgParam("trsEmployee") TrsEmployee trsEmployee) {
-
-		Selectors.wireComponents(component, this, false);
-		if (trsEmployee == null){
-			this.trsEmployee = new TrsEmployee();
-		}
-		else {
-			this.trsEmployee = trsEmployee;
-		}
-		selectPersonalDetails();
-	}
-
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Function Custom sesuai kebutuhan
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void setVisibleFalseForAll() {
 		isVisiblesFormPerssonalDetails = Boolean.FALSE;
 		isVisibleFormContactDetails = Boolean.FALSE;
@@ -68,101 +47,119 @@ public class EmployeeDetailDialogVM {
 		isVisibleFormMemberships = Boolean.FALSE;
 		test = Boolean.FALSE;
 	}
+	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Inisialize Methode MVVM yang pertama kali dijalankan
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	@AfterCompose
+	public void setupComponents(@ContextParam(ContextType.VIEW) Component component,
+			@ExecutionArgParam("object") Object object,
+			@ExecutionArgParam("trsEmployee") TrsEmployee trsEmployee) {
 
-	@NotifyChange({ "*" })
+		Selectors.wireComponents(component, this, false);
+		
+		if (trsEmployee == null){
+			this.trsEmployee = new TrsEmployee();
+		}
+		else {
+			this.trsEmployee = trsEmployee;
+		}
+		
+		selectPersonalDetails();
+	}
+
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Function CRUD Event
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Command
+	@NotifyChange({ "*" })
 	public void selectPersonalDetails() {
 		setVisibleFalseForAll();
 		isVisiblesFormPerssonalDetails = Boolean.TRUE;
 	}
 
-	@NotifyChange({ "*" })
 	@Command
+	@NotifyChange({ "*" })
 	public void selectFormContactDetails() {
 		setVisibleFalseForAll();
 		isVisibleFormContactDetails = Boolean.TRUE;
 	}
 
-	@NotifyChange({ "*" })
 	@Command
+	@NotifyChange({ "*" })
 	public void selectFormEmergencyContacts() {
 		setVisibleFalseForAll();
 		isVisibleFormEmergencyContacts = Boolean.TRUE;
 	}
 
-	@NotifyChange({ "*" })
 	@Command
+	@NotifyChange({ "*" })
 	public void selectFormDependents() {
 		setVisibleFalseForAll();
 		isVisibleFormDependents = Boolean.TRUE;
 	}
 
-	@NotifyChange({ "*" })
 	@Command
+	@NotifyChange({ "*" })
 	public void selectFormImmigration() {
 		setVisibleFalseForAll();
 		isVisibleFormImmigration = Boolean.TRUE;
 	}
 
-	@NotifyChange({ "*" })
 	@Command
+	@NotifyChange({ "*" })
 	public void selectFormJob() {
 		setVisibleFalseForAll();
 		isVisibleFormJob = Boolean.TRUE;
 	}
 
-	@NotifyChange({ "*" })
 	@Command
+	@NotifyChange({ "*" })
 	public void selectFormSalary() {
 		setVisibleFalseForAll();
 		isVisibleFormSalary = Boolean.TRUE;
 	}
 
-	@NotifyChange({ "*" })
 	@Command
+	@NotifyChange({ "*" })
 	public void selectFormReportTo() {
 		setVisibleFalseForAll();
 		isVisibleFormReportTo = Boolean.TRUE;
 	}
 
-	@NotifyChange({ "*" })
 	@Command
+	@NotifyChange({ "*" })
 	public void selectFormQualification() {
 		setVisibleFalseForAll();
 		isVisibleFormQualification = Boolean.TRUE;
 	}
 
-	@NotifyChange({ "*" })
 	@Command
 	public void selectFormMembership() {
 		setVisibleFalseForAll();
 		isVisibleFormMemberships = Boolean.TRUE;
 	}
 
-	// temp for test
-	@NotifyChange({ "*" })
 	@Command
+	@NotifyChange({ "*" })
 	public void test() {
 		setVisibleFalseForAll();
 		test = Boolean.TRUE;
 	}
 
-	/**
-	 * 
-	 */
 	@Command
 	public void doNew() {
 		Executions.createComponents(JHRMAdditionalZulPath.MasterData.Qualifications.Skills.ADD_FORM, null, null);
 	}
 
-	/**
-	 * 
-	 */
 	@Command
 	public void doDetail() {
 		Executions.createComponents(JHRMAdditionalZulPath.MasterData.Qualifications.Skills.DETAIL_FORM, null, null);
 	}
 
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Getter Setter
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public Boolean getIsVisiblesFormPerssonalDetails() {
 		return isVisiblesFormPerssonalDetails;
 	}
@@ -243,7 +240,6 @@ public class EmployeeDetailDialogVM {
 		this.isVisibleFormMemberships = isVisibleFormMemberships;
 	}
 
-	// temp for test
 	public Boolean getTest() {
 		return test;
 	}
@@ -251,7 +247,6 @@ public class EmployeeDetailDialogVM {
 	public void setTest(Boolean test) {
 		this.test = test;
 	}
-	//end
 
 	public TrsEmployee getTrsEmployee() {
 		return trsEmployee;
@@ -260,5 +255,4 @@ public class EmployeeDetailDialogVM {
 	public void setTrsEmployee(TrsEmployee trsEmployee) {
 		this.trsEmployee = trsEmployee;
 	}
-
 }
