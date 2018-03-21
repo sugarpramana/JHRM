@@ -3,7 +3,6 @@ package org.app.portofolio.webui.hr.transaction.employee;
 import java.util.HashMap;
 import java.util.List;
 
-import org.app.portofolio.webui.hr.transaction.employee.model.EmergencyContactListItemRenderer;
 import org.app.portofolio.webui.hr.transaction.employee.model.DependentListItemRenderer;
 import org.module.hr.model.TrsEmployee;
 import org.module.hr.model.TrsEmployeeDependent;
@@ -27,22 +26,32 @@ import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 
-
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class Dependent {
-
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Wire component
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Wire("#ListBoxDependent")
 	private Listbox ListBoxDependent;
 
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Service yang dibutuhkan sesuai bisnis proses
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	private TrsEmployee trsEmployee;
 	@WireVariable
 	private EmployeeService employeeService;
 	
-	private TrsEmployee trsEmployee;
-
-	private DependentListItemRenderer dependentListItemRenderer;
-	private List<TrsEmployeeDependent> trsEmployeeDependents;
 	private TrsEmployeeDependent selectedEmployeeDependent;
-	
+	private List<TrsEmployeeDependent> trsEmployeeDependents;
+	private DependentListItemRenderer dependentListItemRenderer;
+
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Function Custom sesuai kebutuhan
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void doPrepareList(){
 		ListBoxDependent.setCheckmark(true);
 		ListBoxDependent.setMultiple(true);
@@ -50,12 +59,18 @@ public class Dependent {
 		ListBoxDependent.setStyle("border-style: none;");
 	}
 
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Inisialize Methode MVVM yang pertama kali dijalankan
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@AfterCompose
 	public void setupComponents(@ContextParam(ContextType.VIEW) Component component,
-			@ExecutionArgParam("object") Object object, 
-			@ExecutionArgParam("type") TrsEmployee trsEmployee) {
+		@ExecutionArgParam("object") Object object, 
+		@ExecutionArgParam("type") TrsEmployee trsEmployee) {
+	
 		Selectors.wireComponents(component, this, false);
+		
 		this.trsEmployee = trsEmployee;
+		
 		HashMap< String, Object> requestMap = new HashMap<>();
 		requestMap.put("trsEmployee", trsEmployee);
 		trsEmployeeDependents = employeeService.getTrsEmployeeDependentByTrsEmployeeDependentRequestMap(requestMap);
@@ -63,9 +78,13 @@ public class Dependent {
 		
 		ListBoxDependent.setModel(new ListModelList<TrsEmployeeEmergencyContact>());
 		ListBoxDependent.setItemRenderer(dependentListItemRenderer);
+		
 		doPrepareList();
 	}
 	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Function CRUD Event
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Command
 	public void doNew() {
 		ListModelList listModelList = (ListModelList) ListBoxDependent.getModel();
@@ -77,6 +96,7 @@ public class Dependent {
 	@Command
 	public void doDelete(){
 		final ListModelList<TrsEmployeeDependent> listModelListEmployeeDependent = (ListModelList) ListBoxDependent.getModel();
+		
 		if (ListBoxDependent.getSelectedIndex() == -1){
 			Messagebox.show("There is no selected record?", "Confirm", Messagebox.OK, Messagebox.ERROR);
 		} else {
@@ -90,6 +110,7 @@ public class Dependent {
 								employeeService.delete(trsEmployeeDependent);
 							}
 						}
+						
 						BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdateEmployeeDependent", null);
 					} else {
 						return;
@@ -99,7 +120,6 @@ public class Dependent {
 		}
 	}
 	
-	
 	@GlobalCommand
 	@NotifyChange("trsEmployeeDependents")
 	public void refreshAfterSaveOrUpdateEmployeeDependent(){
@@ -108,8 +128,9 @@ public class Dependent {
 		trsEmployeeDependents = employeeService.getTrsEmployeeDependentByTrsEmployeeDependentRequestMap(requestMap);
 	}
 
-	
-
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Getter Setter
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public EmployeeService getEmployeeService() {
 		return employeeService;
 	}
@@ -149,5 +170,4 @@ public class Dependent {
 	public void setTrsEmployee(TrsEmployee trsEmployee) {
 		this.trsEmployee = trsEmployee;
 	}
-
 }

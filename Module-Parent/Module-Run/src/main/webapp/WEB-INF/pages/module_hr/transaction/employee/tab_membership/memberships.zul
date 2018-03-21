@@ -1,50 +1,30 @@
 <zk>
-	<window id="windowMemberships" border="none"
-		apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.Membership')">
+	<window id="windowMemberships" border="none" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.Membership')">
 		<groupbox mold="3d">
-			<caption
-				label="Assigned Membership">
+			<caption label="Assigned Membership">
 			</caption>
 			<borderlayout height="450px">
 				<north border="none">
 					<div sclass="z-toolbar" style="padding:0">
 						<hbox pack="stretch" width="100%">
-							<toolbar align="start"
-								style="border-style: none;">
-								<button mold="trendy"
-									image="/images/icons/btn_save.gif" label="New"
-									onClick="@command('doNew')" />
-								<button mold="trendy"
-									image="/images/icons/btn_delete.gif" label="Delete" />
+							<toolbar align="start" style="border-style: none;">
+								<button mold="trendy" image="/images/icons/btn_save.gif" label="New" onClick="@command('doNew')" />
+								<button mold="trendy" image="/images/icons/btn_delete.gif" label="Delete" />
 							</toolbar>
 						</hbox>
 					</div>
 				</north>
 				<center border="none" autoscroll="true">
 					<div>
-						<listbox id="listBoxMembership"
-							selectedItem="@bind(vm.selectedEmployeeMembership)">
+						<listbox id="listBoxMembership" selectedItem="@bind(vm.selectedEmployeeMembership)">
 							<listhead>
-								<listheader width="5%" align="center" />
-								<listheader
-									label="${labels.menu.employee.membership.listheader.membership}"
-									sort="auto" />
-								<listheader
-									label="${labels.menu.employee.membership.listheader.subcription.paid.by}"
-									sort="auto" />
-								<listheader
-									label="${labels.menu.employee.membership.listheader.subcription.amount}"
-									sort="auto" />
-								<listheader
-									label="${labels.menu.employee.membership.listheader.currency}"
-									sort="auto" />
-								<listheader
-									label="${labels.menu.employee.membership.listheader.subcription.commence.date}"
-									sort="auto" />
-								<listheader
-									label="${labels.menu.employee.membership.listheader.subcription.renewal.date}"
-									sort="auto" />
+								<listheader width="15%" align="center" />
+								<listheader label="${labels.menu.employee.membership.listheader.membership}" sort="auto" />
+								<listheader label="${labels.menu.employee.membership.listheader.subcription.paid.by}" sort="auto" />
+								<listheader label="${labels.menu.employee.membership.listheader.subcription.amount}" sort="auto" />
+								<listheader label="${labels.menu.employee.membership.listheader.currency}" sort="auto" />
+								<listheader label="${labels.menu.employee.membership.listheader.subcription.commence.date}" sort="auto" />
+								<listheader label="${labels.menu.employee.membership.listheader.subcription.renewal.date}" sort="auto" />
 							</listhead>
 						</listbox>
 					</div>

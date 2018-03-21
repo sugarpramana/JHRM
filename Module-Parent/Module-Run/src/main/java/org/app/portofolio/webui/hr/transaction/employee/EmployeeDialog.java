@@ -89,7 +89,7 @@ public class EmployeeDialog {
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@AfterCompose
 	public void setupComponents(@ContextParam(ContextType.VIEW) Component component,
-			@ExecutionArgParam("object") Object object) {
+		@ExecutionArgParam("object") Object object) {
 		
 		Selectors.wireComponents(component, this, false);
 		

@@ -7,10 +7,7 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zkplus.spring.SpringUtil;
-import org.zkoss.zul.Bandbox;
-import org.zkoss.zul.Bandpopup;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
@@ -18,14 +15,16 @@ import org.zkoss.zul.ListitemRenderer;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
-
+/**
+*
+* @author formulateko@admin.com
+*/
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class EmergencyContactListItemRenderer implements ListitemRenderer<TrsEmployeeEmergencyContact> {
 
-	private EmployeeService employeeService = (EmployeeService) SpringUtil
-			.getBean("employeeService");
+	private EmployeeService employeeService = (EmployeeService) SpringUtil.getBean("employeeService");
 
 	@Override
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void render(Listitem item, final TrsEmployeeEmergencyContact trsEmployeeEmergencyContact, int index) throws Exception {
 		Listcell listcell;
 
@@ -53,37 +52,36 @@ public class EmergencyContactListItemRenderer implements ListitemRenderer<TrsEmp
 		final Textbox textboxMobile = new Textbox();
 		final Textbox textboxWorkTelephone = new Textbox();
 		
-
 		listcell = new Listcell();
-		buttonEdit.setParent(listcell);
-		buttonSave.setParent(listcell);
-		buttonCancel.setParent(listcell);
-		buttonDelete.setParent(listcell);
+			buttonEdit.setParent(listcell);
+			buttonSave.setParent(listcell);
+			buttonCancel.setParent(listcell);
+			buttonDelete.setParent(listcell);
 		listcell.setParent(item);
 		
 		listcell = new Listcell();
-		textboxName.setParent(listcell);
-		labelName.setParent(listcell);
+			textboxName.setParent(listcell);
+			labelName.setParent(listcell);
 		listcell.setParent(item);
 		
 		listcell = new Listcell();
-		textboxRelationship.setParent(listcell);
-		labelRelationship.setParent(listcell);
+			textboxRelationship.setParent(listcell);
+			labelRelationship.setParent(listcell);
 		listcell.setParent(item);
 		
 		listcell = new Listcell();
-		textboxHomeTelephone.setParent(listcell);
-		labelHomeTelephone.setParent(listcell);
+			textboxHomeTelephone.setParent(listcell);
+			labelHomeTelephone.setParent(listcell);
 		listcell.setParent(item);
 		
 		listcell = new Listcell();
-		textboxMobile.setParent(listcell);
-		labelMobile.setParent(listcell);
+			textboxMobile.setParent(listcell);
+			labelMobile.setParent(listcell);
 		listcell.setParent(item);
 		
 		listcell = new Listcell();
-		textboxWorkTelephone.setParent(listcell);
-		labelWorkTelephone.setParent(listcell);
+			textboxWorkTelephone.setParent(listcell);
+			labelWorkTelephone.setParent(listcell);
 		listcell.setParent(item);
 		
 		if (trsEmployeeEmergencyContact.getIdEmployeeEmergencyContact() == null){
@@ -107,86 +105,86 @@ public class EmergencyContactListItemRenderer implements ListitemRenderer<TrsEmp
 			textboxWorkTelephone.setVisible(false);
 		}
 		
-	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	 * Function CRUD Event
-	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-	buttonSave.addEventListener(Events.ON_CLICK, new EventListener() {
-		@Override
-		public void onEvent(Event event) throws Exception {
-			if(trsEmployeeEmergencyContact.getIdEmployeeEmergencyContact() == null){
-				trsEmployeeEmergencyContact.setName(textboxName.getValue());
-				trsEmployeeEmergencyContact.setRelationship(textboxRelationship.getValue());
-				trsEmployeeEmergencyContact.setHomeTelephone(textboxHomeTelephone.getValue());
-				trsEmployeeEmergencyContact.setMobile(textboxMobile.getValue());
-				trsEmployeeEmergencyContact.setWorkTelephone(textboxWorkTelephone.getValue());
-
-				employeeService.save(trsEmployeeEmergencyContact);
+		/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		 * Function CRUD Event
+		 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+		buttonSave.addEventListener(Events.ON_CLICK, new EventListener() {
+			@Override
+			public void onEvent(Event event) throws Exception {
+				if(trsEmployeeEmergencyContact.getIdEmployeeEmergencyContact() == null){
+					trsEmployeeEmergencyContact.setName(textboxName.getValue());
+					trsEmployeeEmergencyContact.setRelationship(textboxRelationship.getValue());
+					trsEmployeeEmergencyContact.setHomeTelephone(textboxHomeTelephone.getValue());
+					trsEmployeeEmergencyContact.setMobile(textboxMobile.getValue());
+					trsEmployeeEmergencyContact.setWorkTelephone(textboxWorkTelephone.getValue());
+	
+					employeeService.save(trsEmployeeEmergencyContact);
+					
+					BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdateEmergencyContact", null);
+				}else{
+					trsEmployeeEmergencyContact.setName(textboxName.getValue());
+					trsEmployeeEmergencyContact.setRelationship(textboxRelationship.getValue());
+					trsEmployeeEmergencyContact.setHomeTelephone(textboxHomeTelephone.getValue());
+					trsEmployeeEmergencyContact.setMobile(textboxMobile.getValue());
+					trsEmployeeEmergencyContact.setWorkTelephone(textboxWorkTelephone.getValue());;
+	
+					employeeService.update(trsEmployeeEmergencyContact);
+					
+					BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdateEmergencyContact", null);
+				}
+			}
+		});
+		
+		buttonEdit.addEventListener(Events.ON_CLICK, new EventListener() {
+			@Override
+			public void onEvent(Event event) throws Exception {		
+				buttonEdit.setVisible(false);
+				buttonSave.setVisible(true);
+				buttonDelete.setVisible(true);
 				
-				BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdateEmergencyContact", null);
-			}else{
-				trsEmployeeEmergencyContact.setName(textboxName.getValue());
-				trsEmployeeEmergencyContact.setRelationship(textboxRelationship.getValue());
-				trsEmployeeEmergencyContact.setHomeTelephone(textboxHomeTelephone.getValue());
-				trsEmployeeEmergencyContact.setMobile(textboxMobile.getValue());
-				trsEmployeeEmergencyContact.setWorkTelephone(textboxWorkTelephone.getValue());;
-
-				employeeService.update(trsEmployeeEmergencyContact);
+				textboxName.setVisible(true);
+				textboxRelationship.setVisible(true);
+				textboxHomeTelephone.setVisible(true);
+				textboxMobile.setVisible(true);
+				textboxWorkTelephone.setVisible(true);
 				
+				labelName.setVisible(false);
+				labelRelationship.setVisible(false);
+				labelHomeTelephone.setVisible(false);
+				labelMobile.setVisible(false);
+				labelWorkTelephone.setVisible(false);
+				
+				textboxName.setValue(trsEmployeeEmergencyContact.getName());
+				textboxRelationship.setValue(trsEmployeeEmergencyContact.getRelationship());
+				textboxHomeTelephone.setValue(trsEmployeeEmergencyContact.getHomeTelephone());
+				textboxMobile.setValue(trsEmployeeEmergencyContact.getMobile());
+				textboxWorkTelephone.setValue(trsEmployeeEmergencyContact.getWorkTelephone());
+			}					
+		});
+		
+		buttonDelete.addEventListener(Events.ON_CLICK, new EventListener() {
+			@Override
+			public void onEvent(Event event) throws Exception {
+				Messagebox.show("Do you really want to remove item?", "Confirm", Messagebox.OK | Messagebox.CANCEL, Messagebox.EXCLAMATION, new EventListener() {
+				    public void onEvent(Event event) throws Exception {    	
+				 		if (((Integer) event.getData()).intValue() == Messagebox.OK) {
+	
+				 			employeeService.delete(trsEmployeeEmergencyContact);
+				 			
+				 			BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdateEmergencyContact", null);
+				 		}else{
+				 			return;
+				 		}
+				 	}
+				});
+			}
+		});
+		
+		buttonCancel.addEventListener(Events.ON_CLICK, new EventListener() {
+			@Override
+			public void onEvent(Event event) throws Exception {
 				BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdateEmergencyContact", null);
 			}
-		}
-	});
-	
-	buttonEdit.addEventListener(Events.ON_CLICK, new EventListener() {
-		public void onEvent(Event event) throws Exception {		
-			buttonEdit.setVisible(false);
-			buttonSave.setVisible(true);
-			buttonDelete.setVisible(true);
-			
-			textboxName.setVisible(true);
-			textboxRelationship.setVisible(true);
-			textboxHomeTelephone.setVisible(true);
-			textboxMobile.setVisible(true);
-			textboxWorkTelephone.setVisible(true);
-			
-			labelName.setVisible(false);
-			labelRelationship.setVisible(false);
-			labelHomeTelephone.setVisible(false);
-			labelMobile.setVisible(false);
-			labelWorkTelephone.setVisible(false);
-			
-			textboxName.setValue(trsEmployeeEmergencyContact.getName());
-			textboxRelationship.setValue(trsEmployeeEmergencyContact.getRelationship());
-			textboxHomeTelephone.setValue(trsEmployeeEmergencyContact.getHomeTelephone());
-			textboxMobile.setValue(trsEmployeeEmergencyContact.getMobile());
-			textboxWorkTelephone.setValue(trsEmployeeEmergencyContact.getWorkTelephone());
-		}					
-	});
-	
-	buttonDelete.addEventListener(Events.ON_CLICK, new EventListener() {
-		@Override
-		public void onEvent(Event event) throws Exception {
-			Messagebox.show("Do you really want to remove item?", "Confirm", Messagebox.OK | Messagebox.CANCEL, Messagebox.EXCLAMATION, new EventListener() {
-			    public void onEvent(Event event) throws Exception {    	
-			 		if (((Integer) event.getData()).intValue() == Messagebox.OK) {
-
-			 			employeeService.delete(trsEmployeeEmergencyContact);
-			 			
-			 			BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdateEmergencyContact", null);
-			 		}else{
-			 			return;
-			 		}
-			 	}
-			});
-		}
-	});
-	
-	buttonCancel.addEventListener(Events.ON_CLICK, new EventListener() {
-		@Override
-		public void onEvent(Event event) throws Exception {
-			BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdateEmergencyContact", null);
-		}
-	});
+		});
 	}
 }
-

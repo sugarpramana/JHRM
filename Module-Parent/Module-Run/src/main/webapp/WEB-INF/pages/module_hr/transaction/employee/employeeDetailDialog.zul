@@ -5,7 +5,7 @@
 		<borderlayout vflex="true">
 			<!-- Function CRUD -->
 			<north />
-			<west splittable="true" border="none" size="30%" collapsible="true">
+			<west splittable="true" border="none" size="15%" collapsible="true">
 				<div>
 					<groupbox mold="3d">
 						<caption label="Employee Information" />
@@ -57,8 +57,7 @@
 							</treeitem>
 							<treeitem>
 								<treerow>
-									<treecell label="Salary"
-										onClick="@command('selectFormSalary')" />
+									<treecell label="Salary" onClick="@command('selectFormSalary')" />
 								</treerow>
 							</treeitem>
 							<treeitem>
@@ -73,8 +72,7 @@
 							</treeitem>
 							<treeitem>
 								<treerow>
-									<treecell label="Report-to"
-										onClick="@command('selectFormReportTo')" />
+									<treecell label="Report-to" onClick="@command('selectFormReportTo')" />
 								</treerow>
 							</treeitem>
 						</treechildren>
@@ -105,11 +103,9 @@
 						<row visible="@load(employee.isVisibleFormJob)">
 							<include type="@load(employee.trsEmployee)" src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_job/job.zul')" />
 						</row>
-						<!-- <row 
-							visible="@load(employee.isVisibleFormSalary)">
-							<include type="@load(employee.trsEmployee)"
-								src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_salary/salary.zul')" />
-						</row> -->
+						<row visible="@load(employee.isVisibleFormSalary)">
+							<include type="@load(employee.trsEmployee)" src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_salary/salary.zul')" />
+						</row>
 						<row visible="@load(employee.isVisibleFormQualification)">
 							<div>
 								<include type="@load(employee.trsEmployee)" src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_qualification/qualifications.zul')" />
@@ -118,11 +114,9 @@
 						<row visible="@load(employee.isVisibleFormMemberships)">
 							<include  type="@load(employee.trsEmployee)" src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_membership/memberships.zul')"/>
 						</row> 
-						<!-- <row
-							visible="@load(employee.isVisibleFormReportTo)">
-							<include
-								src="/WEB-INF/pages/module_hr/transaction/employee/tab_report_to/reportTo.zul" />
-						</row>-->
+						<row visible="@load(employee.isVisibleFormReportTo)">
+							<include src="/WEB-INF/pages/module_hr/transaction/employee/tab_report_to/reportTo.zul" />
+						</row>
 					</rows>
 				</grid>
 			</center>

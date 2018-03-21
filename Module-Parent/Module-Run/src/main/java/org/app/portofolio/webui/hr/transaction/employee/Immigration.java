@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.module.hr.model.TrsEmployee;
-import org.module.hr.model.TrsEmployeeDependent;
 import org.module.hr.model.TrsEmployeeImmigration;
 import org.module.hr.service.EmployeeService;
 import org.zkoss.bind.BindUtils;
@@ -26,20 +25,31 @@ import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class Immigration {
-	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Wire component
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Wire("#listBoxImmigration")
 	private Listbox listBoxImmigration;
 	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Service yang dibutuhkan sesuai bisnis proses
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	private TrsEmployee trsEmployee;
 	@WireVariable
 	private EmployeeService employeeService;
 	
-	private TrsEmployee trsEmployee;
-	
-	private List<TrsEmployeeImmigration> trsEmployeeImmigrations;
 	private TrsEmployeeImmigration selectedEmployeeImmigration;
+	private List<TrsEmployeeImmigration> trsEmployeeImmigrations;
 	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Function Custom sesuai kebutuhan
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void doPrepareList(){
 		listBoxImmigration.setCheckmark(true);
 		listBoxImmigration.setMultiple(true);
@@ -47,11 +57,16 @@ public class Immigration {
 		listBoxImmigration.setStyle("border-style: none;");
 	}
 	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Inisialize Methode MVVM yang pertama kali dijalankan
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@AfterCompose
 	public void setupComponent(@ContextParam(ContextType.VIEW) Component component,
-			@ExecutionArgParam("object") Object object, 
-			@ExecutionArgParam("type") TrsEmployee trsEmployee) {
+		@ExecutionArgParam("object") Object object, 
+		@ExecutionArgParam("type") TrsEmployee trsEmployee) {
+		
 		Selectors.wireComponents(component, this, false);
+		
 		this.trsEmployee = trsEmployee;
 		HashMap< String, Object> requestMap = new HashMap<>();
 		requestMap.put("trsEmployee", trsEmployee);
@@ -60,6 +75,9 @@ public class Immigration {
 		doPrepareList();
 	}
 	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Function CRUD Event
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Command
 	public void doNew() {
 		TrsEmployeeImmigration trsEmployeeImmigration = new TrsEmployeeImmigration();
@@ -79,11 +97,11 @@ public class Immigration {
 	@Command
 	public void doDelete(){
 		final ListModelList<TrsEmployeeImmigration> listModelListImmigrations = (ListModelList) listBoxImmigration.getModel();
+		
 		if (listBoxImmigration.getSelectedIndex() == -1){
 			Messagebox.show("There is no selected record?", "Confirm", Messagebox.OK, Messagebox.ERROR);
 		} else {
 			Messagebox.show("Do you really want to remove item?", "Confirm", Messagebox.OK | Messagebox.CANCEL, Messagebox.EXCLAMATION, new EventListener<Event>() {
-				
 				@Override
 				public void onEvent(Event event) throws Exception {
 					if (((Integer)event.getData()).intValue() == Messagebox.OK){
@@ -92,6 +110,7 @@ public class Immigration {
 								employeeService.delete(trsEmployeeImmigration);
 							}
 						}
+						
 						BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdateEmployeeImmigration", null);
 					} else {
 						return;
@@ -109,14 +128,9 @@ public class Immigration {
 		trsEmployeeImmigrations = employeeService.getTrsEmployeeImmigrationByTrsEmployeeImmigrationRequestMap(requestMap);
 	}
 
-	public Listbox getListBoxImmigration() {
-		return listBoxImmigration;
-	}
-
-	public void setListBoxImmigration(Listbox listBoxImmigration) {
-		this.listBoxImmigration = listBoxImmigration;
-	}
-
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Getter Setter
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public TrsEmployee getTrsEmployee() {
 		return trsEmployee;
 	}
@@ -148,8 +162,4 @@ public class Immigration {
 	public void setSelectedEmployeeImmigration(TrsEmployeeImmigration selectedEmployeeImmigration) {
 		this.selectedEmployeeImmigration = selectedEmployeeImmigration;
 	}
-	
-	
-	
-
 }

@@ -1,7 +1,7 @@
 <zk>
 	<window id="windowSalary" border="none" 
 		apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('org.app.portofolio.webui.hr.employee.Salary')">
+		viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.Salary')">
 		<borderlayout height="450px">
 			<!-- Function CRUD -->
 			<!-- <north/> -->
@@ -19,7 +19,7 @@
 						<space />
 						<borderlayout>
 							<north title="List Salary" splittable="true" collapsible="true">
-								<listbox id="listBoxSalary" model="@bind(vm.secUsers)" selectedItem="@bind(vm.secUser)" onSelect="@command('doSelect')">
+								<!-- <listbox id="listBoxSalary" model="@bind(vm.secUsers)" selectedItem="@bind(vm.secUser)" onSelect="@command('doSelect')">
 									<listhead sizable="true">
 										<listheader width="5%" align="center"/>
 										<listheader label="ID User" sort="auto(usrId)" />
@@ -32,10 +32,10 @@
 										<listcell label="@bind(secUser.usrLoginname)" />
 									</listitem>
 									</template>
-								</listbox>
+								</listbox> -->
 							</north>
 							<south title="List Role" splittable="true" collapsible="true">
-								<listbox id="listBoxRoleUserRole" model="@bind(vm.secRoles)" selectedItem="@bind(vm.secRole)">
+								<!-- <listbox id="listBoxRoleUserRole" model="@bind(vm.secRoles)" selectedItem="@bind(vm.secRole)">
 									<listhead sizable="true">
 										<listheader label="ID Role" sort="auto(usrId)" />
 										<listheader label="Role Name" sort="auto(usrLoginname)" />
@@ -46,7 +46,7 @@
 										<listcell label="@bind(secRole.rolShortdescription)" />
 									</listitem>
 									</template>
-								</listbox>
+								</listbox> -->
 							</south>
 						</borderlayout>
 						<!-- <listbox id="listBoxSalary"

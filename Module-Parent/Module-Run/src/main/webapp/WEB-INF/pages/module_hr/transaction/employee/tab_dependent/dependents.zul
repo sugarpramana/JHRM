@@ -28,7 +28,7 @@
 							model="@bind(vm.trsEmployeeDependents)"
 							selectedItem="@bind(vm.selectedEmployeeDependent)">
 							<listhead>
-								<listheader width="5%" align="center" />
+								<listheader width="15%" align="center" />
 								<listheader
 									label="${labels.menu.employee.dependent.listheader.name}"
 									sort="auto" />

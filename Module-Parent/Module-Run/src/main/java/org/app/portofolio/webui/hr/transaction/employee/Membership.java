@@ -22,14 +22,22 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.ListitemRenderer;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class Membership {
-	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Wire component
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Wire("#listBoxMembership")
 	private Listbox listBoxMembership;
 	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Service yang dibutuhkan sesuai bisnis proses
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@WireVariable
 	private EmployeeService employeeService;
 	
@@ -39,7 +47,9 @@ public class Membership {
 	private List<TrsEmployeeMembership> employeeMemberships;
 	private TrsEmployeeMembership selectedEmployeeMembership;
 	
-	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Function Custom sesuai kebutuhan
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void doPrepareList(){
 		listBoxMembership.setCheckmark(true);
 		listBoxMembership.setMultiple(true);
@@ -47,11 +57,16 @@ public class Membership {
 		listBoxMembership.setStyle("border-style: none;");
 	}
 	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Inisialize Methode MVVM yang pertama kali dijalankan
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@AfterCompose
 	public void setupComponents(@ContextParam(ContextType.VIEW) Component component,
-			@ExecutionArgParam("object") Object object, 
-			@ExecutionArgParam("type") TrsEmployee trsEmployee) {
+		@ExecutionArgParam("object") Object object, 
+		@ExecutionArgParam("type") TrsEmployee trsEmployee) {
+		
 		Selectors.wireComponents(component, this, false);
+		
 		this.trsEmployee = trsEmployee;
 		HashMap< String, Object> requestMap = new HashMap<>();
 		requestMap.put("trsEmployee", trsEmployee);
@@ -60,9 +75,13 @@ public class Membership {
 		
 		listBoxMembership.setModel(new ListModelList<TrsEmployeeMembership>());
 		listBoxMembership.setItemRenderer(membershipListItemRenderer);
+		
 		doPrepareList();
 	}
 	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Function CRUD Event
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Command
 	public void doNew(){
 		ListModelList listModelList = (ListModelList) listBoxMembership.getModel();
@@ -73,9 +92,11 @@ public class Membership {
 	
 	@GlobalCommand
 	public void updateMembership(@BindingParam("mstMembership") MstMembership mstMembership,
-			@BindingParam("employeeMembershipID") Integer employeeMembershipID){
+		@BindingParam("employeeMembershipID") Integer employeeMembershipID){
+		
 		ListModelList<TrsEmployeeMembership> listModelList = (ListModelList) listBoxMembership.getModel();
-		ListitemRenderer<TrsEmployeeMembership> listitemRenderer = listBoxMembership.getItemRenderer();
+		//ListitemRenderer<TrsEmployeeMembership> listitemRenderer = listBoxMembership.getItemRenderer();
+		
 		for(TrsEmployeeMembership trsEmployeeMembership:listModelList){
 			System.out.println(trsEmployeeMembership.getIdMembership());
 		}
@@ -100,6 +121,9 @@ public class Membership {
 		employeeMemberships = employeeService.getTrsEmployeeMembershipByTrsEmployeeMembershipRequestMap(requestMap);
 	}
 
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Getter Setter
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public EmployeeService getEmployeeService() {
 		return employeeService;
 	}
@@ -139,5 +163,4 @@ public class Membership {
 	public void setSelectedEmployeeMembership(TrsEmployeeMembership selectedEmployeeMembership) {
 		this.selectedEmployeeMembership = selectedEmployeeMembership;
 	}
-
 }

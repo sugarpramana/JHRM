@@ -12,7 +12,14 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.Selectors;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public class EmployeeDetailDialogVM {
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Service yang dibutuhkan sesuai bisnis proses
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	private Boolean isVisiblesFormPerssonalDetails;
 	private Boolean isVisibleFormContactDetails;
 	private Boolean isVisibleFormEmergencyContacts;
@@ -23,10 +30,6 @@ public class EmployeeDetailDialogVM {
 	private Boolean isVisibleFormReportTo;
 	private Boolean isVisibleFormQualification;
 	private Boolean isVisibleFormMemberships;
-
-	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	 * Service yang dibutuhkan sesuai bisnis proses
-	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	private Boolean test;
 	
 	private TrsEmployee trsEmployee;
@@ -60,8 +63,7 @@ public class EmployeeDetailDialogVM {
 		
 		if (trsEmployee == null){
 			this.trsEmployee = new TrsEmployee();
-		}
-		else {
+		}else {
 			this.trsEmployee = trsEmployee;
 		}
 		

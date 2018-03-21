@@ -20,7 +20,6 @@
 								<button mold="trendy"
 									image="/images/icons/btn_delete.gif" label="Delete"
 									onClick="@command('doDeleteExperience')" />
-								/>
 							</toolbar>
 						</hbox>
 					</div>
@@ -30,7 +29,7 @@
 						model="@bind(vm.employeeExpriences)"
 						selectedItem="@bind(vm.selectedEmployeeExprience)">
 						<listhead>
-							<listheader width="5%" align="center" />
+							<listheader width="15%" align="center" />
 							<listheader
 								label="${labels.menu.employee.qualification.listheader.company}"
 								sort="auto" />
@@ -76,7 +75,7 @@
 						selectedItem="@bind(vm.selectedEmployeeEducation)"
 						itemRenderer="@bind(vm.employeeEducationListItemRenderer)">
 						<listhead>
-							<listheader width="5%" align="center" />
+							<listheader width="15%" align="center" />
 							<listheader
 								label="${labels.menu.employee.qualification.listheader.level}"
 								sort="auto" />
@@ -121,7 +120,7 @@
 						selectedItem="@bind(vm.selectedEmployeeSkill)"
 						itemRenderer="@bind(vm.employeeSkillListItemRenderer)">
 						<listhead>
-							<listheader width="5%" align="center" />
+							<listheader width="15%" align="center" />
 							<listheader
 								label="${labels.menu.employee.qualification.listheader.skill}"
 								sort="auto" />
@@ -161,7 +160,7 @@
 						selectedItem="@bind(vm.selectedEmployeeLanguage)"
 						itemRenderer="@bind(vm.employeeLanguageListItemRenderer)">
 						<listhead>
-							<listheader width="5%" align="center" />
+							<listheader width="15%" align="center" />
 							<listheader
 								label="${labels.menu.employee.qualification.listheader.language}"
 								sort="auto" />
@@ -206,7 +205,7 @@
 						selectedItem="@bind(vm.selectedEmployeeLicense)"
 						itemRenderer="@bind(vm.employeeLicenseListItemRenderer)">
 						<listhead>
-							<listheader width="5%" align="center" />
+							<listheader width="15%" align="center" />
 							<listheader
 								label="${labels.menu.employee.qualification.listheader.license.type}"
 								sort="auto" />

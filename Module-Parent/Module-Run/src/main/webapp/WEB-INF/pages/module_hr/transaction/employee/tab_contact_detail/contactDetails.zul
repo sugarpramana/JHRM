@@ -1,50 +1,37 @@
-<?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window border="none" width="100%"
-		apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.ContactDetails')"
-		validationMessages="@id('vmsgs')">
+	<window border="none" width="100%" apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.ContactDetails')" validationMessages="@id('vmsgs')">
 		<groupbox mold="3d">
-			<caption
-				label="${labels.menu.employee.contact.title.contact.details}" />
-			<borderlayout
-				form="@id('form') @load(vm.trsEmployee) @save(vm.trsEmployee, before={'doSave'}) @validator(vm.formValidator)"
-				height="500px">
+			<caption label="${labels.menu.employee.contact.title.contact.details}" />
+			<borderlayout form="@id('form') @load(vm.trsEmployee) @save(vm.trsEmployee, before={'doSave'}) @validator(vm.formValidator)" height="500px">
 				<north border="none">
 					<div sclass="z-toolbar" style="padding:0">
 						<hbox pack="stretch" width="100%">
-							<toolbar align="start"
-								style="border-style: none;">
-								<button id="buttonSave" mold="trendy"
-									image="/images/icons/btn_save.gif" label="Save"
-									onClick="@command('doSave')" />
-								<button id="buttonEdit" mold="trendy"
-									image="/images/icons/btn_edit.gif" label="Edit"
-									onClick="@command('doEdit')" />
+							<toolbar align="start" style="border-style: none;">
+								<button id="buttonSave" mold="trendy" image="/images/icons/btn_save.gif" label="Save" onClick="@command('doSave')" />
+								<button id="buttonEdit" mold="trendy" image="/images/icons/btn_edit.gif" label="Edit" onClick="@command('doEdit')" />
 							</toolbar>
 						</hbox>
 					</div>
 				</north>
 				<center border="none" autoscroll="true">
 					<grid>
+						<columns>
+							<column align="right" width="150px"/>
+							<column label=""/>
+						</columns>
 						<rows>
 							<row>
-								<label
-									value="${labels.menu.employee.contact.form.address.street.one}" />
-								<textbox id="textBoxAddressStreet1"
-									value="@bind(form.addressStreet1)" />
+								<label value="${labels.menu.employee.contact.form.address.street.one}" />
+								<textbox id="textBoxAddressStreet1" value="@bind(form.addressStreet1)" />
 							</row>
 							<row>
-								<label
-									value="${labels.menu.employee.contact.form.address.street.two}" />
-								<textbox id="textBoxAddressStreet2"
-									value="@bind(form.addressStreet2)" />
+								<label value="${labels.menu.employee.contact.form.address.street.two}" />
+								<textbox id="textBoxAddressStreet2" value="@bind(form.addressStreet2)" />
 							</row>
 							<row>
-								<label
-									value="${labels.menu.employee.contact.form.city}" />
-								<textbox id="textBoxCity"
-									value="@bind(form.city)" />
+								<label value="${labels.menu.employee.contact.form.city}" />
+								<textbox id="textBoxCity" value="@bind(form.city)" />
 							</row>
 							<row>
 								<label

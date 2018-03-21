@@ -17,23 +17,36 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Window;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public class ImmigrationDialog {
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Wire component
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	@Wire("#windowImmigrationDialog")
+	private Window windowImmigrationDialog;
+	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Service yang dibutuhkan sesuai bisnis proses
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	private TrsEmployee trsEmployee;
+	private TrsEmployeeImmigration trsEmployeeImmigration;
 	
 	@WireVariable
 	private EmployeeService employeeService;
 	
-	@Wire("#windowImmigrationDialog")
-	private Window windowImmigrationDialog;
-	
-	/* ---------- Bean ----------*/
 	private TrsEmployeeImmigrationFormValidator formValidator = new TrsEmployeeImmigrationFormValidator();
-	private TrsEmployeeImmigration trsEmployeeImmigration;
-	private TrsEmployee trsEmployee;
 	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Inisialize Methode MVVM yang pertama kali dijalankan
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@AfterCompose
 	public void setupComponents(@ContextParam(ContextType.VIEW) Component component,
-			@ExecutionArgParam("trsEmployeeImmigration") TrsEmployeeImmigration trsEmployeeImmigration,
-			@ExecutionArgParam("trsEmployee") TrsEmployee trsEmployee) {
+		@ExecutionArgParam("trsEmployeeImmigration") TrsEmployeeImmigration trsEmployeeImmigration,
+		@ExecutionArgParam("trsEmployee") TrsEmployee trsEmployee) {
+		
 		Selectors.wireComponents(component, this, false);
 		
 		if (trsEmployeeImmigration != null){
@@ -44,9 +57,11 @@ public class ImmigrationDialog {
 		if (this.trsEmployeeImmigration.getIdImmigration() == null){
 			this.trsEmployeeImmigration.setDocument("passport");
 		}
-		
 	}
 	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Function CRUD Event
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Command
 	public void doSave(){
 		if (this.trsEmployeeImmigration.getIdImmigration() == null){
@@ -54,10 +69,14 @@ public class ImmigrationDialog {
 		} else {
 			employeeService.update(trsEmployeeImmigration);
 		}
+		
 		BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdateEmployeeImmigration", null);
 		windowImmigrationDialog.onClose();
 	}
 
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Getter Setter
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@ImmutableFields
 	public TrsEmployeeImmigration getTrsEmployeeImmigration() {
 		return trsEmployeeImmigration;

@@ -17,29 +17,73 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Listbox;
 
-@SuppressWarnings({ "rawtypes", "unchecked" })
+/**
+*
+* @author formulateko@admin.com
+*/
 public class Salary {
-	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Wire component
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Wire("#listBoxSalary")
 	private Listbox listBoxSalary;
 	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Service yang dibutuhkan sesuai bisnis proses
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	private TrsEmployee trsEmployee;
+	private List<TrsEmployeeSalary> trsEmployeeSalaries;
 	@WireVariable
 	private EmployeeService employeeService;
-	
-	private TrsEmployee trsEmployee;
-	
 	private SalaryListItemRenderer salaryListItemRenderer;
 	
-	private List<TrsEmployeeSalary> trsEmployeeSalaries;
-	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Inisialize Methode MVVM yang pertama kali dijalankan
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@AfterCompose
 	public void setuoComponents(@ContextParam(ContextType.VIEW) Component component, 
-			@ExecutionArgParam("type") TrsEmployee trsEmployee){
+		@ExecutionArgParam("type") TrsEmployee trsEmployee){
+		
 		Selectors.wireComponents(component, this, false);
+		
 		this.trsEmployee = trsEmployee;
 		HashMap< String, Object> requestMap = new HashMap<>();
 		requestMap.put("trsEmployee", trsEmployee);
 		trsEmployeeSalaries = employeeService.getTrsEmployeeSalaryByTrsEmployeeSalaryRequestMap(requestMap);
 	}
-	
+
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Getter Setter
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	public TrsEmployee getTrsEmployee() {
+		return trsEmployee;
+	}
+
+	public void setTrsEmployee(TrsEmployee trsEmployee) {
+		this.trsEmployee = trsEmployee;
+	}
+
+	public List<TrsEmployeeSalary> getTrsEmployeeSalaries() {
+		return trsEmployeeSalaries;
+	}
+
+	public void setTrsEmployeeSalaries(List<TrsEmployeeSalary> trsEmployeeSalaries) {
+		this.trsEmployeeSalaries = trsEmployeeSalaries;
+	}
+
+	public EmployeeService getEmployeeService() {
+		return employeeService;
+	}
+
+	public void setEmployeeService(EmployeeService employeeService) {
+		this.employeeService = employeeService;
+	}
+
+	public SalaryListItemRenderer getSalaryListItemRenderer() {
+		return salaryListItemRenderer;
+	}
+
+	public void setSalaryListItemRenderer(SalaryListItemRenderer salaryListItemRenderer) {
+		this.salaryListItemRenderer = salaryListItemRenderer;
+	}
 }

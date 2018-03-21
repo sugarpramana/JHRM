@@ -24,134 +24,136 @@
 						</hbox>
 					</div>
 				</north>
-			<center border="none" autoscroll="true">
-						 <grid>
-							<rows>
-								<row>
-									<label value="${labels.menu.employee.job.form.job.title}" />
-									<bandbox id="bandBoxJobTitle" onOpen="@command('openBandBoxJobTitle')" >
-										<bandpopup>
-											<vbox>
-												<hbox>
-													<textbox value="@bind(vm.jobTitleKeySearch)"/>
-													<button label="Search" onClick="@command('searchJobTitle')"/>
-												</hbox>
-												<listbox id="listBoxJobTitle" selectedItem="@bind(vm.selectedMstJobtitle)">
-													<listhead>
-														<listheader
-															label="Description" />
-													</listhead>
-												</listbox>
-											</vbox>
-										</bandpopup>
-									</bandbox>
-								</row> 
-								<row>
-									<label
-										value="${labels.menu.employee.job.form.employment.status}" />
-									<bandbox id="bandBoxEmploymentStatus" onOpen="@command('openBandBoxEmploymentStatus')" >
-										<bandpopup>
-											<vbox>
-												<hbox>
-													<textbox value="@bind(vm.employmentStatusKeySearch)"/>
-													<button label="Search" onClick="@command('searchEmploymentStatus')"/>
-												</hbox>
-												<listbox id="listBoxEmploymentStatus" selectedItem="@bind(vm.selectedMstEmployementStatus)" >
-													<listhead>
-														<listheader
-															label="Description" />
-													</listhead>
-												</listbox>
-											</vbox>
-										</bandpopup>
-									</bandbox>
-								</row>
-								<row>
-									<label
-										value="${labels.menu.employee.job.form.job.category}" />
-									<bandbox id="bandBoxJobCategory" onOpen="@command('openBandBoxJobCategory')" >
-										<bandpopup>
-											<vbox>
-												<hbox>
-													<textbox value="@bind(vm.jobCategoryKeySearch)"/>
-													<button label="Search" onClick="@command('searchJobCategory')"/>
-												</hbox>
-												<listbox id="listBoxJobCategory" selectedItem="@bind(vm.selectedMstJobCategory)">
-													<listhead>
-														<listheader
-															label="Description" />
-													</listhead>
-												</listbox>
-											</vbox>
-										</bandpopup>
-									</bandbox>
-								</row>
-								<row>
-									<label
-										value="${labels.menu.employee.job.form.joined.date}" />
-									<datebox id="dateBoxJoinedDate" value="@bind(vm.trsEmployee.joinDate)"/>
-								</row>
-								<row>
-									<label
-										value="${labels.menu.employee.job.form.sub.unit}" />
-									<bandbox id="bandBoxSubUnit" onOpen="@command('openBandBoxSubUnit')" >
-										<bandpopup>
-											<vbox>
-												<hbox>
-													<textbox value="@bind(vm.subUnitKeySearch)"/>
-													<button label="Search" onClick="@command('searchSubUnit')"/>
-												</hbox>
-												<listbox id="listBoxSubUnit" selectedItem="@bind(vm.selectedMstSubUnit)">
-													<listhead>
-														<listheader
-															label="Description" />
-													</listhead>
-												</listbox>
-											</vbox>
-										</bandpopup>
-									</bandbox>
-								</row>
-								<row>
-									<label
-										value="${labels.menu.employee.job.form.location}" />
-									<bandbox id="bandBoxLocation" onOpen="@command('openBandBoxLocation')" >
-										<bandpopup>
-											<vbox>
-												<hbox>
-													<textbox value="@bind(vm.locationKeySearch)"/>
-													<button label="Search" onClick="@command('searchLocation')"/>
-												</hbox>
-												<listbox id="listBoxLocation" selectedItem="@bind(vm.selectedMstLocation)" >
-													<listhead>
-														<listheader
-															label="Description" />
-													</listhead>
-												</listbox>
-											</vbox>
-										</bandpopup>
-									</bandbox>
-								</row>
-								
-								<!-- employment contract -->
-								
-								<!--  <row>
-									<label
-										value="${labels.menu.employee.job.form.employment.contract}"
-										style="font-weight:bold;" />	
-								</row>
-								<row>
-									<label
-										value="${labels.menu.employee.job.form.start.date}" />
-									<datebox id="dateBoxStartDate" />
-								</row>
-								<row>
-									<label
-										value="${labels.menu.employee.job.form.end.date}" />
-									<datebox id="dateBoxEndDate" />
-								</row> -->
-							</rows> 
-						</grid>
-
+				<center border="none" autoscroll="true">
+			 		<grid>
+						<columns>
+							<column align="right" width="150px"/>
+							<column label=""/>
+						</columns>
+					<rows>
+						<row>
+							<label value="${labels.menu.employee.job.form.job.title}" />
+							<bandbox id="bandBoxJobTitle" onOpen="@command('openBandBoxJobTitle')" >
+								<bandpopup>
+									<vbox>
+										<hbox>
+											<textbox value="@bind(vm.jobTitleKeySearch)"/>
+											<button label="Search" onClick="@command('searchJobTitle')"/>
+										</hbox>
+										<listbox id="listBoxJobTitle" selectedItem="@bind(vm.selectedMstJobtitle)">
+											<listhead>
+												<listheader
+													label="Description" />
+											</listhead>
+										</listbox>
+									</vbox>
+								</bandpopup>
+							</bandbox>
+						</row> 
+						<row>
+							<label
+								value="${labels.menu.employee.job.form.employment.status}" />
+							<bandbox id="bandBoxEmploymentStatus" onOpen="@command('openBandBoxEmploymentStatus')" >
+								<bandpopup>
+									<vbox>
+										<hbox>
+											<textbox value="@bind(vm.employmentStatusKeySearch)"/>
+											<button label="Search" onClick="@command('searchEmploymentStatus')"/>
+										</hbox>
+										<listbox id="listBoxEmploymentStatus" selectedItem="@bind(vm.selectedMstEmployementStatus)" >
+											<listhead>
+												<listheader
+													label="Description" />
+											</listhead>
+										</listbox>
+									</vbox>
+								</bandpopup>
+							</bandbox>
+						</row>
+						<row>
+							<label
+								value="${labels.menu.employee.job.form.job.category}" />
+							<bandbox id="bandBoxJobCategory" onOpen="@command('openBandBoxJobCategory')" >
+								<bandpopup>
+									<vbox>
+										<hbox>
+											<textbox value="@bind(vm.jobCategoryKeySearch)"/>
+											<button label="Search" onClick="@command('searchJobCategory')"/>
+										</hbox>
+										<listbox id="listBoxJobCategory" selectedItem="@bind(vm.selectedMstJobCategory)">
+											<listhead>
+												<listheader
+													label="Description" />
+											</listhead>
+										</listbox>
+									</vbox>
+								</bandpopup>
+							</bandbox>
+						</row>
+						<row>
+							<label
+								value="${labels.menu.employee.job.form.joined.date}" />
+							<datebox id="dateBoxJoinedDate" value="@bind(vm.trsEmployee.joinDate)"/>
+						</row>
+						<row>
+							<label
+								value="${labels.menu.employee.job.form.sub.unit}" />
+							<bandbox id="bandBoxSubUnit" onOpen="@command('openBandBoxSubUnit')" >
+								<bandpopup>
+									<vbox>
+										<hbox>
+											<textbox value="@bind(vm.subUnitKeySearch)"/>
+											<button label="Search" onClick="@command('searchSubUnit')"/>
+										</hbox>
+										<listbox id="listBoxSubUnit" selectedItem="@bind(vm.selectedMstSubUnit)">
+											<listhead>
+												<listheader
+													label="Description" />
+											</listhead>
+										</listbox>
+									</vbox>
+								</bandpopup>
+							</bandbox>
+						</row>
+						<row>
+							<label
+								value="${labels.menu.employee.job.form.location}" />
+							<bandbox id="bandBoxLocation" onOpen="@command('openBandBoxLocation')" >
+								<bandpopup>
+									<vbox>
+										<hbox>
+											<textbox value="@bind(vm.locationKeySearch)"/>
+											<button label="Search" onClick="@command('searchLocation')"/>
+										</hbox>
+										<listbox id="listBoxLocation" selectedItem="@bind(vm.selectedMstLocation)" >
+											<listhead>
+												<listheader
+													label="Description" />
+											</listhead>
+										</listbox>
+									</vbox>
+								</bandpopup>
+							</bandbox>
+						</row>
+						
+						<!-- employment contract -->
+						<!--  <row>
+							<label
+								value="${labels.menu.employee.job.form.employment.contract}"
+								style="font-weight:bold;" />	
+						</row>
+						<row>
+							<label
+								value="${labels.menu.employee.job.form.start.date}" />
+							<datebox id="dateBoxStartDate" />
+						</row>
+						<row>
+							<label
+								value="${labels.menu.employee.job.form.end.date}" />
+							<datebox id="dateBoxEndDate" />
+						</row> -->
+					</rows> 
+				</grid>
 			</center>
 		</borderlayout>
 		</groupbox>

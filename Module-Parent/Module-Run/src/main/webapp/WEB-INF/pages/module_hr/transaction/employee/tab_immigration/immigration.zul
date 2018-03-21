@@ -31,7 +31,7 @@
 							model="@bind(vm.trsEmployeeImmigrations)"
 							selectedItem="@bind(vm.selectedEmployeeImmigration)">
 							<listhead>
-								<listheader width="5%" align="center" />
+								<listheader width="15%" align="center" />
 								<listheader
 									label="${labels.menu.employee.immigration.listheader.document}"
 									sort="auto" />

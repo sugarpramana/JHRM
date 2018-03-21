@@ -37,8 +37,14 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.ListitemRenderer;
 import org.zkoss.zul.Window;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public class Job {
-	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Wire component
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Wire("#windowJob")
 	private Window windowJob;
 	
@@ -90,7 +96,9 @@ public class Job {
 	@Wire("#dateBoxEndDate")
 	private Datebox dateBoxEndDate;*/
 	
-	/*---------- service ----------*/
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Service yang dibutuhkan sesuai bisnis proses
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@WireVariable
 	private EmployeeService employeeService;
 	
@@ -99,8 +107,7 @@ public class Job {
 	
 	@WireVariable
 	private OrganizationService organizationService;
-	
-	/*---------- bean ---------*/
+
 	private TrsEmployee trsEmployee;
 	private TrsEmployeeJobFormValidator formValidator = new TrsEmployeeJobFormValidator();
 
@@ -128,19 +135,46 @@ public class Job {
 	private String locationKeySearch;
 	private List<MstLocation> mstLocations;
 	private MstLocation selectedMstLocation;
+	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Function Custom sesuai kebutuhan
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	private void formEditCondition() {
+		ComponentConditionUtil.visibleButton(buttonSave, buttonTerminateEmployment);
+		ComponentConditionUtil.invisibleButton(buttonEdit);
+		ComponentConditionUtil.enableBandBox(bandBoxEmploymentStatus, bandBoxJobCategory, bandBoxJobTitle, bandBoxLocation);
+		ComponentConditionUtil.enableDateBox(dateBoxJoinedDate);
+	}
 
+	private void formDetailCondition() {
+		ComponentConditionUtil.invisibleButton(buttonSave, buttonTerminateEmployment);
+		ComponentConditionUtil.visibleButton(buttonEdit);
+		ComponentConditionUtil.disableBandBox(bandBoxEmploymentStatus, bandBoxJobCategory, bandBoxJobTitle, bandBoxLocation, bandBoxSubUnit);
+		ComponentConditionUtil.disableDateBox(dateBoxJoinedDate);
+	}
+
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Inisialize Methode MVVM yang pertama kali dijalankan
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@AfterCompose
 	public void setupComponents(@ContextParam(ContextType.VIEW) Component component,
-			@ExecutionArgParam("object") Object object, @ExecutionArgParam("type") TrsEmployee trsEmployee) {
+		@ExecutionArgParam("object") Object object, @ExecutionArgParam("type") TrsEmployee trsEmployee) {
+		
 		Selectors.wireComponents(component, this, false);
+		
 		this.trsEmployee = trsEmployee;
+		
 		formDetailCondition();
 	}
 	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Function CRUD Event
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Command
 	public void searchJobTitle() {
 		mstJobtitles.clear();
 		List<MstJobtitle> cacheMstJobtitles = jobService.getAllMstJobtitles();
+		
 		if (jobTitleKeySearch == null || "".equals(jobTitleKeySearch)){
 			mstJobtitles.addAll(cacheMstJobtitles);
 		} else {
@@ -148,10 +182,12 @@ public class Job {
 				if (mstJobtitle.getJobName().toUpperCase().contains(jobTitleKeySearch.toUpperCase())) {
 					mstJobtitles.clear();
 					mstJobtitles.add(mstJobtitle);
+					
 					break;
 				}
 			}
 		}
+		
 		listBoxJobTitle.setModel(new ListModelList<MstJobtitle>(mstJobtitles));
 	}
 	
@@ -168,6 +204,7 @@ public class Job {
 	@Command
 	public void searchEmploymentStatus() {
 		listMstEmployementStatus.clear();
+		
 		if (employmentStatusKeySearch == null || "".equals(employmentStatusKeySearch)){
 			listMstEmployementStatus = jobService.getAllMstEmployementStatus();
 		} else {
@@ -175,6 +212,7 @@ public class Job {
 			hashMap.put("employementStatusName", employmentStatusKeySearch);
 			listMstEmployementStatus = jobService.getByMstEmployementStatusRequestMap(hashMap);
 		}
+		
 		listBoxEmploymentStatus.setModel(new ListModelList<MstEmployementStatus>(listMstEmployementStatus));
 	}
 	
@@ -191,7 +229,9 @@ public class Job {
 	@Command
 	public void searchJobCategory() {
 		mstJobCategories.clear();
+		
 		List<MstJobCategory> cacheMstJobCategories = jobService.getAllMstJobCategories();
+		
 		if (jobCategoryKeySearch == null || "".equals(jobCategoryKeySearch)){
 			mstJobCategories.addAll(cacheMstJobCategories);
 		} else {
@@ -203,6 +243,7 @@ public class Job {
 				}
 			}
 		}
+		
 		listBoxJobCategory.setModel(new ListModelList<MstJobCategory>(mstJobCategories));
 	}
 	
@@ -230,18 +271,18 @@ public class Job {
 				if (mstSubUnit.getNameSubUnit().contains(subUnitKeySearch)) {
 					mstSubUnits.clear();
 					mstSubUnits.add(mstSubUnit);
+					
 					break;
 				}
 			}
 		}
+		
 		listBoxSubUnit.setModel(new ListModelList<MstSubUnit>(mstSubUnits));
 	}
 	
 	@Command
 	public void openBandBoxSubUnit(){
-		
 		// get all sub unit by service
-		
 		listitemRendererSubUnit= new SubUnitListItemRenderer();
 		 
 		listBoxSubUnit.setModel(new ListModelList<MstSubUnit>(mstSubUnits));
@@ -262,19 +303,19 @@ public class Job {
 				if (mstLocation.getName().contains(locationKeySearch)) {
 					mstLocations.clear();
 					mstLocations.add(mstLocation);
+					
 					break;
 				}
 			}
 		}
+		
 		listBoxLocation.setModel(new ListModelList<MstLocation>(mstLocations));
 	}
 	
 	@Command
 	public void openBandBoxLocation(){
-		
 		// get all location by service
 		mstLocations = organizationService.getAllMstLocation();
-		
 		
 		listitemRendererLocation= new LocationListItemRenderer(); 
 		
@@ -303,28 +344,9 @@ public class Job {
 		System.out.println("kuda");
 	}
 	
-	/**
-	 * 
-	 */
-	private void formEditCondition() {
-		ComponentConditionUtil.visibleButton(buttonSave, buttonTerminateEmployment);
-		ComponentConditionUtil.invisibleButton(buttonEdit);
-		ComponentConditionUtil.enableBandBox(bandBoxEmploymentStatus, bandBoxJobCategory, bandBoxJobTitle, bandBoxLocation);
-		ComponentConditionUtil.enableDateBox(dateBoxJoinedDate);
-	}
-	
-	/**
-	 * 
-	 */
-	private void formDetailCondition() {
-		ComponentConditionUtil.invisibleButton(buttonSave, buttonTerminateEmployment);
-		ComponentConditionUtil.visibleButton(buttonEdit);
-		ComponentConditionUtil.disableBandBox(bandBoxEmploymentStatus, bandBoxJobCategory, bandBoxJobTitle, bandBoxLocation, bandBoxSubUnit);
-		ComponentConditionUtil.disableDateBox(dateBoxJoinedDate);
-	}
-	
-	
-
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Getter Setter
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public TrsEmployeeJobFormValidator getFormValidator() {
 		return formValidator;
 	}
@@ -430,7 +452,4 @@ public class Job {
 	public void setTrsEmployee(TrsEmployee trsEmployee) {
 		this.trsEmployee = trsEmployee;
 	}
-	
-	
-	
 }

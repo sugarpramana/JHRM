@@ -10,7 +10,6 @@ import org.app.portofolio.webui.hr.transaction.employee.model.EmployeeLicenseLis
 import org.app.portofolio.webui.hr.transaction.employee.model.EmployeeSkillListItemRenderer;
 import org.module.hr.model.TrsEmployee;
 import org.module.hr.model.TrsEmployeeEducation;
-import org.module.hr.model.TrsEmployeeEmergencyContact;
 import org.module.hr.model.TrsEmployeeExprience;
 import org.module.hr.model.TrsEmployeeLanguage;
 import org.module.hr.model.TrsEmployeeLicense;
@@ -34,8 +33,15 @@ import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 
+/**
+*
+* @author formulateko@admin.com
+*/
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class Qualifications {
-	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Wire component
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Wire("#ListBoxEmployeeExperience")
 	private Listbox listEmployeeExperience;
 	
@@ -51,6 +57,9 @@ public class Qualifications {
 	@Wire("#ListBoxEmployeeLicense")
 	private Listbox listEmployeeLicense;
 	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Service yang dibutuhkan sesuai bisnis proses
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@WireVariable
 	private EmployeeService employeeService;
 	
@@ -76,8 +85,10 @@ public class Qualifications {
 	private List<TrsEmployeeLicense> employeeLicenses;
 	private TrsEmployeeLicense selectedEmployeeLicense;
 	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Function Custom sesuai kebutuhan
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void doPrepareList(){
-		
 		listEmployeeExperience.setCheckmark(true);
 		listEmployeeExperience.setMultiple(true);
 		listEmployeeExperience.setRows(15);
@@ -103,14 +114,18 @@ public class Qualifications {
 		listEmployeeLicense.setMultiple(true);
 		listEmployeeLicense.setRows(15);
 		listEmployeeLicense.setStyle("border-style: none;");
-		
 	}
 	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Inisialize Methode MVVM yang pertama kali dijalankan
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@AfterCompose
 	public void setupComponents(@ContextParam(ContextType.VIEW) Component component,
-			@ExecutionArgParam("object") Object object, 
-			@ExecutionArgParam("type") TrsEmployee trsEmployee) {
+		@ExecutionArgParam("object") Object object, 
+		@ExecutionArgParam("type") TrsEmployee trsEmployee) {
+		
 		Selectors.wireComponents(component, this, false);
+		
 		this.trsEmployee = trsEmployee;
 		
 		HashMap< String, Object> requestMap = new HashMap<>();
@@ -145,10 +160,10 @@ public class Qualifications {
 		doPrepareList();
 	}
 	
-	/* ---------- Experience ---------- */
-	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Function CRUD Event
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Command
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void doNewExperience(){
 		ListModelList listModelList = (ListModelList) listEmployeeExperience.getModel();
 		TrsEmployeeExprience trsEmployeeExprience = new TrsEmployeeExprience();
@@ -157,9 +172,9 @@ public class Qualifications {
 	}
 	
 	@Command
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void doDeleteExperience(){
 		final ListModelList<TrsEmployeeExprience> listModelListExpriences = (ListModelList) listEmployeeExperience.getModel();
+		
 		if (listEmployeeExperience.getSelectedIndex() == -1){
 			Messagebox.show("There is no selected record?", "Confirm", Messagebox.OK, Messagebox.ERROR);
 		} else {
@@ -173,6 +188,7 @@ public class Qualifications {
 								employeeService.delete(trsEmployeeExprience);
 							}
 						}
+						
 						BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdateEmployeeExprience", null);
 					} else {
 						return;
@@ -189,11 +205,8 @@ public class Qualifications {
 		requestMap.put("trsEmployee", trsEmployee);
 		employeeExpriences = employeeService.getTrsEmployeeExprienceByTrsEmployeeExprienceRequestMap(requestMap);
 	}
-	
-	/* ---------- Education ---------- */
-	
+
 	@Command
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void doNewEducation(){
 		ListModelList listModelList = (ListModelList) listEmployeeEducation.getModel();
 		TrsEmployeeEducation trsEmployeeEducation = new TrsEmployeeEducation();
@@ -202,14 +215,13 @@ public class Qualifications {
 	}
 	
 	@Command
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void doDeleteEducation(){
 		final ListModelList<TrsEmployeeEducation> listModelListEducations = (ListModelList) listEmployeeEducation.getModel();
+		
 		if (listEmployeeEducation.getSelectedIndex() == -1){
 			Messagebox.show("There is no selected record?", "Confirm", Messagebox.OK, Messagebox.ERROR);
 		} else {
 			Messagebox.show("Do you really want to remove item?", "Confirm", Messagebox.OK | Messagebox.CANCEL, Messagebox.EXCLAMATION, new EventListener<Event>() {
-				
 				@Override
 				public void onEvent(Event event) throws Exception {
 					if (((Integer)event.getData()).intValue() == Messagebox.OK){
@@ -235,9 +247,7 @@ public class Qualifications {
 		employeeEducations = employeeService.getTrsEmployeeEducationByTrsEmployeeEducationRequestMap(requestMap);
 	}
 	
-	/* ---------- Skill ---------- */
 	@Command
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void doNewSkill(){
 		ListModelList listModelList = (ListModelList) listEmployeeSkill.getModel();
 		TrsEmployeeSkill trsEmployeeSkill = new TrsEmployeeSkill();
@@ -246,14 +256,13 @@ public class Qualifications {
 	}
 	
 	@Command
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void doDeleteSkill(){
 		final ListModelList<TrsEmployeeSkill> listModelListSkills = (ListModelList) listEmployeeSkill.getModel();
+		
 		if (listEmployeeSkill.getSelectedIndex() == -1){
 			Messagebox.show("There is no selected record?", "Confirm", Messagebox.OK, Messagebox.ERROR);
 		} else {
 			Messagebox.show("Do you really want to remove item?", "Confirm", Messagebox.OK | Messagebox.CANCEL, Messagebox.EXCLAMATION, new EventListener<Event>() {
-				
 				@Override
 				public void onEvent(Event event) throws Exception {
 					if (((Integer)event.getData()).intValue() == Messagebox.OK){
@@ -279,9 +288,7 @@ public class Qualifications {
 		employeeSkills = employeeService.getTrsEmployeeSkillByTrsEmployeeSkillRequestMap(requestMap);
 	}
 	
-	/* ---------- Language ---------- */
 	@Command
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void doNewLanguage(){
 		ListModelList listModelList = (ListModelList) listEmployeeLanguage.getModel();
 		TrsEmployeeLanguage trsEmployeeLanguage = new TrsEmployeeLanguage();
@@ -290,14 +297,13 @@ public class Qualifications {
 	}
 	
 	@Command
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void doDeleteLanguage(){
 		final ListModelList<TrsEmployeeLanguage> listModelListLanguages = (ListModelList) listEmployeeLanguage.getModel();
+		
 		if (listEmployeeLanguage.getSelectedIndex() == -1){
 			Messagebox.show("There is no selected record?", "Confirm", Messagebox.OK, Messagebox.ERROR);
 		} else {
 			Messagebox.show("Do you really want to remove item?", "Confirm", Messagebox.OK | Messagebox.CANCEL, Messagebox.EXCLAMATION, new EventListener<Event>() {
-				
 				@Override
 				public void onEvent(Event event) throws Exception {
 					if (((Integer)event.getData()).intValue() == Messagebox.OK){
@@ -306,6 +312,7 @@ public class Qualifications {
 								employeeService.delete(trsEmployeeLanguage);
 							}
 						}
+						
 						BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdateEmployeeLanguage", null);
 					} else {
 						return;
@@ -323,11 +330,7 @@ public class Qualifications {
 		employeeLanguages = employeeService.getTrsEmployeeLanguageByTrsEmployeeLanguageRequestMap(requestMap);
 	}
 	
-	
-	/* ---------- License ---------- */
-	
 	@Command
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void doNewLicense(){
 		ListModelList listModelList = (ListModelList) listEmployeeLicense.getModel();
 		TrsEmployeeLicense trsEmployeeLicense = new TrsEmployeeLicense();
@@ -336,14 +339,13 @@ public class Qualifications {
 	}
 	
 	@Command
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void doDeleteLicense(){
 		final ListModelList<TrsEmployeeLicense> listModelListLicenses = (ListModelList) listEmployeeLicense.getModel();
+		
 		if (listEmployeeLicense.getSelectedIndex() == -1){
 			Messagebox.show("There is no selected record?", "Confirm", Messagebox.OK, Messagebox.ERROR);
 		} else {
 			Messagebox.show("Do you really want to remove item?", "Confirm", Messagebox.OK | Messagebox.CANCEL, Messagebox.EXCLAMATION, new EventListener<Event>() {
-				
 				@Override
 				public void onEvent(Event event) throws Exception {
 					if (((Integer)event.getData()).intValue() == Messagebox.OK){
@@ -352,6 +354,7 @@ public class Qualifications {
 								employeeService.delete(trsEmployeeLicense);
 							}
 						}
+						
 						BindUtils.postGlobalCommand(null, null, "refreshAfterSaveOrUpdateEmployeeLicense", null);
 					} else {
 						return;
@@ -369,42 +372,19 @@ public class Qualifications {
 		employeeLicenses= employeeService.getTrsEmployeeLicenseByTrsEmployeeLicenseRequestMap(requestMap);
 	}
 	
-	/* ---------- setter getter ---------- */
-
-	public Listbox getListEmployeeExperience() {
-		return listEmployeeExperience;
-	}
-
-	public void setListEmployeeExperience(Listbox listEmployeeExperience) {
-		this.listEmployeeExperience = listEmployeeExperience;
-	}
-
-	public Listbox getListEmployeeEducation() {
-		return listEmployeeEducation;
-	}
-
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Getter Setter
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void setListEmployeeEducation(Listbox listEmployeeEducation) {
 		this.listEmployeeEducation = listEmployeeEducation;
-	}
-
-	public Listbox getListEmployeeSkill() {
-		return listEmployeeSkill;
 	}
 
 	public void setListEmployeeSkill(Listbox listEmployeeSkill) {
 		this.listEmployeeSkill = listEmployeeSkill;
 	}
-
-	public Listbox getListEmployeeLanguage() {
-		return listEmployeeLanguage;
-	}
-
+	
 	public void setListEmployeeLanguage(Listbox listEmployeeLanguage) {
 		this.listEmployeeLanguage = listEmployeeLanguage;
-	}
-
-	public Listbox getListEmployeeLicense() {
-		return listEmployeeLicense;
 	}
 
 	public void setListEmployeeLicense(Listbox listEmployeeLicense) {
@@ -423,8 +403,7 @@ public class Qualifications {
 		return employeeExperienceListItemRenderer;
 	}
 
-	public void setEmployeeExperienceListItemRenderer(
-			EmployeeExperienceListItemRenderer employeeExperienceListItemRenderer) {
+	public void setEmployeeExperienceListItemRenderer(EmployeeExperienceListItemRenderer employeeExperienceListItemRenderer) {
 		this.employeeExperienceListItemRenderer = employeeExperienceListItemRenderer;
 	}
 
@@ -539,5 +518,4 @@ public class Qualifications {
 	public void setSelectedEmployeeLicense(TrsEmployeeLicense selectedEmployeeLicense) {
 		this.selectedEmployeeLicense = selectedEmployeeLicense;
 	}
-	
 }
