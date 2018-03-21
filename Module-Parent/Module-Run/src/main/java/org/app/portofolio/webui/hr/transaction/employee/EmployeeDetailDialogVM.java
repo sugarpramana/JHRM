@@ -135,6 +135,7 @@ public class EmployeeDetailDialogVM {
 	}
 
 	@Command
+	@NotifyChange({ "*" })
 	public void selectFormMembership() {
 		setVisibleFalseForAll();
 		isVisibleFormMemberships = Boolean.TRUE;

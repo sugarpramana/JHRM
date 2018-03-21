@@ -21,7 +21,10 @@ import org.zkoss.zul.Paging;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.event.PagingEvent;
 
-@SuppressWarnings({ "rawtypes", "unchecked" })
+/**
+*
+* @author formulateko@admin.com
+*/
 public class EmployeeListVM {
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Wire component

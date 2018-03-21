@@ -25,8 +25,14 @@ import org.zkoss.zul.Radio;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public class PersonalDetail {
-	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Wire component
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Wire("#windowPersonalDetail")
 	private Window windowPersonalDetail;
 	
@@ -66,50 +72,28 @@ public class PersonalDetail {
 	@Wire("#buttonSave")
 	private Button buttonSave;
 	
-	
-	@WireVariable
-	private EmployeeService employeeService;
-	
 	@Wire("#comboBoxMaritalStatus")
 	private Combobox comboBoxMaritalStatus;
 	
-	
-	/*---------- Bean ----------*/
-	private TrsEmployeePersonalDetailFormValidator formValidator = new TrsEmployeePersonalDetailFormValidator();
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Service yang dibutuhkan sesuai bisnis proses
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	private TrsEmployee trsEmployee;
+	@WireVariable
+	private EmployeeService employeeService;
+	
+	private MaritalStatusType maritalStatusType;
 	private MaritalStatusType selectedMaritalStatus;
 	private List<MaritalStatusType> maritalStatusTypes;
+	
+	private TrsEmployeePersonalDetailFormValidator formValidator = new TrsEmployeePersonalDetailFormValidator();
+
 	private Boolean isEdit;
 	private ModalAction action;
 	
-	private MaritalStatusType maritalStatusType;
-	
-	/*
-	 * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	 * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	 * ++++++ Inisialize Methode MVVM yang pertama kali dijalankan
-	 * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	 * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	 * ++++++
-	 */
-	@AfterCompose
-	public void setupComponents(@ContextParam(ContextType.VIEW) Component component,
-			@ExecutionArgParam("type") TrsEmployee trsEmployee) {
-		Selectors.wireComponents(component, this, false);
-			
-		this.trsEmployee = trsEmployee;
-		
-		maritalStatusTypes = employeeService.getAllMaritalStatusType();
-
-		maritalStatusType = employeeService.getMaritalStatusTypeTypeById(trsEmployee.getMaritalStatus());
-		
-		formDetailCondition();
-		
-	}
-	
-	/**
-	 * 
-	 */
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Function Custom sesuai kebutuhan
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	private void formEditCondition() {
 		ComponentConditionUtil.visibleButton(buttonSave);
 		ComponentConditionUtil.invisibleButton(buttonEdit);
@@ -119,9 +103,6 @@ public class PersonalDetail {
 		ComponentConditionUtil.enableRadio(radioFemale, radioMale);
 	}
 	
-	/**
-	 * 
-	 */
 	private void formDetailCondition() {
 		ComponentConditionUtil.invisibleButton(buttonSave);
 		ComponentConditionUtil.visibleButton(buttonEdit);
@@ -131,6 +112,26 @@ public class PersonalDetail {
 		ComponentConditionUtil.disableRadio(radioFemale, radioMale);
 	}
 	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Inisialize Methode MVVM yang pertama kali dijalankan
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	@AfterCompose
+	public void setupComponents(@ContextParam(ContextType.VIEW) Component component,
+		@ExecutionArgParam("type") TrsEmployee trsEmployee) {
+		
+		Selectors.wireComponents(component, this, false);
+			
+		this.trsEmployee = trsEmployee;
+		
+		maritalStatusTypes = employeeService.getAllMaritalStatusType();
+		maritalStatusType = employeeService.getMaritalStatusTypeTypeById(trsEmployee.getMaritalStatus());
+		
+		formDetailCondition();
+	}
+	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Function CRUD Event
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Command
 	public void doEdit(){
 		formEditCondition();
@@ -141,10 +142,15 @@ public class PersonalDetail {
 		if (maritalStatusType != null){
 			trsEmployee.setMaritalStatus(maritalStatusType.getStpId());
 		}
+		
 		employeeService.update(trsEmployee);
+		
 		formDetailCondition();
 	}
 	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Getter Setter
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@ImmutableFields
 	public TrsEmployee getTrsEmployee() {
 		return trsEmployee;
@@ -153,8 +159,6 @@ public class PersonalDetail {
 	public void setTrsEmployee(TrsEmployee trsEmployee) {
 		this.trsEmployee = trsEmployee;
 	}
-
-
 
 	public EmployeeService getEmployeeService() {
 		return employeeService;
@@ -211,5 +215,4 @@ public class PersonalDetail {
 	public void setMaritalStatusType(MaritalStatusType maritalStatusType) {
 		this.maritalStatusType = maritalStatusType;
 	}
-	
 }

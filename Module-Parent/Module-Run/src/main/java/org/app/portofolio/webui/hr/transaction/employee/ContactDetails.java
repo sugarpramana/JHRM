@@ -9,7 +9,6 @@ import org.app.portofolio.webui.hr.transaction.employee.validator.TrsEmployeeCon
 import org.module.hr.model.MstNationality;
 import org.module.hr.model.TrsEmployee;
 import org.module.hr.service.EmployeeService;
-import org.module.sysadmin.model.SecRight;
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
@@ -28,8 +27,14 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.ListitemRenderer;
 import org.zkoss.zul.Textbox;
 
+/**
+*
+* @author formulateko@admin.com
+*/
 public class ContactDetails {
-
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Wire component
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Wire("#listBoxCountry")
 	private Listbox listBoxCountry;
 
@@ -72,38 +77,55 @@ public class ContactDetails {
 	@Wire("#buttonSave")
 	private Button buttonSave;
 	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Service yang dibutuhkan sesuai bisnis proses
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	private TrsEmployee trsEmployee;
 	@WireVariable
 	private EmployeeService employeeService;
 
-
-
-	
-	/*---------- Bean ----------*/
-	private TrsEmployeeContactDetailsFormValidator formValidator = new TrsEmployeeContactDetailsFormValidator();
-	private ListitemRenderer<MstNationality> listitemRenderer;
-	private TrsEmployee trsEmployee;
-	private String countryKeySearch;
-	private List<MstNationality> nationalities;
 	private MstNationality selectedNationality;
+	private List<MstNationality> nationalities;
+	private ListitemRenderer<MstNationality> listitemRenderer;
 	
-	private Boolean isEdit;
+	private TrsEmployeeContactDetailsFormValidator formValidator = new TrsEmployeeContactDetailsFormValidator();
 
-	/*
-	 * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	 * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	 * ++++++ Inisialize Methode MVVM yang pertama kali dijalankan
-	 * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	 * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	 * ++++++
-	 */
+	private String countryKeySearch;
+	private Boolean isEdit;
+	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Function Custom sesuai kebutuhan
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+	private void formEditCondition() {
+		ComponentConditionUtil.visibleButton(buttonSave);
+		ComponentConditionUtil.invisibleButton(buttonEdit);
+		ComponentConditionUtil.enableBandBox(bandBoxNationality);
+		ComponentConditionUtil.enableTextbox(textBoxAddressStreet1, textBoxAddressStreet2, textBoxCity, textBoxHomeTelephone, textBoxMobile, textBoxOtherEmail, textBoxProvince, textBoxWorkEmail, textBoxWorkTelephone, textBoxZip);
+	}
+
+	private void formDetailCondition() {
+		ComponentConditionUtil.invisibleButton(buttonSave);
+		ComponentConditionUtil.visibleButton(buttonEdit);
+		ComponentConditionUtil.disableTextbox(textBoxAddressStreet1, textBoxAddressStreet2, textBoxCity, textBoxHomeTelephone, textBoxMobile, textBoxOtherEmail, textBoxProvince, textBoxWorkEmail, textBoxWorkTelephone, textBoxZip);
+		ComponentConditionUtil.disableBandBox(bandBoxNationality);
+	}
+	
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Inisialize Methode MVVM yang pertama kali dijalankan
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@AfterCompose
 	public void setupComponents(@ContextParam(ContextType.VIEW) Component component,
-			@ExecutionArgParam("type") TrsEmployee trsEmployee) {
+		@ExecutionArgParam("type") TrsEmployee trsEmployee) {
+		
 		Selectors.wireComponents(component, this, false);
+		
 		this.trsEmployee = trsEmployee;
 		formDetailCondition();
 	}
 
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Function CRUD Event
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Command
 	public void search() {
 		for (MstNationality mstNationality : nationalities) {
@@ -113,6 +135,7 @@ public class ContactDetails {
 				break;
 			}
 		}
+		
 		listBoxCountry.setModel(new ListModelList<MstNationality>(nationalities));
 	}
 	
@@ -133,37 +156,29 @@ public class ContactDetails {
 		// dummy data Nasionality
 		nationalities = new ArrayList<MstNationality>();
 		MstNationality nationality;
+		
 		for (int i = 1; i < 5; i++) {
 			nationality = new MstNationality();
 			nationality.setIdNationality(i);
 			nationality.setNameNationality("Nationality " + i);
 			nationalities.add(nationality);
 		}
+		
 		listitemRenderer = new DummyNationalityItemRender();
 		listBoxCountry.setModel(new ListModelList<MstNationality>(nationalities));
 		listBoxCountry.setItemRenderer(listitemRenderer);
 	}
 	
-	/**
-	 * 
-	 */
-	private void formEditCondition() {
-		ComponentConditionUtil.visibleButton(buttonSave);
-		ComponentConditionUtil.invisibleButton(buttonEdit);
-		ComponentConditionUtil.enableBandBox(bandBoxNationality);
-		ComponentConditionUtil.enableTextbox(textBoxAddressStreet1, textBoxAddressStreet2, textBoxCity, textBoxHomeTelephone, textBoxMobile, textBoxOtherEmail, textBoxProvince, textBoxWorkEmail, textBoxWorkTelephone, textBoxZip);
-	}
-	
-	/**
-	 * 
-	 */
-	private void formDetailCondition() {
-		ComponentConditionUtil.invisibleButton(buttonSave);
-		ComponentConditionUtil.visibleButton(buttonEdit);
-		ComponentConditionUtil.disableTextbox(textBoxAddressStreet1, textBoxAddressStreet2, textBoxCity, textBoxHomeTelephone, textBoxMobile, textBoxOtherEmail, textBoxProvince, textBoxWorkEmail, textBoxWorkTelephone, textBoxZip);
-		ComponentConditionUtil.disableBandBox(bandBoxNationality);
+	public void setSelectedNationality(MstNationality selectedNationality) {
+		this.selectedNationality = selectedNationality;
+		trsEmployee.setCountry(selectedNationality.getNameNationality());
+		bandBoxNationality.setValue(trsEmployee.getCountry());
+		bandBoxNationality.close();
 	}
 
+	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	 * Getter Setter
+	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@ImmutableFields
 	public TrsEmployee getTrsEmployee() {
 		return trsEmployee;
@@ -201,14 +216,6 @@ public class ContactDetails {
 		return selectedNationality;
 	}
 
-	
-	public void setSelectedNationality(MstNationality selectedNationality) {
-		this.selectedNationality = selectedNationality;
-		trsEmployee.setCountry(selectedNationality.getNameNationality());
-		bandBoxNationality.setValue(trsEmployee.getCountry());
-		bandBoxNationality.close();
-	}
-
 	public Bandbox getBandBoxNationality() {
 		return bandBoxNationality;
 	}
@@ -232,5 +239,4 @@ public class ContactDetails {
 	public void setFormValidator(TrsEmployeeContactDetailsFormValidator formValidator) {
 		this.formValidator = formValidator;
 	}
-	
 }

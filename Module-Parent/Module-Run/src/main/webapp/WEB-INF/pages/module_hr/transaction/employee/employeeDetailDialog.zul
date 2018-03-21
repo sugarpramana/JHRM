@@ -55,12 +55,12 @@
 									<treecell label="Job" onClick="@command('selectFormJob')" />
 								</treerow>
 							</treeitem>
-							<!-- <treeitem>
+							<treeitem>
 								<treerow>
 									<treecell label="Salary"
 										onClick="@command('selectFormSalary')" />
 								</treerow>
-							</treeitem> -->
+							</treeitem>
 							<treeitem>
 								<treerow>
 									<treecell label="Qualifications" onClick="@command('selectFormQualification')" />
@@ -71,12 +71,12 @@
 									<treecell label="Memberships" onClick="@command('selectFormMembership')" />
 								</treerow>
 							</treeitem>
-							<!-- <treeitem>
+							<treeitem>
 								<treerow>
 									<treecell label="Report-to"
 										onClick="@command('selectFormReportTo')" />
 								</treerow>
-							</treeitem>-->
+							</treeitem>
 						</treechildren>
 					</tree>
 				</div>
