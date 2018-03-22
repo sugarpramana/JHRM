@@ -1,84 +1,50 @@
 <zk>
-	<window id="windowImmigration" border="none"
-		apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.Immigration')">
+	<window id="windowImmigration" border="none" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.Immigration')">
 		<groupbox mold="3d">
-			<caption
-				label="${labels.menu.employee.emergency.contact.title}">
+			<caption label="${labels.menu.employee.emergency.contact.title}">
 			</caption>
 			<borderlayout height="500px">
+				<!-- Function CRUD -->
 				<north border="none">
 					<div sclass="z-toolbar" style="padding:0">
 						<hbox pack="stretch" width="100%">
-							<toolbar align="start"
-								style="border-style: none;">
-								<button mold="trendy"
-									image="/images/icons/btn_save.gif" label="New"
-									onClick="@command('doNew')" />
-								<button mold="trendy"
-									image="/images/icons/btn_delete.gif" label="Delete" 
-									onClick="@command('doDelete')" />
+							<toolbar align="start" style="border-style: none;">
+								<button mold="trendy" image="/images/icons/btn_save.gif" label="New" onClick="@command('doNew')" />
+								<button mold="trendy" image="/images/icons/btn_delete.gif" label="Delete" onClick="@command('doDelete')" />
 							</toolbar>
 						</hbox>
 					</div>
 				</north>
-				<!-- Function CRUD -->
-				<!-- <north/> -->
 				<!-- Table Database -->
 				<center border="none" autoscroll="true">
 					<div>
-						<listbox id="listBoxImmigration"
-							model="@bind(vm.trsEmployeeImmigrations)"
-							selectedItem="@bind(vm.selectedEmployeeImmigration)">
+						<listbox id="listBoxImmigration" model="@bind(vm.trsEmployeeImmigrations)" selectedItem="@bind(vm.selectedEmployeeImmigration)">
 							<listhead>
 								<listheader width="15%" align="center" />
-								<listheader
-									label="${labels.menu.employee.immigration.listheader.document}"
-									sort="auto" />
-								<listheader
-									label="${labels.menu.employee.immigration.listheader.number}"
-									sort="auto" />
-								<listheader
-									label="${labels.menu.employee.immigration.listheader.issued.by}"
-									sort="auto" />
-								<listheader
-									label="${labels.menu.employee.immigration.listheader.issued.date}"
-									sort="auto" />
-								<listheader
-									label="${labels.menu.employee.immigration.listheader.expiry.date}"
-									sort="auto" />
-								<listheader label="Eligible Status"
-									sort="auto" />
-								<listheader label="Eligible Review Date"
-									sort="auto" />
+								<listheader= label="${labels.menu.employee.immigration.listheader.document}" sort="auto" />
+								<listheader label="${labels.menu.employee.immigration.listheader.number}" sort="auto" />
+								<listheader label="${labels.menu.employee.immigration.listheader.issued.by}" sort="auto" />
+								<listheader label="${labels.menu.employee.immigration.listheader.issued.date}" sort="auto" />
+								<listheader label="${labels.menu.employee.immigration.listheader.expiry.date}" sort="auto" />
+								<listheader label="Eligible Status" sort="auto" />
+								<listheader label="Eligible Review Date"sort="auto" />
 								<listheader label="Comment" sort="auto" />
 							</listhead>
 							<template name="model"
 								var="trsEmployeeImmigration">
 								<listitem>
-									<listcell
-										image="/images/icons/btn_edit.gif"
-										tooltiptext="Click For Edit" onClick="@command('doDetail')" />
-									<listcell
-										label="@bind(trsEmployeeImmigration.document)" />
-									<listcell
-										label="@bind(trsEmployeeImmigration.number)" />
-									<listcell
-										label="@bind(trsEmployeeImmigration.idNationality.nameNationality)" />
-									<listcell
-										label="@bind(trsEmployeeImmigration.issuedDate)  @converter('formatedDate', format='yyyy/MM/dd')" />
-									<listcell
-										label="@bind(trsEmployeeImmigration.expiredDate)  @converter('formatedDate', format='yyyy/MM/dd')" />
-									<listcell
-										label="@bind(trsEmployeeImmigration.eligibleStatus)" />
-									<listcell
-										label="@bind(trsEmployeeImmigration.eligibleReview)  @converter('formatedDate', format='yyyy/MM/dd')" />
-									<listcell
-										label="@bind(trsEmployeeImmigration.comment)" />
+									<listcell image="/images/icons/btn_edit.gif" tooltiptext="Click For Edit" onClick="@command('doDetail')" />
+									<listcell label="@bind(trsEmployeeImmigration.document)" />
+									<listcell label="@bind(trsEmployeeImmigration.number)" />
+									<listcell label="@bind(trsEmployeeImmigration.idNationality.nameNationality)" />
+									<listcell label="@bind(trsEmployeeImmigration.issuedDate) @converter('formatedDate', format='yyyy/MM/dd')" />
+									<listcell label="@bind(trsEmployeeImmigration.expiredDate) @converter('formatedDate', format='yyyy/MM/dd')" />
+									<listcell label="@bind(trsEmployeeImmigration.eligibleStatus)" />
+									<listcell label="@bind(trsEmployeeImmigration.eligibleReview) @converter('formatedDate', format='yyyy/MM/dd')" />
+									<listcell label="@bind(trsEmployeeImmigration.comment)" />
 								</listitem>
 							</template>
 						</listbox>
-
 					</div>
 				</center>
 			</borderlayout>

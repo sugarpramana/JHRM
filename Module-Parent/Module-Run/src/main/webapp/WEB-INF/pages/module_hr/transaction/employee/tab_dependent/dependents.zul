@@ -1,43 +1,27 @@
 <zk>
-	<window id="windowDependent" border="none"
-		apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.Dependent')">
+	<window id="windowDependent" border="none" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.Dependent')">
 		<groupbox mold="3d">
-			<caption
-				label="${labels.menu.employee.emergency.contact.title}">
+			<caption label="${labels.menu.employee.emergency.contact.title}">
 			</caption>
 			<borderlayout height="450px">
 				<north border="none">
 					<div sclass="z-toolbar" style="padding:0">
 						<hbox pack="stretch" width="100%">
-							<toolbar align="start"
-								style="border-style: none;">
-								<button mold="trendy"
-									image="/images/icons/btn_save.gif" label="New"
-									onClick="@command('doNew')" />
-								<button mold="trendy"
-									image="/images/icons/btn_delete.gif" label="Delete"
-									onClick="@command('doDelete')" />
+							<toolbar align="start" style="border-style: none;">
+								<button mold="trendy" image="/images/icons/btn_save.gif" label="New" onClick="@command('doNew')" />
+								<button mold="trendy" image="/images/icons/btn_delete.gif" label="Delete" onClick="@command('doDelete')" />
 							</toolbar>
 						</hbox>
 					</div>
 				</north>
 				<center border="none" autoscroll="true">
 					<div>
-						<listbox id="ListBoxDependent"
-							model="@bind(vm.trsEmployeeDependents)"
-							selectedItem="@bind(vm.selectedEmployeeDependent)">
+						<listbox id="ListBoxDependent" model="@bind(vm.trsEmployeeDependents)" selectedItem="@bind(vm.selectedEmployeeDependent)">
 							<listhead>
 								<listheader width="15%" align="center" />
-								<listheader
-									label="${labels.menu.employee.dependent.listheader.name}"
-									sort="auto" />
-								<listheader
-									label="${labels.menu.employee.dependent.listheader.relationship}"
-									sort="auto" />
-								<listheader
-									label="${labels.menu.employee.dependent.listheader.date.of.birth}"
-									sort="auto" />
+								<listheader label="${labels.menu.employee.dependent.listheader.name}" sort="auto" />
+								<listheader label="${labels.menu.employee.dependent.listheader.relationship}" sort="auto" />
+								<listheader label="${labels.menu.employee.dependent.listheader.date.of.birth}" sort="auto" />
 							</listhead>
 						</listbox>
 					</div>

@@ -1,37 +1,22 @@
-<?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-<bandbox apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.BandBoxPopup')" open="@bind(vm.isBandboxOpen)" value="@bind(vm.selectedMstMembership.nameMembership)">
-	<bandpopup >
-		<vbox>
-			<hbox>
-				Search
-				<textbox />
-			</hbox>
-			<listbox selectedItem="@bind(vm.selectedMstMembership)"	model="@bind(vm.mstMemberships)">
-				<listhead>
-					<listheader label="name" sort="auto" />
-				</listhead>
-				<template name="model" var="membership">
-					<listitem>
-						<listcell
-							label="@bind(membership.nameMembership)" />
-					</listitem>
-				</template>
-			</listbox>
-		</vbox>
-	</bandpopup>
+	<bandbox apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.BandBoxPopup')" open="@bind(vm.isBandboxOpen)" value="@bind(vm.selectedMstMembership.nameMembership)">
+		<bandpopup >
+			<vbox>
+				<hbox>
+					<label value="Search"/> 
+					<textbox />
+				</hbox>
+				<listbox selectedItem="@bind(vm.selectedMstMembership)"	model="@bind(vm.mstMemberships)">
+					<listhead>
+						<listheader label="name" sort="auto" />
+					</listhead>
+					<template name="model" var="membership">
+						<listitem>
+							<listcell label="@bind(membership.nameMembership)" />
+						</listitem>
+					</template>
+				</listbox>
+			</vbox>
+		</bandpopup>
 	</bandbox>
-	<!-- <listbox id="listBoxMembership" apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('org.app.portofolio.webui.hr.employee.model.MembershipListItemRenderer')"
-		selectedItem="@bind(vm.selectedMstMembership)"
-		model="@bind(vm.mstMemberships)">
-		<listhead>
-		<listheader label="name" sort="auto" />
-		</listhead>
-		<template name="model" var="membership">
-		<listitem>
-		<listcell label="@bind(membership.nameMembership)"/>
-		</listitem>
-		</template>
-		</listbox> -->
 </zk>

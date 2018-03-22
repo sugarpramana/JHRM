@@ -1,16 +1,12 @@
 <zk>
-<window id="windowImmigrationDialog" title="Form Employee"
-		border="normal" width="60%" position="center,center" closable="true"
-		maximizable="true" action="show: slideDown; hide: slideUp"
-		mode="modal" apply="org.zkoss.bind.BindComposer"
+	<window id="windowImmigrationDialog" title="Form Employee" border="normal" width="60%" position="center,center" closable="true"
+		maximizable="true" action="show: slideDown; hide: slideUp" mode="modal" apply="org.zkoss.bind.BindComposer"
 		viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.ImmigrationDialog')">
-		<borderlayout form="@id('form') @load(vm.trsEmployeeImmigration) @save(vm.trsEmployeeImmigration, before={'doSave'}) @validator(vm.formValidator)"
-				height="500px">
+		<borderlayout form="@id('form') @load(vm.trsEmployeeImmigration) @save(vm.trsEmployeeImmigration, before={'doSave'}) @validator(vm.formValidator)" height="500px">
 			<!-- Function CRUD -->
 			<north>
 				<toolbar>
-					<button image="/images/icons/btn_save.gif"
-						label="Save" onClick="@command('doSave')" />
+					<button image="/images/icons/btn_save.gif" label="Save" onClick="@command('doSave')" />
 				</toolbar>
 			</north>
 			<center>
@@ -19,21 +15,18 @@
 					<grid>
 						<rows>
 							<row>
-								<label
-									value="Document" />
+								<label value="Document" />
 								<radiogroup selectedItem="@bind(form.document)" >
-										<radio id="radioPassort" label="Passport" value="passport" />
-										<radio id="radioVisa" label="Visa" value="visa"/>
+									<radio id="radioPassort" label="Passport" value="passport" />
+									<radio id="radioVisa" label="Visa" value="visa"/>
 								</radiogroup>
 							</row>
 							<row>
-								<label
-									value="Number" />
+								<label value="Number" />
 								<textbox value="@bind(form.number)" />
 							</row>
 							<row>
-								<label
-									value="Issued Date" />
+								<label value="Issued Date" />
 								<datebox value="@bind(form.issuedDate)" />
 							</row>
 							<row>
@@ -46,8 +39,7 @@
 							</row>
 							<row>
 								<label value="Issued by"/>
-								<bandbox>
-								</bandbox>
+								<bandbox/>
 							</row>
 							<row>
 								<label value="Eligible Review Date"/>

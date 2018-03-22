@@ -1,26 +1,15 @@
-<?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window id="windowPersonalDetail" border="none" width="100%"
-		sclass="jhrm-window-dialog" apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.PersonalDetail')"
-		validationMessages="@id('vmsgs')">
+	<window id="windowPersonalDetail" border="none" width="100%" sclass="jhrm-window-dialog" apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.PersonalDetail')" validationMessages="@id('vmsgs')">
 		<groupbox mold="3d">
-			<caption
-				label="${labels.menu.employee.personal.details.title}" />
-			<borderlayout
-				form="@id('form') @load(vm.trsEmployee) @save(vm.trsEmployee, before={'doSave'}) @validator(vm.formValidator)"
-				height="500px">
+			<caption label="${labels.menu.employee.personal.details.title}" />
+			<borderlayout form="@id('form') @load(vm.trsEmployee) @save(vm.trsEmployee, before={'doSave'}) @validator(vm.formValidator)" height="500px">
 				<north vflex="true" border="none">
 					<div sclass="z-toolbar" style="padding:0">
 						<hbox pack="stretch" width="100%">
-							<toolbar align="start"
-								style="border-style: none;">
-								<button id="buttonSave" mold="trendy"
-									image="/images/icons/btn_save.gif" label="Save"
-									onClick="@command('doSave')" />
-								<button id="buttonEdit" mold="trendy"
-									image="/images/icons/btn_edit.gif" label="Edit"
-									onClick="@command('doEdit')" />
+							<toolbar align="start" style="border-style: none;">
+								<button id="buttonSave" mold="trendy" image="/images/icons/btn_save.gif" label="Save" onClick="@command('doSave')" />
+								<button id="buttonEdit" mold="trendy" image="/images/icons/btn_edit.gif" label="Edit" onClick="@command('doEdit')" />
 							</toolbar>
 						</hbox>
 					</div>
@@ -35,95 +24,60 @@
 						</columns>
 						<rows>
 							<row>
-								<label
-									value="${labels.menu.employee.personal.details.form.full.name}" />
+								<label value="${labels.menu.employee.personal.details.form.full.name}" />
 								<div>
-									<label
-										value="${labels.menu.employee.personal.details.form.first.name}"
-										style="text-align: justify; display: block;" />
-									<textbox id="textBoxFirstName"
-										value="@bind(form.firstName)" />
-									<label
-										value="@load(vmsgs['firstName'])" width="100%"
-										style="color: red">
+									<label value="${labels.menu.employee.personal.details.form.first.name}" style="text-align: justify; display: block;" />
+									<textbox id="textBoxFirstName" value="@bind(form.firstName)" />
+									<label value="@load(vmsgs['firstName'])" width="100%" style="color: red">
 									</label>
 								</div>
 								<div>
-									<label
-										value="${labels.menu.employee.personal.details.form.middle.name}"
-										style="text-align: justify; display: block;" />
-									<textbox id="textBoxMiddleName"
-										value="@bind(form.middleName)" />
+									<label value="${labels.menu.employee.personal.details.form.middle.name}" style="text-align: justify; display: block;" />
+									<textbox id="textBoxMiddleName" value="@bind(form.middleName)" />
 								</div>
 								<div>
-									<label
-										value="${labels.menu.employee.personal.details.form.last.name}"
-										style="text-align: justify; display: block;" />
-									<textbox id="textBoxLastName"
-										value="@bind(form.lastName)" />
-									<label
-										value="@load(vmsgs['lastName'])" width="100%"
-										style="color: red">
+									<label value="${labels.menu.employee.personal.details.form.last.name}" style="text-align: justify; display: block;" />
+									<textbox id="textBoxLastName" value="@bind(form.lastName)" />
+									<label value="@load(vmsgs['lastName'])" width="100%" style="color: red">
 									</label>
 								</div>
 							</row>
 							<row>
-								<label
-									value="${labels.menu.employee.personal.details.form.employee.id}" />
-								<textbox id="textBoxIdEmployee"
-									value="@bind(form.idEmployee)" />
-								<label
-									value="${labels.menu.employee.personal.details.form.other.id}" />
-								<textbox id="textBoxOtherLicense"
-									value="@bind(form.otherLicense)" />
+								<label value="${labels.menu.employee.personal.details.form.employee.id}" />
+								<textbox id="textBoxIdEmployee" value="@bind(form.idEmployee)" />
+								<label value="${labels.menu.employee.personal.details.form.other.id}" />
+								<textbox id="textBoxOtherLicense" value="@bind(form.otherLicense)" />
 							</row>
 							<row>
-								<label
-									value="${labels.menu.employee.personal.details.form.drivers.license.number}" />
-								<textbox id="textBoxDriverLicense"
-									value="@bind(form.driverLicense)" />
-								<label
-									value="${labels.menu.employee.personal.details.form.license.expiry.date}" />
-								<datebox id="dateBoxExpiredLicense"
-									value="@bind(form.expiredLicense)" />
+								<label value="${labels.menu.employee.personal.details.form.drivers.license.number}" />
+								<textbox id="textBoxDriverLicense" value="@bind(form.driverLicense)" />
+								<label value="${labels.menu.employee.personal.details.form.license.expiry.date}" />
+								<datebox id="dateBoxExpiredLicense" value="@bind(form.expiredLicense)" />
 							</row>
 							<row>
-								<label
-									value="${labels.menu.employee.personal.details.form.gender}" />
-								<radiogroup
-									selectedItem="@bind(form.gender)">
-									<radio id="radioMale" label="Pria"
-										value="true"
-										selected="@load(form.gender eq false ? false: true)" />
-									<radio id="radioFemale"
-										label="Wanita" value="false"
-										selected="@load(form.gender eq false ? true : false)" />
+								<label value="${labels.menu.employee.personal.details.form.gender}" />
+								<radiogroup selectedItem="@bind(form.gender)">
+									<radio id="radioMale" label="Pria" value="true" selected="@load(form.gender eq false ? false: true)" />
+									<radio id="radioFemale" label="Wanita" value="false" selected="@load(form.gender eq false ? true : false)" />
 								</radiogroup>
-								<label
-									value="${labels.menu.employee.personal.details.form.marital.status}" />
-								<combobox id="comboBoxMaritalStatus"
-									width="100%" model="@bind(vm.maritalStatusTypes)"
-									selectedItem="@bind(vm.maritalStatusType)">
+								<label value="${labels.menu.employee.personal.details.form.marital.status}" />
+								<combobox id="comboBoxMaritalStatus" width="100%" model="@bind(vm.maritalStatusTypes)" selectedItem="@bind(vm.maritalStatusType)">
 									<template name="model">
-										<comboitem
-											label="@load(each.stpTypname)" value="@load(each.stpId)">
+										<comboitem label="@load(each.stpTypname)" value="@load(each.stpId)">
 										</comboitem>
 									</template>
 								</combobox>
 							</row>
 							<row>
-								<label
-									value="${labels.menu.employee.personal.details.form.nationality}" />
-								<bandbox></bandbox>
+								<label value="${labels.menu.employee.personal.details.form.nationality}" />
+								<bandbox/>
 								<!-- <combobox id="comboBoxNationality" width="100%" model="@bind(vm.mstNationalities)" selectedItem="@bind(form.idNationality)" >
 									<template name="model">
-									<comboitem label="@load(each.nameNationality)" value="@load(each)"></comboitem>	
+										<comboitem label="@load(each.nameNationality)" value="@load(each)"></comboitem>	
 									</template>	
-									</combobox> -->
-								<label
-									value="${labels.menu.employee.personal.details.form.date.of.birth}" />
-								<datebox id="dateBoxDateOfBirth"
-									value="@bind(form.dob)" />
+								</combobox> -->
+								<label value="${labels.menu.employee.personal.details.form.date.of.birth}" />
+								<datebox id="dateBoxDateOfBirth" value="@bind(form.dob)" />
 							</row>
 						</rows>
 					</grid>

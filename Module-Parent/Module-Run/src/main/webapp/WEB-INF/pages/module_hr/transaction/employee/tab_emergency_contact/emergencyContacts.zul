@@ -1,6 +1,5 @@
 <zk>
-	<window id="windowEmergencyContact" border="none" apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.EmergencyContact')">
+	<window id="windowEmergencyContact" border="none" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.EmergencyContact')">
 		<groupbox mold="3d">
 			<caption label="${labels.menu.employee.emergency.contact.title}">
 			</caption>

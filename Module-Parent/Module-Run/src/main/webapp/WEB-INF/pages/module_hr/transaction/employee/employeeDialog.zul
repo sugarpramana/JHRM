@@ -34,8 +34,8 @@
 					    </row>
 					    <row>
 							<label value="${labels.menu.employee.form.photograph}" />
-								<label value="@load(vm.labelUploadFoto)" />
-								<button id="buttonUpload" mold="trendy" upload="true" label="upload" onUpload="@command('upload')" />
+							<label value="@load(vm.labelUploadFoto)" />
+							<button id="buttonUpload" mold="trendy" upload="true" label="upload" onUpload="@command('upload')" />
 					    </row>
 					</rows>
 				</grid>

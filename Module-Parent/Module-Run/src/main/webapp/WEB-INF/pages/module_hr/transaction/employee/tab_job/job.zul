@@ -1,29 +1,20 @@
 <zk>
 	<window id="windowJob" border="none" width="100%" apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.Job')"
-		validationMessages="@id('vmsgs')" >
+		viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.Job')" validationMessages="@id('vmsgs')" >
 		<groupbox mold="3d">
-			<caption
-				label="${labels.menu.employee.job.title}" />
+			<caption label="${labels.menu.employee.job.title}" />
 		<borderlayout form="@id('form') @load(vm.trsEmployee) @save(vm.trsEmployee, before={'doSave'}) @validator(vm.formValidator)" height="500px">
-		<north border="none">
-					<div sclass="z-toolbar" style="padding:0">
-						<hbox pack="stretch" width="100%">
-							<toolbar align="start"
-								style="border-style: none;">
-								<button id="buttonSave" mold="trendy"
-									image="/images/icons/btn_save.gif" label="Save"
-									onClick="@command('doSaveJob')" />
-								<button id="buttonEdit" mold="trendy"
-									image="/images/icons/btn_edit.gif" label="Edit"
-									onClick="@command('doEditJob')" />
-								<button id="buttonTerminateEmployment" mold="trendy"
-									image="" label="Terminate Employee"
-									onClick="@command('doTerminateJob')" />
-							</toolbar>
-						</hbox>
-					</div>
-				</north>
+			<north border="none">
+				<div sclass="z-toolbar" style="padding:0">
+					<hbox pack="stretch" width="100%">
+						<toolbar align="start" style="border-style: none;">
+							<button id="buttonSave" mold="trendy" image="/images/icons/btn_save.gif" label="Save" onClick="@command('doSaveJob')" />
+							<button id="buttonEdit" mold="trendy" image="/images/icons/btn_edit.gif" label="Edit" onClick="@command('doEditJob')" />
+							<button id="buttonTerminateEmployment" mold="trendy" image="" label="Terminate Employee" onClick="@command('doTerminateJob')" />
+						</toolbar>
+					</hbox>
+				</div>
+			</north>
 				<center border="none" autoscroll="true">
 			 		<grid>
 						<columns>
@@ -42,8 +33,7 @@
 										</hbox>
 										<listbox id="listBoxJobTitle" selectedItem="@bind(vm.selectedMstJobtitle)">
 											<listhead>
-												<listheader
-													label="Description" />
+												<listheader label="Description" />
 											</listhead>
 										</listbox>
 									</vbox>
@@ -51,8 +41,7 @@
 							</bandbox>
 						</row> 
 						<row>
-							<label
-								value="${labels.menu.employee.job.form.employment.status}" />
+							<label value="${labels.menu.employee.job.form.employment.status}" />
 							<bandbox id="bandBoxEmploymentStatus" onOpen="@command('openBandBoxEmploymentStatus')" >
 								<bandpopup>
 									<vbox>
@@ -71,8 +60,7 @@
 							</bandbox>
 						</row>
 						<row>
-							<label
-								value="${labels.menu.employee.job.form.job.category}" />
+							<label value="${labels.menu.employee.job.form.job.category}" />
 							<bandbox id="bandBoxJobCategory" onOpen="@command('openBandBoxJobCategory')" >
 								<bandpopup>
 									<vbox>
@@ -82,8 +70,7 @@
 										</hbox>
 										<listbox id="listBoxJobCategory" selectedItem="@bind(vm.selectedMstJobCategory)">
 											<listhead>
-												<listheader
-													label="Description" />
+												<listheader label="Description" />
 											</listhead>
 										</listbox>
 									</vbox>
@@ -91,13 +78,11 @@
 							</bandbox>
 						</row>
 						<row>
-							<label
-								value="${labels.menu.employee.job.form.joined.date}" />
+							<label value="${labels.menu.employee.job.form.joined.date}" />
 							<datebox id="dateBoxJoinedDate" value="@bind(vm.trsEmployee.joinDate)"/>
 						</row>
 						<row>
-							<label
-								value="${labels.menu.employee.job.form.sub.unit}" />
+							<label value="${labels.menu.employee.job.form.sub.unit}" />
 							<bandbox id="bandBoxSubUnit" onOpen="@command('openBandBoxSubUnit')" >
 								<bandpopup>
 									<vbox>
@@ -107,8 +92,7 @@
 										</hbox>
 										<listbox id="listBoxSubUnit" selectedItem="@bind(vm.selectedMstSubUnit)">
 											<listhead>
-												<listheader
-													label="Description" />
+												<listheader label="Description" />
 											</listhead>
 										</listbox>
 									</vbox>
@@ -116,8 +100,7 @@
 							</bandbox>
 						</row>
 						<row>
-							<label
-								value="${labels.menu.employee.job.form.location}" />
+							<label value="${labels.menu.employee.job.form.location}" />
 							<bandbox id="bandBoxLocation" onOpen="@command('openBandBoxLocation')" >
 								<bandpopup>
 									<vbox>
@@ -127,35 +110,29 @@
 										</hbox>
 										<listbox id="listBoxLocation" selectedItem="@bind(vm.selectedMstLocation)" >
 											<listhead>
-												<listheader
-													label="Description" />
+												<listheader label="Description" />
 											</listhead>
 										</listbox>
 									</vbox>
 								</bandpopup>
 							</bandbox>
 						</row>
-						
 						<!-- employment contract -->
-						<!--  <row>
-							<label
-								value="${labels.menu.employee.job.form.employment.contract}"
-								style="font-weight:bold;" />	
+						<!-- <row>
+							<label value="${labels.menu.employee.job.form.employment.contract}" style="font-weight:bold;" />	
 						</row>
 						<row>
-							<label
-								value="${labels.menu.employee.job.form.start.date}" />
+							<label value="${labels.menu.employee.job.form.start.date}" />
 							<datebox id="dateBoxStartDate" />
 						</row>
 						<row>
-							<label
-								value="${labels.menu.employee.job.form.end.date}" />
+							<label value="${labels.menu.employee.job.form.end.date}" />
 							<datebox id="dateBoxEndDate" />
 						</row> -->
-					</rows> 
+					</rows>
 				</grid>
 			</center>
-		</borderlayout>
+			</borderlayout>
 		</groupbox>
 	</window>
 </zk>

@@ -1,70 +1,43 @@
-<?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window border="none" width="100%"
-		apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.Qualifications')">
+	<window border="none" width="100%" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.Qualifications')">
 		<groupbox mold="3d">
-
 			<!-- experience -->
-			<caption
-				label="${labels.menu.employee.qualification.title.work.experience}" />
+			<caption label="${labels.menu.employee.qualification.title.work.experience}" />
 			<borderlayout height="450px">
 				<north border="none">
 					<div sclass="z-toolbar" style="padding:0">
 						<hbox pack="stretch" width="100%">
-							<toolbar align="start"
-								style="border-style: none;">
-								<button mold="trendy"
-									image="/images/icons/btn_save.gif" label="New"
-									onClick="@command('doNewExperience')" />
-								<button mold="trendy"
-									image="/images/icons/btn_delete.gif" label="Delete"
-									onClick="@command('doDeleteExperience')" />
+							<toolbar align="start" style="border-style: none;">
+								<button mold="trendy" image="/images/icons/btn_save.gif" label="New" onClick="@command('doNewExperience')" />
+								<button mold="trendy" image="/images/icons/btn_delete.gif" label="Delete" onClick="@command('doDeleteExperience')" />
 							</toolbar>
 						</hbox>
 					</div>
 				</north>
 				<center>
-					<listbox id="ListBoxEmployeeExperience"
-						model="@bind(vm.employeeExpriences)"
-						selectedItem="@bind(vm.selectedEmployeeExprience)">
+					<listbox id="ListBoxEmployeeExperience" model="@bind(vm.employeeExpriences)" selectedItem="@bind(vm.selectedEmployeeExprience)">
 						<listhead>
 							<listheader width="15%" align="center" />
-							<listheader
-								label="${labels.menu.employee.qualification.listheader.company}"
-								sort="auto" />
-							<listheader
-								label="${labels.menu.employee.qualification.listheader.job.title}"
-								sort="auto" />
-							<listheader
-								label="${labels.menu.employee.qualification.listheader.from}"
-								sort="auto" />
-							<listheader
-								label="${labels.menu.employee.qualification.listheader.to}"
-								sort="auto" />
+							<listheader label="${labels.menu.employee.qualification.listheader.company}" sort="auto" />
+							<listheader label="${labels.menu.employee.qualification.listheader.job.title}" sort="auto" />
+							<listheader label="${labels.menu.employee.qualification.listheader.from}" sort="auto" />
+							<listheader label="${labels.menu.employee.qualification.listheader.to}" sort="auto" />
 							<listheader label="Comment" sort="auto" />
 						</listhead>
 					</listbox>
 				</center>
 			</borderlayout>
 		</groupbox>
-
 		<!-- education -->
 		<groupbox mold="3d">
-			<caption
-				label="${labels.menu.employee.qualification.title.education}" />
+			<caption label="${labels.menu.employee.qualification.title.education}" />
 			<borderlayout height="450px">
 				<north border="none">
 					<div sclass="z-toolbar" style="padding:0">
 						<hbox pack="stretch" width="100%">
-							<toolbar align="start"
-								style="border-style: none;">
-								<button mold="trendy"
-									image="/images/icons/btn_save.gif" label="New"
-									onClick="@command('doNewEducation')" />
-								<button mold="trendy"
-									image="/images/icons/btn_delete.gif" label="Delete"
-									onClick="@command('doDeleteEducation')" />
+							<toolbar align="start" style="border-style: none;">
+								<button mold="trendy" image="/images/icons/btn_save.gif" label="New" onClick="@command('doNewEducation')" />
+								<button mold="trendy" image="/images/icons/btn_delete.gif" label="Delete" onClick="@command('doDeleteEducation')" />
 							</toolbar>
 						</hbox>
 					</div>
@@ -76,16 +49,11 @@
 						itemRenderer="@bind(vm.employeeEducationListItemRenderer)">
 						<listhead>
 							<listheader width="15%" align="center" />
-							<listheader
-								label="${labels.menu.employee.qualification.listheader.level}"
-								sort="auto" />
+							<listheader label="${labels.menu.employee.qualification.listheader.level}" sort="auto" />
 							<listheader label="Institute" sort="auto" />
-							<listheader label="Major/Specialization"
-								sort="auto" />
+							<listheader label="Major/Specialization" sort="auto" />
 							<listheader label="year" sort="auto" />
-							<listheader
-								label="${labels.menu.employee.qualification.listheader.gpa.score}"
-								sort="auto" />
+							<listheader label="${labels.menu.employee.qualification.listheader.gpa.score}" sort="auto" />
 							<listheader label="Start Date" sort="auto" />
 							<listheader label="End Date" sort="auto" />
 						</listhead>
@@ -93,128 +61,81 @@
 				</center>
 			</borderlayout>
 		</groupbox>
-
 		<!-- skill -->
 		<groupbox mold="3d">
-			<caption
-				label="${labels.menu.employee.qualification.title.skill}" />
+			<caption label="${labels.menu.employee.qualification.title.skill}" />
 			<borderlayout height="450px">
 				<north border="none">
 					<div sclass="z-toolbar" style="padding:0">
 						<hbox pack="stretch" width="100%">
-							<toolbar align="start"
-								style="border-style: none;">
-								<button mold="trendy"
-									image="/images/icons/btn_save.gif" label="New"
-									onClick="@command('doNewSkill')" />
-								<button mold="trendy"
-									image="/images/icons/btn_delete.gif" label="Delete"
-									onClick="@command('doDeleteSkill')" />
+							<toolbar align="start" style="border-style: none;">
+								<button mold="trendy" image="/images/icons/btn_save.gif" label="New" onClick="@command('doNewSkill')" />
+								<button mold="trendy" image="/images/icons/btn_delete.gif" label="Delete" onClick="@command('doDeleteSkill')" />
 							</toolbar>
 						</hbox>
 					</div>
 				</north>
 				<center>
-					<listbox id="ListBoxEmployeeSkill"
-						model="@bind(vm.employeeSkills)"
-						selectedItem="@bind(vm.selectedEmployeeSkill)"
-						itemRenderer="@bind(vm.employeeSkillListItemRenderer)">
+					<listbox id="ListBoxEmployeeSkill" model="@bind(vm.employeeSkills)" selectedItem="@bind(vm.selectedEmployeeSkill)" itemRenderer="@bind(vm.employeeSkillListItemRenderer)">
 						<listhead>
 							<listheader width="15%" align="center" />
-							<listheader
-								label="${labels.menu.employee.qualification.listheader.skill}"
-								sort="auto" />
-							<listheader
-								label="${labels.menu.employee.qualification.listheader.years.of.experience}"
-								sort="auto" />
+							<listheader label="${labels.menu.employee.qualification.listheader.skill}" sort="auto" />
+							<listheader label="${labels.menu.employee.qualification.listheader.years.of.experience}" sort="auto" />
 							<listheader label="Comment" sort="auto" />
 						</listhead>
 					</listbox>
 				</center>
 			</borderlayout>
 		</groupbox>
-
 		<!-- languange -->
 		<groupbox mold="3d">
-			<caption
-				label="${labels.menu.employee.qualification.title.languages}" />
+			<caption label="${labels.menu.employee.qualification.title.languages}" />
 			<borderlayout height="450px">
 				<north border="none">
 					<div sclass="z-toolbar" style="padding:0">
 						<hbox pack="stretch" width="100%">
-							<toolbar align="start"
-								style="border-style: none;">
-								<button mold="trendy"
-									image="/images/icons/btn_save.gif" label="New"
-									onClick="@command('doNewLanguage')" />
-								<button mold="trendy"
-									image="/images/icons/btn_delete.gif" label="Delete"
-									onClick="@command('doDeleteLanguage')" />
+							<toolbar align="start" style="border-style: none;">
+								<button mold="trendy" image="/images/icons/btn_save.gif" label="New" onClick="@command('doNewLanguage')" />
+								<button mold="trendy" image="/images/icons/btn_delete.gif" label="Delete" onClick="@command('doDeleteLanguage')" />
 							</toolbar>
 						</hbox>
 					</div>
 				</north>
 				<center>
-					<listbox id="ListBoxEmployeeLanguage"
-						model="@bind(vm.employeeLanguages)"
-						selectedItem="@bind(vm.selectedEmployeeLanguage)"
-						itemRenderer="@bind(vm.employeeLanguageListItemRenderer)">
+					<listbox id="ListBoxEmployeeLanguage" model="@bind(vm.employeeLanguages)" selectedItem="@bind(vm.selectedEmployeeLanguage)" itemRenderer="@bind(vm.employeeLanguageListItemRenderer)">
 						<listhead>
 							<listheader width="15%" align="center" />
-							<listheader
-								label="${labels.menu.employee.qualification.listheader.language}"
-								sort="auto" />
-							<listheader
-								label="${labels.menu.employee.qualification.listheader.fluency}"
-								sort="auto" />
-							<listheader
-								label="${labels.menu.employee.qualification.listheader.competency}"
-								sort="auto" />
-							<listheader
-								label="${labels.menu.employee.qualification.listheader.comments}"
-								sort="auto" />
+							<listheader label="${labels.menu.employee.qualification.listheader.language}" sort="auto" />
+							<listheader label="${labels.menu.employee.qualification.listheader.fluency}" sort="auto" />
+							<listheader label="${labels.menu.employee.qualification.listheader.competency}" sort="auto" />
+							<listheader label="${labels.menu.employee.qualification.listheader.comments}" sort="auto" />
 						</listhead>
 					</listbox>
 				</center>
 			</borderlayout>
 		</groupbox>
-
 		<!-- license -->
 		<groupbox mold="3d">
-			<caption
-				label="${labels.menu.employee.qualification.title.license}" />
+			<caption label="${labels.menu.employee.qualification.title.license}" />
 			<borderlayout height="450px">
 				<north border="none">
 					<div sclass="z-toolbar" style="padding:0">
 						<hbox pack="stretch" width="100%">
-							<toolbar align="start"
-								style="border-style: none;">
-								<button mold="trendy"
-									image="/images/icons/btn_save.gif" label="New"
-									onClick="@command('doNewLicense')" />
-								<button mold="trendy"
-									image="/images/icons/btn_delete.gif" label="Delete"
-									onClick="@command('doDeleteLicense')" />
+							<toolbar align="start" style="border-style: none;">
+								<button mold="trendy" image="/images/icons/btn_save.gif" label="New" onClick="@command('doNewLicense')" />
+								<button mold="trendy" image="/images/icons/btn_delete.gif" label="Delete" onClick="@command('doDeleteLicense')" />
 							</toolbar>
 						</hbox>
 					</div>
 				</north>
 				<center>
-					<listbox id="ListBoxEmployeeLicense"
-						model="@bind(vm.employeeLicenses)"
-						selectedItem="@bind(vm.selectedEmployeeLicense)"
-						itemRenderer="@bind(vm.employeeLicenseListItemRenderer)">
+					<listbox id="ListBoxEmployeeLicense" model="@bind(vm.employeeLicenses)" selectedItem="@bind(vm.selectedEmployeeLicense)" itemRenderer="@bind(vm.employeeLicenseListItemRenderer)">
 						<listhead>
 							<listheader width="15%" align="center" />
-							<listheader
-								label="${labels.menu.employee.qualification.listheader.license.type}"
-								sort="auto" />
-							<listheader label="License Number"
-								sort="auto" />
+							<listheader label="${labels.menu.employee.qualification.listheader.license.type}" sort="auto" />
+							<listheader label="License Number" sort="auto" />
 							<listheader label="Issued Date" sort="auto" />
-							<listheader
-								label="${labels.menu.employee.qualification.listheader.expiry.date}"
-								sort="auto" />
+							<listheader label="${labels.menu.employee.qualification.listheader.expiry.date}" sort="auto" />
 						</listhead>
 					</listbox>
 				</center>
