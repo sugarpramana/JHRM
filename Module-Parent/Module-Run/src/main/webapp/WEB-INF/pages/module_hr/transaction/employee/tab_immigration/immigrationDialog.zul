@@ -1,18 +1,22 @@
 <zk>
-	<window id="windowImmigrationDialog" title="Form Employee" border="normal" width="60%" position="center,center" closable="true"
+	<window id="windowImmigrationDialog" title="Form Immigration" border="normal" width="50%" position="center,center" closable="true"
 		maximizable="true" action="show: slideDown; hide: slideUp" mode="modal" apply="org.zkoss.bind.BindComposer"
 		viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.ImmigrationDialog')">
-		<borderlayout form="@id('form') @load(vm.trsEmployeeImmigration) @save(vm.trsEmployeeImmigration, before={'doSave'}) @validator(vm.formValidator)" height="500px">
+		<borderlayout form="@id('form') @load(vm.trsEmployeeImmigration) @save(vm.trsEmployeeImmigration, before={'doSave'}) @validator(vm.formValidator)" height="400px">
 			<!-- Function CRUD -->
-			<north>
+			<north border="none">
 				<toolbar>
 					<button image="/images/icons/btn_save.gif" label="Save" onClick="@command('doSave')" />
 				</toolbar>
 			</north>
-			<center>
+			<center border="none">
 				<groupbox mold="3d">
 					<caption label="Immigration dialog" />
 					<grid>
+						<columns>
+							<column align="right" width="45%"/>
+							<column/>
+						</columns>
 						<rows>
 							<row>
 								<label value="Document" />

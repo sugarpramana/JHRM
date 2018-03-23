@@ -3,7 +3,7 @@
 		<groupbox mold="3d">
 			<caption label="${labels.menu.employee.emergency.contact.title}">
 			</caption>
-			<borderlayout height="450px">
+			<borderlayout height="500px">
 				<north border="none">
 					<div sclass="z-toolbar" style="padding:0">
 						<hbox pack="stretch" width="100%">

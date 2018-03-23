@@ -1,9 +1,8 @@
 <zk>
-	<window id="windowDependent" border="none" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.Dependent')">
+	<window id="windowDependent" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.employee.Dependent')" border="none" width="100%" vflex="true">
 		<groupbox mold="3d">
-			<caption label="${labels.menu.employee.emergency.contact.title}">
-			</caption>
-			<borderlayout height="450px">
+			<caption label="Assigned Dependents"/>
+			<borderlayout height="500px">
 				<north border="none">
 					<div sclass="z-toolbar" style="padding:0">
 						<hbox pack="stretch" width="100%">
@@ -26,6 +25,9 @@
 						</listbox>
 					</div>
 				</center>
+				<south>
+				<paging/>
+			</south>
 			</borderlayout>
 		</groupbox>
 	</window>

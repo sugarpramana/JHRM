@@ -1,26 +1,26 @@
-<?page title="Add Unit" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window id="windowVacancyDialog" title="${labels.menu.recruitment.vacancy.form.title}" border="normal" height="350px" width="40%" mode="modal" closable="true" apply="org.zkoss.bind.BindComposer" 
+	<window id="windowVacancyDialog" title="${labels.menu.recruitment.vacancy.form.title}" border="normal" width="40%" mode="modal" closable="true" apply="org.zkoss.bind.BindComposer" 
 		viewModel="@id('vm') @init('org.app.portofolio.webui.hr.transaction.recruitment.vacancy.RecruitmentVacancyDialogVM')" 
-		validationMessages="@id('vmsgs')">
+		validationMessages="@id('vmsgs')" height="65%">
 		<borderlayout 
 			form="@id('form') @load(vm.trsJobVacancy) @save(vm.trsJobVacancy, before={'doSave', 'doSaveAndNew'}) 
-				@validator(vm.formValidator)">
-			<north>
+				@validator(vm.formValidator)" >
+			<north border="none">
 				<toolbar>
 					<button id="buttonSaveVacancy" label="${labels.button.dialog.save}" onClick="@command('doSave')"></button>
 					<button id="buttonSaveAndNewVacancy" label="${labels.button.dialog.saveandnew}" onClick="@save(vm.trsJobVacancy)@command('doSaveAndNew')"></button>
 					<button id="buttonEditVacancy" label="${labels.button.dialog.edit}" onClick="@command('doEdit')"></button>
 				</toolbar>
 			</north>
-			<center>
+			<center border="none">
 				<grid>
 					<columns>
-						<column width="25%" />
+						<column align="right" width="50%" />
 						<column width="50%"/>
-						<column  width="25%"/>
+						<column width="25%"/>
 					</columns>
 					<rows>
+						<row><space/></row>
 						<row>
 							<label value="${labels.menu.recruitment.vacancy.form.jobTitle}" />
 							<combobox id="comboboxJobTitle" width="100%" model="@bind(vm.listJobtitle)" 
@@ -55,6 +55,7 @@
 							<label value="${labels.menu.recruitment.vacancy.form.description}" />
 							<textbox id="textboxDescription" width="100%" rows="5" value="@bind(form.description)"/>
 						</row>
+						<row><space/></row>
 					</rows>
 				</grid>
 			</center>

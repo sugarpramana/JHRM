@@ -1,5 +1,5 @@
 <zk>
-	<window id="windowEmployeeDetailDialog" title="Form Employee" border="normal" width="60%" height="80%" position="center,center" closable="true"
+	<window id="windowEmployeeDetailDialog" title="Form Employee" border="normal" width="100%" height="100%" position="center,center" closable="true"
 		maximizable="true" action="show: slideDown; hide: slideUp" mode="modal" apply="org.zkoss.bind.BindComposer" sizable="true"
 		viewModel="@id('employee') @init('org.app.portofolio.webui.hr.transaction.employee.EmployeeDetailDialogVM')">
 		<borderlayout vflex="true">
