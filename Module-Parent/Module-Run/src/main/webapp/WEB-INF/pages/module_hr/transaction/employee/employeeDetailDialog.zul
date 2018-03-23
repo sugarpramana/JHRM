@@ -62,17 +62,17 @@
 							</treeitem>
 							<treeitem>
 								<treerow>
+									<treecell label="Report-to" onClick="@command('selectFormReportTo')" />
+								</treerow>
+							</treeitem>
+							<treeitem>
+								<treerow>
 									<treecell label="Qualifications" onClick="@command('selectFormQualification')" />
 								</treerow>
 							</treeitem> 
 							<treeitem>
 								<treerow>
 									<treecell label="Memberships" onClick="@command('selectFormMembership')" />
-								</treerow>
-							</treeitem>
-							<treeitem>
-								<treerow>
-									<treecell label="Report-to" onClick="@command('selectFormReportTo')" />
 								</treerow>
 							</treeitem>
 						</treechildren>
@@ -106,6 +106,9 @@
 						<row visible="@load(employee.isVisibleFormSalary)">
 							<include type="@load(employee.trsEmployee)" src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_salary/salary.zul')" />
 						</row>
+						<row visible="@load(employee.isVisibleFormReportTo)">
+							<include src="/WEB-INF/pages/module_hr/transaction/employee/tab_report_to/reportTo.zul" />
+						</row>
 						<row visible="@load(employee.isVisibleFormQualification)">
 							<div>
 								<include type="@load(employee.trsEmployee)" src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_qualification/qualifications.zul')" />
@@ -114,9 +117,6 @@
 						<row visible="@load(employee.isVisibleFormMemberships)">
 							<include  type="@load(employee.trsEmployee)" src="@load('/WEB-INF/pages/module_hr/transaction/employee/tab_membership/memberships.zul')"/>
 						</row> 
-						<row visible="@load(employee.isVisibleFormReportTo)">
-							<include src="/WEB-INF/pages/module_hr/transaction/employee/tab_report_to/reportTo.zul" />
-						</row>
 					</rows>
 				</grid>
 			</center>
