@@ -35,7 +35,7 @@ public class DefaultDropDownMenuItem extends Menuitem implements EventListener, 
 		final Center center = bl.getCenter();
 
 		final Tabs tabs = (Tabs) center.getFellow("tabbox").getFellow("tabs");
-		System.out.println("Get Fellow Tabs ->>>"+tabs);
+		/*System.out.println("Get Fellow Tabs ->>>"+tabs);*/
 	}
 	
 	@Override

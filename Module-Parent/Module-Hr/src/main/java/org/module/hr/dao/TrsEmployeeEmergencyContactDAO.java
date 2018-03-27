@@ -17,6 +17,7 @@ public interface TrsEmployeeEmergencyContactDAO {
 	public void delete(TrsEmployeeEmergencyContact trsEmployeeEmergencyContact);
 	public List<TrsEmployeeEmergencyContact> getAllTrsEmployeeEmergencyContact();
 	public List<TrsEmployeeEmergencyContact> getTrsEmployeeEmergencyContactByTrsEmployeeEmergencyContactRequestMap (Map<String, Object> requestMap);
+	public List<TrsEmployeeEmergencyContact> getByRequestMap(HashMap<String, Object> hashMap);
 	public List<TrsEmployeeEmergencyContact> getTrsEmployeeEmergencyContactPaging(HashMap<String, Object> hashMap);
     public int getCountTrsEmployeeEmergencyContacts();
 }

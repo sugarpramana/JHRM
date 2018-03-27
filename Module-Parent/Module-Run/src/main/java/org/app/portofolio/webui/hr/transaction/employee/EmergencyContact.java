@@ -1,5 +1,6 @@
 package org.app.portofolio.webui.hr.transaction.employee;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,7 +24,10 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
+import org.zkoss.zul.ListitemRenderer;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Paging;
+import org.zkoss.zul.event.PagingEvent;
 
 /**
 *
@@ -34,8 +38,11 @@ public class EmergencyContact {
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Wire component
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-	@Wire("#listBoxEmergencyContact")
-	private Listbox listBoxEmergencyContact;
+	@Wire("#listboxEmergencyContact")
+	private Listbox listboxEmergencyContact;
+	
+	@Wire("#pagingEmergencyContact")
+	private Paging pagingEmergencyContact;
 
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Service yang dibutuhkan sesuai bisnis proses
@@ -46,17 +53,57 @@ public class EmergencyContact {
 	
 	private TrsEmployeeEmergencyContact selectedEmployeeEmergencyContact;
 	private List<TrsEmployeeEmergencyContact> employeeEmergencyContacts;
-	private EmergencyContactListItemRenderer emergencyContactListItemRenderer;
+	private ListitemRenderer<TrsEmployeeEmergencyContact> listitemRenderer;
 	
+	private HashMap<String, Object> hashMapEmployeeEmergencyContact;
+	
+	private int startPageNumber = 0;
+	private int pageSize = 10;
+
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Function Custom sesuai kebutuhan
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void doPrepareList(){
-		listBoxEmergencyContact.setCheckmark(true);
-		listBoxEmergencyContact.setMultiple(true);
-		listBoxEmergencyContact.setRows(15);
-		listBoxEmergencyContact.setStyle("border-style: none;");
+		listboxEmergencyContact.setCheckmark(true);
+		listboxEmergencyContact.setMultiple(true);
+		listboxEmergencyContact.setStyle("border-style: none;");
+		listboxEmergencyContact.setMold("paging");
+		
+		int count = employeeService.getCountTrsEmployeeEmergencyContacts();
+
+		pagingEmergencyContact.setTotalSize(count);
+		pagingEmergencyContact.setDetailed(true);
+		pagingEmergencyContact.setPageSize(pageSize);
 	}
+	
+	private void refreshPageList(int refreshActivePage) {
+		if (refreshActivePage == 0) {
+			pagingEmergencyContact.setActivePage(0);
+		}
+		
+		refreshActivePage += 1;
+
+		HashMap<String, Object> hashMapEmployee = new HashMap<String, Object>();
+		hashMapEmployee.put("idEmployee", trsEmployee.getIdEmployee());
+		employeeEmergencyContacts = employeeService.getTrsEmployeeEmergencyContactByTrsEmployeeEmergencyContactRequestMap(hashMapEmployee);
+		
+		List<TrsEmployeeEmergencyContact> casts = new ArrayList<TrsEmployeeEmergencyContact>();
+		casts.addAll(employeeEmergencyContacts);
+		
+		hashMapEmployeeEmergencyContact = new HashMap<String, Object>();
+		hashMapEmployeeEmergencyContact.put("firstResult", refreshActivePage);
+		hashMapEmployeeEmergencyContact.put("maxResults", pagingEmergencyContact.getPageSize());
+		
+		casts = employeeService.getTrsEmployeeEmergencyContactPaging(hashMapEmployeeEmergencyContact);
+		listitemRenderer = new EmergencyContactListItemRenderer();
+	}
+	
+	/*public void doPrepareList(){
+		listboxEmergencyContact.setCheckmark(true);
+		listboxEmergencyContact.setMultiple(true);
+		listboxEmergencyContact.setRows(15);
+		listboxEmergencyContact.setStyle("border-style: none;");
+	}*/
 
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Inisialize Methode MVVM yang pertama kali dijalankan
@@ -70,23 +117,23 @@ public class EmergencyContact {
 		
 		this.trsEmployee = trsEmployee;
 		
-		HashMap< String, Object> requestMap = new HashMap<>();
-		requestMap.put("trsEmployee", trsEmployee);
-		employeeEmergencyContacts = employeeService.getTrsEmployeeEmergencyContactByTrsEmployeeEmergencyContactRequestMap(requestMap);
-		emergencyContactListItemRenderer = new EmergencyContactListItemRenderer();
-		
-		listBoxEmergencyContact.setModel(new ListModelList<TrsEmployeeEmergencyContact>());
-		listBoxEmergencyContact.setItemRenderer(emergencyContactListItemRenderer);
-		
 		doPrepareList();
+		refreshPageList(startPageNumber);
 	}
 	
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Function CRUD Event
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	@Command
+	@NotifyChange("employeeEmergencyContacts")
+	public void onPaging(@ContextParam(ContextType.TRIGGER_EVENT) PagingEvent pagingEvent){
+		startPageNumber = pagingEvent.getActivePage() * pageSize;
+		refreshPageList(startPageNumber);
+	}
+	
+	@Command
 	public void doNew() {
-		ListModelList listModelList = (ListModelList) listBoxEmergencyContact.getModel();
+		ListModelList listModelList = (ListModelList) listboxEmergencyContact.getModel();
 		TrsEmployeeEmergencyContact trsEmployeeEmergencyContact = new TrsEmployeeEmergencyContact();
 		trsEmployeeEmergencyContact.setIdEmployee(trsEmployee);
 		listModelList.add(0,  trsEmployeeEmergencyContact);		
@@ -94,9 +141,9 @@ public class EmergencyContact {
 	
 	@Command
 	public void doDelete(){
-		final ListModelList<TrsEmployeeEmergencyContact> listModelListEmployeeEmergencyContact = (ListModelList)listBoxEmergencyContact.getModel();
+		final ListModelList<TrsEmployeeEmergencyContact> listModelListEmployeeEmergencyContact = (ListModelList)listboxEmergencyContact.getModel();
 		
-		if (listBoxEmergencyContact.getSelectedIndex() == -1){
+		if (listboxEmergencyContact.getSelectedIndex() == -1){
 			Messagebox.show("There is no selected record?", "Confirm", Messagebox.OK, Messagebox.ERROR);
 		} else {
 			Messagebox.show("Do you really want to remove item?", "Confirm", Messagebox.OK | Messagebox.CANCEL, Messagebox.EXCLAMATION, new EventListener<Event>() {
@@ -125,32 +172,24 @@ public class EmergencyContact {
 		requestMap.put("trsEmployee", trsEmployee);
 		employeeEmergencyContacts = employeeService.getTrsEmployeeEmergencyContactByTrsEmployeeEmergencyContactRequestMap(requestMap);
 	}
-
+	
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Getter Setter
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-	public Listbox getListBoxEmergencyContact() {
-		return listBoxEmergencyContact;
+	public TrsEmployee getTrsEmployee() {
+		return trsEmployee;
 	}
 
-	public void setListBoxEmergencyContact(Listbox listBoxEmergencyContact) {
-		this.listBoxEmergencyContact = listBoxEmergencyContact;
+	public void setTrsEmployee(TrsEmployee trsEmployee) {
+		this.trsEmployee = trsEmployee;
 	}
 
-	public EmergencyContactListItemRenderer getEmergencyContactListItemRenderer() {
-		return emergencyContactListItemRenderer;
+	public EmployeeService getEmployeeService() {
+		return employeeService;
 	}
 
-	public void setEmergencyContactListItemRenderer(EmergencyContactListItemRenderer emergencyContactListItemRenderer) {
-		this.emergencyContactListItemRenderer = emergencyContactListItemRenderer;
-	}
-
-	public List<TrsEmployeeEmergencyContact> getEmployeeEmergencyContacts() {
-		return employeeEmergencyContacts;
-	}
-
-	public void setEmployeeEmergencyContacts(List<TrsEmployeeEmergencyContact> employeeEmergencyContacts) {
-		this.employeeEmergencyContacts = employeeEmergencyContacts;
+	public void setEmployeeService(EmployeeService employeeService) {
+		this.employeeService = employeeService;
 	}
 
 	public TrsEmployeeEmergencyContact getSelectedEmployeeEmergencyContact() {
@@ -161,11 +200,19 @@ public class EmergencyContact {
 		this.selectedEmployeeEmergencyContact = selectedEmployeeEmergencyContact;
 	}
 
-	public EmployeeService getEmployeeService() {
-		return employeeService;
+	public List<TrsEmployeeEmergencyContact> getEmployeeEmergencyContacts() {
+		return employeeEmergencyContacts;
 	}
 
-	public void setEmployeeService(EmployeeService employeeService) {
-		this.employeeService = employeeService;
+	public void setEmployeeEmergencyContacts(List<TrsEmployeeEmergencyContact> employeeEmergencyContacts) {
+		this.employeeEmergencyContacts = employeeEmergencyContacts;
+	}
+
+	public ListitemRenderer<TrsEmployeeEmergencyContact> getListitemRenderer() {
+		return listitemRenderer;
+	}
+
+	public void setListitemRenderer(ListitemRenderer<TrsEmployeeEmergencyContact> listitemRenderer) {
+		this.listitemRenderer = listitemRenderer;
 	}
 }

@@ -140,8 +140,19 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 	
 	@Override
-	public List<TrsEmployeeEmergencyContact> getTrsEmployeeEmergencyContactByTrsEmployeeEmergencyContactRequestMap(Map<String, Object> requestMap){
-		return trsEmployeeEmergencyContactDAO.getTrsEmployeeEmergencyContactByTrsEmployeeEmergencyContactRequestMap(requestMap);
+	public List<TrsEmployeeEmergencyContact> getTrsEmployeeEmergencyContactByTrsEmployeeEmergencyContactRequestMap(HashMap<String, Object> hashMap){
+		//return trsEmployeeEmergencyContactDAO.getTrsEmployeeEmergencyContactByTrsEmployeeEmergencyContactRequestMap(requestMap);
+		return trsEmployeeEmergencyContactDAO.getByRequestMap(hashMap);
+	}
+	
+	@Override
+	public List<TrsEmployeeEmergencyContact> getTrsEmployeeEmergencyContactPaging(HashMap<String, Object> hashMap) {
+		return trsEmployeeEmergencyContactDAO.getTrsEmployeeEmergencyContactPaging(hashMap);
+	}
+
+	@Override
+	public int getCountTrsEmployeeEmergencyContacts() {
+		return trsEmployeeEmergencyContactDAO.getCountTrsEmployeeEmergencyContacts();
 	}
 	
 	/*- Employee Dependent +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.module.api.common.dao.base.BasisDAO;
 import org.module.hr.dao.TrsEmployeeEmergencyContactDAO;
 import org.module.hr.model.TrsEmployeeEmergencyContact;
+import org.springframework.dao.support.DataAccessUtils;
 
 /**
 *
@@ -28,13 +29,12 @@ public class TrsEmployeeEmergencyContactDAOImpl extends BasisDAO<TrsEmployeeEmer
 
 	@Override
 	public List<TrsEmployeeEmergencyContact> getTrsEmployeeEmergencyContactPaging(HashMap<String, Object> hashMap) {
-		// TODO Auto-generated method stub
-		return null;
+		List<TrsEmployeeEmergencyContact>list = (List<TrsEmployeeEmergencyContact>) getHibernateTemplate().findByExample(new TrsEmployeeEmergencyContact(), (Integer)hashMap.get("firstResult"), (Integer)hashMap.get("maxResults"));
+		return list;
 	}
 
 	@Override
 	public int getCountTrsEmployeeEmergencyContacts() {
-		// TODO Auto-generated method stub
-		return 0;
+		return DataAccessUtils.intResult(getHibernateTemplate().find("SELECT COUNT(*) FROM TrsEmployeeEmergencyContact trsEmployeeEmergencyContact WHERE trsEmployeeEmergencyContact.idEmployee = '1'"));
 	}
 }
