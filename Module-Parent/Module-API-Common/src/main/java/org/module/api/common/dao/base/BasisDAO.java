@@ -69,14 +69,12 @@ public abstract class BasisDAO<T> {
         hibernateTemplate.deleteAll(entities);
     }
     
-	public List<T> getByRequestMap(HashMap<String, Object> hashMap) {
+	/*public List<T> getByRequestMap(HashMap<String, Object> hashMap) {
 		
     	final StringBuffer queryString = new StringBuffer();
-		
 		queryString.append(" FROM "+ genericType.getSimpleName());
 
 		Object params[] = new Object[hashMap.size()];
-    	
 		int a = 0;
 		
     	if ((hashMap != null) && !hashMap.isEmpty()){
@@ -89,9 +87,16 @@ public abstract class BasisDAO<T> {
             	if (entry.getValue() instanceof Class) {
             		queryString.append(entry.getKey()).append(" = ").append("?");
             		params[a] = entry.getValue();
-				
-				} else if (entry.getValue() instanceof String) {                	
-					queryString.append(entry.getKey()).append(" like ").append("'%"+entry.getValue()+"%'");
+				} else 
+            	if (entry.getKey() instanceof String) {
+            		if(entry.getKey() == ""){
+            			System.out.println("String GetALL");
+            		}else if(entry.getKey() == "a"){
+            			System.out.println("String a GetALL");
+            		}
+            		
+            		
+					//queryString.append(entry.getKey()).append(" like ").append("'%"+entry.getValue()+"%'");
 				} else if (entry.getValue() instanceof Boolean) {
 					queryString.append(entry.getKey()).append(" = ").append(entry.getValue());
 				}
@@ -103,6 +108,28 @@ public abstract class BasisDAO<T> {
         }
         
     	logger.info("Query Map : "+queryString);
+		return (List<T>) hibernateTemplate.find(queryString.toString());
+    }*/
+    
+    public List<T> getByRequestMap(HashMap<String, Object> hashMap) {
+    	final StringBuffer queryString = new StringBuffer();
+		queryString.append("SELECT o FROM "+genericType.getSimpleName()+" o");
+
+    	if ((hashMap != null) && !hashMap.isEmpty()){
+
+            for (final Iterator<Map.Entry<String, Object>> it = hashMap.entrySet().iterator(); it.hasNext();){
+                
+            	final Map.Entry<String,Object> entry = it.next(); 
+             
+            	if (entry.getKey() instanceof String) {
+            		queryString.append(" WHERE o.").append(entry.getKey()).append(" = ").append("'"+entry.getValue()+"'");
+					//queryString.append(entry.getKey()).append(" like ").append("'%"+entry.getValue()+"%'");
+				} 
+            }
+        }
+        
+    	logger.info("Query Map : "+queryString);
+    	
 		return (List<T>) hibernateTemplate.find(queryString.toString());
     }
     

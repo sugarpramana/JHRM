@@ -1,15 +1,13 @@
 package org.app.portofolio.webui.hr.transaction.employee;
 
-import org.app.portofolio.common.menu.util.JHRMAdditionalZulPath;
 import org.module.hr.model.TrsEmployee;
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
-import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
+import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.Selectors;
 
 /**
@@ -30,7 +28,6 @@ public class EmployeeDetailDialogVM {
 	private Boolean isVisibleFormReportTo;
 	private Boolean isVisibleFormQualification;
 	private Boolean isVisibleFormMemberships;
-	private Boolean test;
 	
 	private TrsEmployee trsEmployee;
 	
@@ -48,7 +45,6 @@ public class EmployeeDetailDialogVM {
 		isVisibleFormReportTo = Boolean.FALSE;
 		isVisibleFormQualification = Boolean.FALSE;
 		isVisibleFormMemberships = Boolean.FALSE;
-		test = Boolean.FALSE;
 	}
 	
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -143,23 +139,6 @@ public class EmployeeDetailDialogVM {
 		isVisibleFormMemberships = Boolean.TRUE;
 	}
 
-	@Command
-	@NotifyChange({ "*" })
-	public void test() {
-		setVisibleFalseForAll();
-		test = Boolean.TRUE;
-	}
-
-	@Command
-	public void doNew() {
-		Executions.createComponents(JHRMAdditionalZulPath.MasterData.Qualifications.Skills.ADD_FORM, null, null);
-	}
-
-	@Command
-	public void doDetail() {
-		Executions.createComponents(JHRMAdditionalZulPath.MasterData.Qualifications.Skills.DETAIL_FORM, null, null);
-	}
-
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Getter Setter
 	 *++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -241,14 +220,6 @@ public class EmployeeDetailDialogVM {
 
 	public void setIsVisibleFormMemberships(Boolean isVisibleFormMemberships) {
 		this.isVisibleFormMemberships = isVisibleFormMemberships;
-	}
-
-	public Boolean getTest() {
-		return test;
-	}
-
-	public void setTest(Boolean test) {
-		this.test = test;
 	}
 
 	public TrsEmployee getTrsEmployee() {

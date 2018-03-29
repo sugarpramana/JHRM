@@ -2,7 +2,6 @@ package org.module.hr.dao;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.module.hr.model.TrsEmployeeEmergencyContact;
 
@@ -16,8 +15,7 @@ public interface TrsEmployeeEmergencyContactDAO {
 	public void saveOrUpdate(TrsEmployeeEmergencyContact trsEmployeeEmergencyContact);
 	public void delete(TrsEmployeeEmergencyContact trsEmployeeEmergencyContact);
 	public List<TrsEmployeeEmergencyContact> getAllTrsEmployeeEmergencyContact();
-	public List<TrsEmployeeEmergencyContact> getTrsEmployeeEmergencyContactByTrsEmployeeEmergencyContactRequestMap (Map<String, Object> requestMap);
 	public List<TrsEmployeeEmergencyContact> getByRequestMap(HashMap<String, Object> hashMap);
 	public List<TrsEmployeeEmergencyContact> getTrsEmployeeEmergencyContactPaging(HashMap<String, Object> hashMap);
-    public int getCountTrsEmployeeEmergencyContacts();
+    public int getCountTrsEmployeeEmergencyContacts(HashMap<String, Object> hashMap);
 }

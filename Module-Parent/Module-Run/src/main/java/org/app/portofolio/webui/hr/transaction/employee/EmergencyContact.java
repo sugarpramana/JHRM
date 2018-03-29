@@ -1,6 +1,5 @@
 package org.app.portofolio.webui.hr.transaction.employee;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -53,6 +52,7 @@ public class EmergencyContact {
 	
 	private TrsEmployeeEmergencyContact selectedEmployeeEmergencyContact;
 	private List<TrsEmployeeEmergencyContact> employeeEmergencyContacts;
+	//private List<TrsEmployeeEmergencyContact> casts;
 	private ListitemRenderer<TrsEmployeeEmergencyContact> listitemRenderer;
 	
 	private HashMap<String, Object> hashMapEmployeeEmergencyContact;
@@ -69,41 +69,45 @@ public class EmergencyContact {
 		listboxEmergencyContact.setStyle("border-style: none;");
 		listboxEmergencyContact.setMold("paging");
 		
-		int count = employeeService.getCountTrsEmployeeEmergencyContacts();
+		HashMap<String, Object> hashMapEmployee = new HashMap<String, Object>();
+		hashMapEmployee.put("count", trsEmployee.getIdEmployee());
+		int count = employeeService.getCountTrsEmployeeEmergencyContacts(hashMapEmployee);
+		System.out.println("Cout Size >>>"+count);
 
 		pagingEmergencyContact.setTotalSize(count);
 		pagingEmergencyContact.setDetailed(true);
 		pagingEmergencyContact.setPageSize(pageSize);
 	}
-	
+
 	private void refreshPageList(int refreshActivePage) {
 		if (refreshActivePage == 0) {
 			pagingEmergencyContact.setActivePage(0);
 		}
 		
 		refreshActivePage += 1;
+		
+		hashMapEmployeeEmergencyContact = new HashMap<String, Object>();
+		hashMapEmployeeEmergencyContact.put("idEmployee", trsEmployee.getIdEmployee());
+		hashMapEmployeeEmergencyContact.put("firstResult", refreshActivePage);
+		hashMapEmployeeEmergencyContact.put("maxResults", pagingEmergencyContact.getPageSize());
 
-		HashMap<String, Object> hashMapEmployee = new HashMap<String, Object>();
+		employeeEmergencyContacts = employeeService.getTrsEmployeeEmergencyContactPaging(hashMapEmployeeEmergencyContact);
+		listitemRenderer = new EmergencyContactListItemRenderer();
+		
+		/*HashMap<String, Object> hashMapEmployee = new HashMap<String, Object>();
 		hashMapEmployee.put("idEmployee", trsEmployee.getIdEmployee());
 		employeeEmergencyContacts = employeeService.getTrsEmployeeEmergencyContactByTrsEmployeeEmergencyContactRequestMap(hashMapEmployee);
-		
-		List<TrsEmployeeEmergencyContact> casts = new ArrayList<TrsEmployeeEmergencyContact>();
-		casts.addAll(employeeEmergencyContacts);
-		
+		System.out.println("List Emergency ID Employee Size >>>"+employeeEmergencyContacts.size());
+
+		listitemRenderer = new EmergencyContactListItemRenderer();
+	
 		hashMapEmployeeEmergencyContact = new HashMap<String, Object>();
 		hashMapEmployeeEmergencyContact.put("firstResult", refreshActivePage);
 		hashMapEmployeeEmergencyContact.put("maxResults", pagingEmergencyContact.getPageSize());
-		
-		casts = employeeService.getTrsEmployeeEmergencyContactPaging(hashMapEmployeeEmergencyContact);
-		listitemRenderer = new EmergencyContactListItemRenderer();
+
+		employeeEmergencyContacts = employeeService.getTrsEmployeeEmergencyContactPaging(hashMapEmployeeEmergencyContact);
+		System.out.println("List Emergency ID Employee Paging Size >>>"+employeeEmergencyContacts.size());*/
 	}
-	
-	/*public void doPrepareList(){
-		listboxEmergencyContact.setCheckmark(true);
-		listboxEmergencyContact.setMultiple(true);
-		listboxEmergencyContact.setRows(15);
-		listboxEmergencyContact.setStyle("border-style: none;");
-	}*/
 
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	 * Inisialize Methode MVVM yang pertama kali dijalankan
@@ -116,7 +120,7 @@ public class EmergencyContact {
 		Selectors.wireComponents(component, this, false);
 		
 		this.trsEmployee = trsEmployee;
-		
+
 		doPrepareList();
 		refreshPageList(startPageNumber);
 	}
@@ -170,7 +174,7 @@ public class EmergencyContact {
 	public void refreshAfterSaveOrUpdateEmergencyContact(){
 		HashMap<String, Object> requestMap = new HashMap<>();
 		requestMap.put("trsEmployee", trsEmployee);
-		employeeEmergencyContacts = employeeService.getTrsEmployeeEmergencyContactByTrsEmployeeEmergencyContactRequestMap(requestMap);
+		//employeeEmergencyContacts = employeeService.getTrsEmployeeEmergencyContactByTrsEmployeeEmergencyContactRequestMap(requestMap);
 	}
 	
 	/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -199,6 +203,14 @@ public class EmergencyContact {
 	public void setSelectedEmployeeEmergencyContact(TrsEmployeeEmergencyContact selectedEmployeeEmergencyContact) {
 		this.selectedEmployeeEmergencyContact = selectedEmployeeEmergencyContact;
 	}
+	
+	/*public List<TrsEmployeeEmergencyContact> getCasts() {
+		return casts;
+	}
+
+	public void setCasts(List<TrsEmployeeEmergencyContact> casts) {
+		this.casts = casts;
+	}*/
 
 	public List<TrsEmployeeEmergencyContact> getEmployeeEmergencyContacts() {
 		return employeeEmergencyContacts;

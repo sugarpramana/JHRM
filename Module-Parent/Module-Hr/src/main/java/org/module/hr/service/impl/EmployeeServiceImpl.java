@@ -151,8 +151,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public int getCountTrsEmployeeEmergencyContacts() {
-		return trsEmployeeEmergencyContactDAO.getCountTrsEmployeeEmergencyContacts();
+	public int getCountTrsEmployeeEmergencyContacts(HashMap<String, Object> hashMap) {
+		return trsEmployeeEmergencyContactDAO.getCountTrsEmployeeEmergencyContacts(hashMap);
 	}
 	
 	/*- Employee Dependent +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/

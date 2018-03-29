@@ -41,7 +41,7 @@ public interface EmployeeService {
 	public List<TrsEmployeeEmergencyContact> getAllTrsEmployeeEmergencyContact();
 	public List<TrsEmployeeEmergencyContact> getTrsEmployeeEmergencyContactByTrsEmployeeEmergencyContactRequestMap(HashMap<String, Object> hashMap);
 	public List<TrsEmployeeEmergencyContact> getTrsEmployeeEmergencyContactPaging(HashMap<String, Object> hashMap);
-    public int getCountTrsEmployeeEmergencyContacts();
+    public int getCountTrsEmployeeEmergencyContacts(HashMap<String, Object> hashMap);
 	
 	/*- Employee Dependent +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	public void save(TrsEmployeeDependent trsEmployeeDependent);
